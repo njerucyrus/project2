@@ -123,7 +123,35 @@ class GroupController implements GroupInterface
 
     public static function getGroupObject($id)
     {
-        // TODO: Implement getGroupObject() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("SELECT g.* FROM sacco_group g WHERE g.id=:id");
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+            if($stmt->rowCount() == 1) {
+                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+                $group = new Group();
+                $group->setGroupName($row['group_name']);
+                $group->setRefNo($row['ref_no']);
+                $group->setRegion($row['region']);
+                $group->setOfficialContact($row['official_contact']);
+                $group->setDateFormed($row['date_formed']);
+                $group->setMonthlyMeetingSchedule($row['monthly_meeting_schedule']);
+
+                $db->closeConnection();
+                return $group;
+            }
+            else{
+                $db->closeConnection();
+                return null;
+            }
+        } catch (\PDOException $exception) {
+
+            echo $exception->getMessage();
+            return null;
+        }
     }
 
     public static function all()
