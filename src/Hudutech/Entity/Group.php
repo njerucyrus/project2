@@ -32,9 +32,9 @@ class Group
      */
     private $officialContact;
     /**
-     * @var \DateTime
+     * @var string
      */
-    private $monthlyMeetingDate;
+    private $monthlyMeetingSchedule;
     /**
      * @var \DateTime
      */
@@ -121,19 +121,19 @@ class Group
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
-    public function getMonthlyMeetingDate()
+    public function getMonthlyMeetingSchedule()
     {
-        return $this->monthlyMeetingDate;
+        return $this->monthlyMeetingSchedule;
     }
 
     /**
-     * @param \DateTime $monthlyMeetingDate
+     * @param string $monthlyMeetingSchedule
      */
-    public function setMonthlyMeetingDate($monthlyMeetingDate)
+    public function setMonthlyMeetingSchedule($monthlyMeetingSchedule)
     {
-        $this->monthlyMeetingDate = $monthlyMeetingDate;
+        $this->monthlyMeetingSchedule = $monthlyMeetingSchedule;
     }
 
     /**
