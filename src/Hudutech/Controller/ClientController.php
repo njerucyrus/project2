@@ -200,17 +200,77 @@ class ClientController implements ClientInterface
 
     public static function delete($id)
     {
-        // TODO: Implement delete() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("DELETE FROM clients WHERE id=:id");
+            $stmt->bindParam(":id", $id);
+            return $stmt->execute() ? true : false;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
     }
 
     public static function destroy()
     {
-        // TODO: Implement destroy() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("DELETE FROM clients");
+            return $stmt->execute() ? true : false;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
     }
 
     public static function getClientObject($id)
     {
-        // TODO: Implement getClientObject() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("SELECT c.* FROM clients c WHERE c.id=:id");
+
+            $stmt->execute();
+
+            if($stmt->rowCount() == 1) {
+                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+                $client = new Client();
+                $client->setGroupRefNo($row['group_ref_no']);
+                $client->setFullName($row['full_name']);
+                $client->setMembershipNo($row['membership_no']);
+                $client->setIdNo($row['id_no']);
+                $client->setDob($row['dob']);
+                $client->setOccupation($row['occupation']);
+                $client->setPostalAddress($row['postal_address']);
+                $client->setEmail($row['email']);
+                $client->setPhoneNumber($row['phone_number']);
+                $client->setCounty($row['county']);
+                $client->setSubCounty($row['sub_county']);
+                $client->setLocation($row['location']);
+                $client->setSubLocation($row['sub_location']);
+                $client->setVillage($row['village']);
+                $client->setEmergencyContact($row['emergency_contact']);
+                $client->setMemberOfOtherOrg($row['is_member_of_other_org']);
+                $client->setExpectation($row['expectation']);
+                $client->setNokName($row['nok_name']);
+                $client->setNokContact($row['nok_contact']);
+                $client->setDateEnrolled($row['date_enrolled']);
+                return $client;
+            }
+            else{
+                return null;
+            }
+
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return null;
+
+        }
     }
 
     public static function all()
