@@ -156,7 +156,22 @@ class GroupController implements GroupInterface
 
     public static function all()
     {
-        // TODO: Implement all() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("SELECT g.* FROM sacco_group g WHERE 1");
+            $stmt->execute();
+            $groups = array();
+            if ($stmt->rowCount() > 0) {
+                $groups[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            }
+            return $groups;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
+
     }
 
 }
