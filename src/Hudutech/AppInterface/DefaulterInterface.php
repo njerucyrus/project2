@@ -9,7 +9,14 @@
 namespace Hudutech\AppInterface;
 
 
+use Hudutech\Entity\Defaulter;
+
 interface DefaulterInterface
 {
-
+    public function create(Defaulter $defaulter);
+    public function update(Defaulter $defaulter, $id);
+    public static function delete($id);
+    public static function destroy();
+    public static function getDefaulterObject($id);
+    public static function all();
 }
