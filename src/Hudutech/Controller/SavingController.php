@@ -61,6 +61,24 @@ class SavingController implements SavingInterface
 
     public static function getClientTotalSavings($id)
     {
+        $db = new DB();
+        $conn = $db->connect();
+
+        try {
+            $stmt = $conn->prepare("SELECT SUM(s.contribution) AS total_saving FROM savings s WHERE id=:id");
+            $stmt->bindParam(":id", $id);
+
+            if ($stmt->execute() && $stmt->rowCount() > 0 ){
+                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+                $total_saving  = $row['total_saving'];
+                return $total_saving;
+            }
+            else{
+                return null;
+            }
+        } catch (\PDOException $exception) {
+            return null;
+        }
     }
 
     public static function getGroupSavings($groupId)
