@@ -136,7 +136,22 @@ class DefaulterController implements DefaulterInterface
 
     public static function all()
     {
-        // TODO: Implement all() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("SELECT d.* FROM defaulters d WHERE  1");
+            $stmt->execute();
+            $defaulters = array();
+            if ($stmt->rowCount() > 0){
+               $defaulters[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            }
+            $db->closeConnection();
+            return $defaulters;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
     }
 
 }
