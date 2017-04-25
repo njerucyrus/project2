@@ -203,7 +203,7 @@ class ClientController implements ClientInterface
         $db = new DB();
         $conn = $db->connect();
 
-        try{
+        try {
             $stmt = $conn->prepare("DELETE FROM clients WHERE id=:id");
             $stmt->bindParam(":id", $id);
             return $stmt->execute() ? true : false;
@@ -218,7 +218,7 @@ class ClientController implements ClientInterface
         $db = new DB();
         $conn = $db->connect();
 
-        try{
+        try {
             $stmt = $conn->prepare("DELETE FROM clients");
             return $stmt->execute() ? true : false;
         } catch (\PDOException $exception) {
@@ -232,12 +232,12 @@ class ClientController implements ClientInterface
         $db = new DB();
         $conn = $db->connect();
 
-        try{
+        try {
             $stmt = $conn->prepare("SELECT c.* FROM clients c WHERE c.id=:id");
 
             $stmt->execute();
 
-            if($stmt->rowCount() == 1) {
+            if ($stmt->rowCount() == 1) {
                 $row = $stmt->fetch(\PDO::FETCH_ASSOC);
                 $client = new Client();
                 $client->setGroupRefNo($row['group_ref_no']);
@@ -261,8 +261,7 @@ class ClientController implements ClientInterface
                 $client->setNokContact($row['nok_contact']);
                 $client->setDateEnrolled($row['date_enrolled']);
                 return $client;
-            }
-            else{
+            } else {
                 return null;
             }
 
@@ -275,7 +274,22 @@ class ClientController implements ClientInterface
 
     public static function all()
     {
-        // TODO: Implement all() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try {
+            $stmt = $conn->prepare("SELECT c.* FROM clients c WHERE 1");
+            $stmt->execute();
+            $clients = array();
+            if ($stmt->rowCount() > 0) {
+                $clients[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            }
+            return $clients;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
     }
 
 }
