@@ -262,7 +262,20 @@ class EmployeeController implements EmployeeInterface
 
     public static function all()
     {
-        // TODO: Implement all() method.
+        $db = new DB();
+        $conn = $db->connect();
+        try{
+            $stmt = $conn->prepare("SELECT e.* FROM employees e WHERE 1");
+            $stmt->execute();
+            $employees = array();
+            if ($stmt->rowCount() > 0) {
+                $employees[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            }
+            return $employees;
+        }catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
     }
 
 }
