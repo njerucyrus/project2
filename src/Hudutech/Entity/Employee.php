@@ -42,7 +42,7 @@ class Employee
     /**
      * @var float
      */
-    private $renumeration;
+    private $remuneration;
     /**
      * @var string
      */
@@ -54,7 +54,7 @@ class Employee
     /**
      * @var string
      */
-    private $testmonial;
+    private $testimonial;
     /**
      * @var string
      */
@@ -62,7 +62,7 @@ class Employee
     /**
      * @var string
      */
-    private $bankAcountNo;
+    private $bankAccountNo;
     /**
      * @var string
      */
@@ -203,17 +203,17 @@ class Employee
     /**
      * @return float
      */
-    public function getRenumeration()
+    public function getRemuneration()
     {
-        return $this->renumeration;
+        return $this->remuneration;
     }
 
     /**
-     * @param float $renumeration
+     * @param float $remuneration
      */
-    public function setRenumeration($renumeration)
+    public function setRemuneration($remuneration)
     {
-        $this->renumeration = $renumeration;
+        $this->remuneration = $remuneration;
     }
 
     /**
@@ -251,17 +251,17 @@ class Employee
     /**
      * @return string
      */
-    public function getTestmonial()
+    public function getTestimonial()
     {
-        return $this->testmonial;
+        return $this->testimonial;
     }
 
     /**
-     * @param string $testmonial
+     * @param string $testimonial
      */
-    public function setTestmonial($testmonial)
+    public function setTestimonial($testimonial)
     {
-        $this->testmonial = $testmonial;
+        $this->testimonial = $testimonial;
     }
 
     /**
@@ -283,17 +283,17 @@ class Employee
     /**
      * @return string
      */
-    public function getBankAcountNo()
+    public function getBankAccountNo()
     {
-        return $this->bankAcountNo;
+        return $this->bankAccountNo;
     }
 
     /**
-     * @param string $bankAcountNo
+     * @param string $bankAccountNo
      */
-    public function setBankAcountNo($bankAcountNo)
+    public function setBankAccountNo($bankAccountNo)
     {
-        $this->bankAcountNo = $bankAcountNo;
+        $this->bankAccountNo = $bankAccountNo;
     }
 
     /**
