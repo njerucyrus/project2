@@ -228,8 +228,9 @@ class EmployeeController implements EmployeeInterface
         try{
             $stmt = $conn->prepare("SELECT e.* FROM employees e WHERE e.id=:id");
             $stmt->bindParam(":id", $id);
-            $employee = new Employee();
-            if ($stmt->execute()) {
+            $stmt->execute();
+            if ($stmt->rowCount() == 1) {
+                $employee = new Employee();
                 $row = $stmt->fetch(\PDO::FETCH_ASSOC);
                 $employee->setPfNo($row['pf_no']);
                 $employee->setFullName($row['full_name']);
@@ -249,9 +250,17 @@ class EmployeeController implements EmployeeInterface
                 $employee->setNokName($row['nok_name']);
                 $employee->setNokRelationship($row['nok_relationship']);
                 $employee->setNokContact($row['nok_contact']);
+
+                $db->closeConnection();
+
+                return $employee;
             }
-            $db->closeConnection();
-            return $employee;
+            else{
+                $db->closeConnection();
+                return null;
+            }
+
+
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return null;
