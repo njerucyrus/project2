@@ -191,7 +191,19 @@ class EmployeeController implements EmployeeInterface
 
     public static function delete($id)
     {
-        // TODO: Implement delete() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("DELETE FROM employees WHERE id=:id");
+            $stmt->bindParam(":id", $id);
+            return $stmt->execute() ? true : false;
+
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
+
     }
 
     public static function destroy()
