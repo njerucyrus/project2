@@ -85,23 +85,23 @@ class EmployeeController implements EmployeeInterface
             $stmt = $conn->prepare($sql);
 
             $stmt->bindParam(":pf_no", $pfNo);
-            $stmt->bindParam(":full_name",$fullName);
+            $stmt->bindParam(":full_name", $fullName);
             $stmt->bindParam(":job_tile", $jobTitle);
-            $stmt->bindParam(":id_no",$idNo);
-            $stmt->bindParam(":nssf_no",$nssfNo);
-            $stmt->bindParam(":nhif_no",$nhifNo);
-            $stmt->bindParam(":remuneration",$remuneration);
-            $stmt->bindParam(":job_description",$jobDescription);
-            $stmt->bindParam(":qualification",$qualification);
-            $stmt->bindParam(":testimonial",$testimonial);
-            $stmt->bindParam(":bank_name",$bankName);
-            $stmt->bindParam(":bank_account_no",$bankAccountNo);
-            $stmt->bindParam(":postal_address",$postalAddress);
-            $stmt->bindParam(":email",$email);
-            $stmt->bindParam(":phone_number",$phoneNumber);
-            $stmt->bindParam(":nok_name",$nokName);
-            $stmt->bindParam(":nok_relationship",$nokRelationship);
-            $stmt->bindParam(":nok_contact",$nokContact);
+            $stmt->bindParam(":id_no", $idNo);
+            $stmt->bindParam(":nssf_no", $nssfNo);
+            $stmt->bindParam(":nhif_no", $nhifNo);
+            $stmt->bindParam(":remuneration", $remuneration);
+            $stmt->bindParam(":job_description", $jobDescription);
+            $stmt->bindParam(":qualification", $qualification);
+            $stmt->bindParam(":testimonial", $testimonial);
+            $stmt->bindParam(":bank_name", $bankName);
+            $stmt->bindParam(":bank_account_no", $bankAccountNo);
+            $stmt->bindParam(":postal_address", $postalAddress);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":phone_number", $phoneNumber);
+            $stmt->bindParam(":nok_name", $nokName);
+            $stmt->bindParam(":nok_relationship", $nokRelationship);
+            $stmt->bindParam(":nok_contact", $nokContact);
             return $stmt->execute() ? true : false;
 
         } catch (\PDOException $exception) {
@@ -136,7 +136,7 @@ class EmployeeController implements EmployeeInterface
         $nokRelationship = $employee->getNokRelationship();
         $nokContact = $employee->getNokContact();
 
-        try{
+        try {
 
             $sql = "UPDATE employees SET
                                         pf_no=:pf_no,
@@ -164,23 +164,23 @@ class EmployeeController implements EmployeeInterface
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":pf_no", $pfNo);
-            $stmt->bindParam(":full_name",$fullName);
+            $stmt->bindParam(":full_name", $fullName);
             $stmt->bindParam(":job_tile", $jobTitle);
-            $stmt->bindParam(":id_no",$idNo);
-            $stmt->bindParam(":nssf_no",$nssfNo);
-            $stmt->bindParam(":nhif_no",$nhifNo);
-            $stmt->bindParam(":remuneration",$remuneration);
-            $stmt->bindParam(":job_description",$jobDescription);
-            $stmt->bindParam(":qualification",$qualification);
-            $stmt->bindParam(":testimonial",$testimonial);
-            $stmt->bindParam(":bank_name",$bankName);
-            $stmt->bindParam(":bank_account_no",$bankAccountNo);
-            $stmt->bindParam(":postal_address",$postalAddress);
-            $stmt->bindParam(":email",$email);
-            $stmt->bindParam(":phone_number",$phoneNumber);
-            $stmt->bindParam(":nok_name",$nokName);
-            $stmt->bindParam(":nok_relationship",$nokRelationship);
-            $stmt->bindParam(":nok_contact",$nokContact);
+            $stmt->bindParam(":id_no", $idNo);
+            $stmt->bindParam(":nssf_no", $nssfNo);
+            $stmt->bindParam(":nhif_no", $nhifNo);
+            $stmt->bindParam(":remuneration", $remuneration);
+            $stmt->bindParam(":job_description", $jobDescription);
+            $stmt->bindParam(":qualification", $qualification);
+            $stmt->bindParam(":testimonial", $testimonial);
+            $stmt->bindParam(":bank_name", $bankName);
+            $stmt->bindParam(":bank_account_no", $bankAccountNo);
+            $stmt->bindParam(":postal_address", $postalAddress);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":phone_number", $phoneNumber);
+            $stmt->bindParam(":nok_name", $nokName);
+            $stmt->bindParam(":nok_relationship", $nokRelationship);
+            $stmt->bindParam(":nok_contact", $nokContact);
             return $stmt->execute() ? true : false;
 
         } catch (\PDOException $exception) {
@@ -194,7 +194,7 @@ class EmployeeController implements EmployeeInterface
         $db = new DB();
         $conn = $db->connect();
 
-        try{
+        try {
             $stmt = $conn->prepare("DELETE FROM employees WHERE id=:id");
             $stmt->bindParam(":id", $id);
             return $stmt->execute() ? true : false;
@@ -211,7 +211,7 @@ class EmployeeController implements EmployeeInterface
         $db = new DB();
         $conn = $db->connect();
 
-        try{
+        try {
             $stmt = $conn->prepare("DELETE FROM employees");
             return $stmt->execute() ? true : false;
 
@@ -225,7 +225,7 @@ class EmployeeController implements EmployeeInterface
     {
         $db = new DB();
         $conn = $db->connect();
-        try{
+        try {
             $stmt = $conn->prepare("SELECT e.* FROM employees e WHERE e.id=:id");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
@@ -254,26 +254,22 @@ class EmployeeController implements EmployeeInterface
                 $db->closeConnection();
 
                 return $employee;
-            }
-            else{
+            } else {
                 $db->closeConnection();
                 return null;
             }
-
 
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return null;
         }
-
-
     }
 
     public static function all()
     {
         $db = new DB();
         $conn = $db->connect();
-        try{
+        try {
             $stmt = $conn->prepare("SELECT e.* FROM employees e WHERE 1");
             $stmt->execute();
             $employees = array();
@@ -281,7 +277,7 @@ class EmployeeController implements EmployeeInterface
                 $employees[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             }
             return $employees;
-        }catch (\PDOException $exception) {
+        } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
         }
