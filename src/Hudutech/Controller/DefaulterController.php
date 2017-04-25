@@ -95,6 +95,16 @@ class DefaulterController implements DefaulterInterface
 
     public static function destroy()
     {
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("DELETE FROM defaulters");
+            return $stmt->execute() ? true : false;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
     }
 
     public static function getDefaulterObject($id)
