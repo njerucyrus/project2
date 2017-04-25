@@ -11,5 +11,146 @@ namespace Hudutech\Entity;
 
 class Group
 {
+    /**
+     * @var integer
+     */
+    private $id;
+    /**
+     * @var string
+     */
+    private $groupName;
+    /**
+     * @var string
+     */
+    private $refNo;
+    /**
+     * @var string
+     */
+    private $region;
+    /**
+     * @var string
+     */
+    private $officialContact;
+    /**
+     * @var \DateTime
+     */
+    private $monthlyMeetingDate;
+    /**
+     * @var \DateTime
+     */
+    private $dateFormed;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGroupName()
+    {
+        return $this->groupName;
+    }
+
+    /**
+     * @param string $groupName
+     */
+    public function setGroupName($groupName)
+    {
+        $this->groupName = $groupName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefNo()
+    {
+        return $this->refNo;
+    }
+
+    /**
+     * @param string $refNo
+     */
+    public function setRefNo($refNo)
+    {
+        $this->refNo = $refNo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param string $region
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOfficialContact()
+    {
+        return $this->officialContact;
+    }
+
+    /**
+     * @param string $officialContact
+     */
+    public function setOfficialContact($officialContact)
+    {
+        $this->officialContact = $officialContact;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getMonthlyMeetingDate()
+    {
+        return $this->monthlyMeetingDate;
+    }
+
+    /**
+     * @param \DateTime $monthlyMeetingDate
+     */
+    public function setMonthlyMeetingDate($monthlyMeetingDate)
+    {
+        $this->monthlyMeetingDate = $monthlyMeetingDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateFormed()
+    {
+        return $this->dateFormed;
+    }
+
+    /**
+     * @param \DateTime $dateFormed
+     */
+    public function setDateFormed($dateFormed)
+    {
+        $this->dateFormed = $dateFormed;
+    }
+
 
 }
