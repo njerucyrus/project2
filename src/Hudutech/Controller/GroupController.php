@@ -108,7 +108,17 @@ class GroupController implements GroupInterface
 
     public static function destroy()
     {
-        // TODO: Implement destroy() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("DELETE FROM sacco_group");
+            return $stmt->execute() ? true : false;
+
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
     }
 
     public static function getGroupObject($id)
