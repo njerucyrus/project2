@@ -223,7 +223,41 @@ class EmployeeController implements EmployeeInterface
 
     public static function getEmployeeObject($id)
     {
-        // TODO: Implement getEmployeeObject() method.
+        $db = new DB();
+        $conn = $db->connect();
+        try{
+            $stmt = $conn->prepare("SELECT e.* FROM employees e WHERE e.id=:id");
+            $stmt->bindParam(":id", $id);
+            $employee = new Employee();
+            if ($stmt->execute()) {
+                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+                $employee->setPfNo($row['pf_no']);
+                $employee->setFullName($row['full_name']);
+                $employee->setJobTitle($row['job_title']);
+                $employee->setIdNo($row['id_no']);
+                $employee->setNssfNo($row['nssf_no']);
+                $employee->setNhifNo($row['nhif_no']);
+                $employee->setRemuneration($row['remuneration']);
+                $employee->setJobDescription($row['job_description']);
+                $employee->setQualification($row['qualification']);
+                $employee->setTestimonial($row['testimonial']);
+                $employee->setBankName($row['bank_name']);
+                $employee->setBankAccountNo($row['bank_account_no']);
+                $employee->setPostalAddress($row['postal_address']);
+                $employee->setEmail($row['email']);
+                $employee->setPhoneNumber($row['phone_number']);
+                $employee->setNokName($row['nok_name']);
+                $employee->setNokRelationship($row['nok_relationship']);
+                $employee->setNokContact($row['nok_contact']);
+            }
+            $db->closeConnection();
+            return $employee;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return null;
+        }
+
+
     }
 
     public static function all()
