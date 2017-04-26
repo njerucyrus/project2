@@ -296,12 +296,14 @@ class ClientController implements ClientInterface
         try {
             $stmt = $conn->prepare("SELECT c.* FROM clients c WHERE 1");
             $stmt->execute();
-            $clients = array();
             if ($stmt->rowCount() > 0) {
-                $clients[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $clients = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $clients;
 
+            } else{
+               return [];
             }
-            return $clients;
+
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
