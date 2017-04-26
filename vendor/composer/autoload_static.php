@@ -25,16 +25,19 @@ class ComposerStaticInit4e3453010ba9f77a6119b03ae3282213
         'Hudutech\\AppInterface\\DefaulterInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/DefaulterInterface.php',
         'Hudutech\\AppInterface\\EmployeeInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/EmployeeInterface.php',
         'Hudutech\\AppInterface\\GroupInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/GroupInterface.php',
+        'Hudutech\\AppInterface\\SavingInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/SavingInterface.php',
         'Hudutech\\Controller\\ClientController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/ClientController.php',
         'Hudutech\\Controller\\DefaulterController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/DefaulterController.php',
         'Hudutech\\Controller\\EmployeeController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/EmployeeController.php',
         'Hudutech\\Controller\\GroupController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/GroupController.php',
+        'Hudutech\\Controller\\SavingController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/SavingController.php',
         'Hudutech\\DBManager\\ComplexQuery' => __DIR__ . '/../..' . '/src/Hudutech/DBManager/ComplexQuery.php',
         'Hudutech\\DBManager\\DB' => __DIR__ . '/../..' . '/src/Hudutech/DBManager/DB.php',
         'Hudutech\\Entity\\Client' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Client.php',
         'Hudutech\\Entity\\Defaulter' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Defaulter.php',
         'Hudutech\\Entity\\Employee' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Employee.php',
         'Hudutech\\Entity\\Group' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Group.php',
+        'Hudutech\\Entity\\Saving' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Saving.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

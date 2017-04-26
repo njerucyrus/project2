@@ -27,7 +27,7 @@ class SavingController implements SavingInterface
         $paymentMethod = $saving->getPaymentMethod();
         $datePaid = $saving->getDatePaid();
 
-        try{
+        try {
 
             $stmt = $conn->prepare("INSERT INTO savings(
                                                         client_id,
@@ -65,17 +65,22 @@ class SavingController implements SavingInterface
         $conn = $db->connect();
 
         try {
-            $stmt = $conn->prepare("SELECT SUM(s.contribution) AS total_saving FROM savings s WHERE id=:id");
+            $sql = "(SELECT c.full_name , g.group_name , SUM(s.contribution) as total_savings FROM
+                      clients c , sacco_group g , savings s
+                       WHERE c.id = (SELECT s.client_id FROM savings s WHERE s.client_id=:id LIMIT 1)
+                        AND g.id = (SELECT s.group_id FROM savings s WHERE s.group_id=g.id LIMIT 1))";
+            $stmt = $conn->prepare($sql);
             $stmt->bindParam(":id", $id);
-
-            if ($stmt->execute() && $stmt->rowCount() > 0 ){
+            $total_saving = array();
+            if ($stmt->execute() && $stmt->rowCount() > 0) {
                 $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $total_saving  = $row['total_saving'];
-                return $total_saving;
+                $total_saving = array(
+                    "client_name" => $row['full_name'],
+                    "group_name" => $row['group_name'],
+                    "total_savings" => $row['total_savings']
+                );
             }
-            else{
-                return null;
-            }
+            return $total_saving;
         } catch (\PDOException $exception) {
             return null;
         }
