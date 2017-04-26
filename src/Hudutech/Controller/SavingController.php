@@ -86,7 +86,7 @@ class SavingController implements SavingInterface
         }
     }
 
-    public static function getGroupSavings($groupId)
+    public static function getGroupTotalSavings($groupId)
     {
         $db = new DB();
         $conn = $db->connect();
@@ -118,6 +118,38 @@ class SavingController implements SavingInterface
             echo $exception->getMessage();
             return [];
         }
+    }
+
+    public static function showClientSavingsLog($clientId)
+    {
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+
+            $sql = "SELECT c.full_name, g.group_name, s.contribution,s.payment_method, s.date_paid
+                    FROM clients c , sacco_group g, savings s
+                    WHERE s.client_id=:client_id AND s.group_id=g.id";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":client_id", $clientId);
+            if ($stmt->execute() && $stmt->rowCount() > 0) {
+                $savingsLog = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $db->closeConnection();
+                return $savingsLog;
+            } else{
+                return [];
+            }
+
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
+    }
+
+    public static function showGroupSavingsLog($group)
+    {
+        // TODO: Implement showGroupSavingsLog() method.
     }
 
     public static function all()
