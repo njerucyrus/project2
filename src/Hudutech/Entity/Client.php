@@ -32,6 +32,11 @@ class Client
      * @var integer
      */
     private $idNo;
+
+    /**
+     * @var string
+     */
+    private $kraPin;
     /**
      * @var \DateTime
      */
@@ -88,7 +93,10 @@ class Client
      * @var string
      */
     private $nokName;
-
+    /**
+     * @var string
+     */
+    private $nokRelationShip;
     /**
      * @var string
      */
@@ -177,6 +185,22 @@ class Client
     public function setIdNo($idNo)
     {
         $this->idNo = $idNo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKraPin()
+    {
+        return $this->kraPin;
+    }
+
+    /**
+     * @param string $kraPin
+     */
+    public function setKraPin($kraPin)
+    {
+        $this->kraPin = $kraPin;
     }
 
     /**
@@ -402,6 +426,24 @@ class Client
     {
         $this->nokName = $nokName;
     }
+
+    /**
+     * @return string
+     */
+    public function getNokRelationShip()
+    {
+        return $this->nokRelationShip;
+    }
+
+    /**
+     * @param string $nokRelationShip
+     */
+    public function setNokRelationShip($nokRelationShip)
+    {
+        $this->nokRelationShip = $nokRelationShip;
+    }
+
+
 
     /**
      * @return string

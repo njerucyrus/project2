@@ -23,6 +23,7 @@ class ClientController implements ClientInterface
         $fullName = $client->getFullName();
         $membershipNo = $client->getMembershipNo();
         $idNo = $client->getIdNo();
+        $kraPin = $client->getKraPin();
         $dob = $client->getDob();
         $occupation = $client->getOccupation();
         $postalAddress = $client->getPostalAddress();
@@ -37,6 +38,7 @@ class ClientController implements ClientInterface
         $isMemberOfOtherOrg = $client->isMemberOfOtherOrg();
         $expectation = $client->getExpectation();
         $nokName = $client->getNokName();
+        $nokRelationship = $client->getNokRelationShip();
         $nokContact = $client->getNokContact();
         $dateEnrolled = $client->getDateEnrolled();
 
@@ -47,6 +49,7 @@ class ClientController implements ClientInterface
                                             full_name,
                                             membership_no,
                                             id_no,
+                                            kra_pin,
                                             dob,
                                             occupation,
                                             postal_address,
@@ -61,6 +64,7 @@ class ClientController implements ClientInterface
                                             is_member_of_other_org,
                                             expectation,
                                             nok_name,
+                                            nok_relationship,
                                             date_enrolled,
                                             nok_contact
                                         ) 
@@ -69,6 +73,7 @@ class ClientController implements ClientInterface
                                             :full_name,
                                             :membership_no,
                                             :id_no,
+                                            :kra_pin,
                                             :dob,
                                             :occupation,
                                             :postal_address,
@@ -83,6 +88,7 @@ class ClientController implements ClientInterface
                                             :is_member_of_other_org,
                                             :expectation,
                                             :nok_name,
+                                            :nok_relationship,
                                             :date_enrolled,
                                             :nok_contact
                                         )";
@@ -93,6 +99,7 @@ class ClientController implements ClientInterface
             $stmt->bindParam(":full_name", $fullName);
             $stmt->bindParam(":membership_no", $membershipNo);
             $stmt->bindParam(":id_no", $idNo);
+            $stmt->bindParam(":kra_pin", $kraPin);
             $stmt->bindParam(":dob", $dob);
             $stmt->bindParam(":occupation", $occupation);
             $stmt->bindParam(":postal_address", $postalAddress);
@@ -107,6 +114,7 @@ class ClientController implements ClientInterface
             $stmt->bindParam(":is_member_of_other_org", $isMemberOfOtherOrg);
             $stmt->bindParam(":expectation", $expectation);
             $stmt->bindParam(":nok_name", $nokName);
+            $stmt->bindParam(":nok_relationship", $nokRelationship);
             $stmt->bindParam(":date_enrolled", $dateEnrolled);
             $stmt->bindParam(":nok_contact", $nokContact);
             return $stmt->execute() ? true : false;
@@ -124,6 +132,7 @@ class ClientController implements ClientInterface
         $fullName = $client->getFullName();
         $membershipNo = $client->getMembershipNo();
         $idNo = $client->getIdNo();
+        $kraPin = $client->getKraPin();
         $dob = $client->getDob();
         $occupation = $client->getOccupation();
         $postalAddress = $client->getPostalAddress();
@@ -138,6 +147,7 @@ class ClientController implements ClientInterface
         $isMemberOfOtherOrg = $client->isMemberOfOtherOrg();
         $expectation = $client->getExpectation();
         $nokName = $client->getNokName();
+        $nokRelationship = $client->getNokRelationShip();
         $nokContact = $client->getNokContact();
         $dateEnrolled = $client->getDateEnrolled();
 
@@ -148,6 +158,7 @@ class ClientController implements ClientInterface
                                     full_name=:full_name,
                                     membership_no=:membership_no,
                                     id_no=:id_no,
+                                    kra_pin=:kra_pin,
                                     dob=:dob,
                                     occupation=:occupation,
                                     postal_address=:postal_address,
@@ -162,6 +173,7 @@ class ClientController implements ClientInterface
                                     is_member_of_other_org=:is_member_of_other_org,
                                     expectation=:expectation,
                                     nok_name=:nok_name,
+                                    nok_relationship=:nok_relationship,
                                     date_enrolled=:date_enrolled,
                                     nok_contact=:nok_contact
                             WHERE  
@@ -175,6 +187,7 @@ class ClientController implements ClientInterface
             $stmt->bindParam(":full_name", $fullName);
             $stmt->bindParam(":membership_no", $membershipNo);
             $stmt->bindParam(":id_no", $idNo);
+            $stmt->bindParam(":kra_pin", $kraPin);
             $stmt->bindParam(":dob", $dob);
             $stmt->bindParam(":occupation", $occupation);
             $stmt->bindParam(":postal_address", $postalAddress);
@@ -189,6 +202,7 @@ class ClientController implements ClientInterface
             $stmt->bindParam(":is_member_of_other_org", $isMemberOfOtherOrg);
             $stmt->bindParam(":expectation", $expectation);
             $stmt->bindParam(":nok_name", $nokName);
+            $stmt->bindParam(":nok_relationship", $nokRelationship);
             $stmt->bindParam(":date_enrolled", $dateEnrolled);
             $stmt->bindParam(":nok_contact", $nokContact);
             return $stmt->execute() ? true : false;
@@ -244,6 +258,7 @@ class ClientController implements ClientInterface
                 $client->setFullName($row['full_name']);
                 $client->setMembershipNo($row['membership_no']);
                 $client->setIdNo($row['id_no']);
+                $client->setKraPin($row['kra_pin']);
                 $client->setDob($row['dob']);
                 $client->setOccupation($row['occupation']);
                 $client->setPostalAddress($row['postal_address']);
@@ -258,6 +273,7 @@ class ClientController implements ClientInterface
                 $client->setMemberOfOtherOrg($row['is_member_of_other_org']);
                 $client->setExpectation($row['expectation']);
                 $client->setNokName($row['nok_name']);
+                $client->setNokRelationShip($row['nok_relationship']);
                 $client->setNokContact($row['nok_contact']);
                 $client->setDateEnrolled($row['date_enrolled']);
                 return $client;
