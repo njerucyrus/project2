@@ -38,7 +38,7 @@ if(isset($_POST['first_name'], $_POST['middle_name'], $_POST['last_name'])) {
 
     $client-> setExpectation($_POST['expectation']);
     $client-> setNokName($_POST['nok_name']);
-    $client-> setDateEnrolled('date_enrolled');
+    $client-> setDateEnrolled($_POST['date_enrolled']);
     $client-> setNokContact($_POST['nok_contact']);
     $client-> setNokRelationShip($_POST['nok_relationship']);
 

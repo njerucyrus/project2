@@ -7,6 +7,8 @@
  */
 require_once __DIR__.'/../vendor/autoload.php';
 include  __DIR__.'/includes/register_client.inc.php';
+
+$groups = \Hudutech\Controller\GroupController::all();
 ?>
 <!doctype html>
 <html>
@@ -175,11 +177,19 @@ else
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-5">
-                        <input type="text" name="group_ref_no" placeholder="Group reference number" class="form-control">
+                        <select name="group_ref_no" class="form-control">
+                            <option>--Select Group here--</option>
+                            <?php foreach ($groups as $group): ?>
+                            <option value="<?php echo $group['ref_no']?>"><?php echo $group['group_name']?></option>
+                            <?php endforeach ?>
+
+                        </select>
                     </div>
 
 
                 </div>
+
+
 
                 <div class="form-group">
                     <div class="col-sm-4">
