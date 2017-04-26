@@ -15,6 +15,8 @@ interface SavingInterface
 {
     public function create(Saving $saving);
     public static function getClientTotalSavings($id);
-    public static function getGroupSavings($groupId);
+    public static function getGroupTotalSavings($groupId);
+    public static function showClientSavingsLog($clientId);
+    public static function showGroupSavingsLog($group);
     public static function all();
 }

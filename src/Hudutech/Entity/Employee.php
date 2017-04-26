@@ -40,6 +40,10 @@ class Employee
      */
     private $nhifNo;
     /**
+     * @var string
+     */
+    private $kraPin;
+    /**
      * @var float
      */
     private $remuneration;
@@ -198,6 +202,22 @@ class Employee
     public function setNhifNo($nhifNo)
     {
         $this->nhifNo = $nhifNo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKraPin()
+    {
+        return $this->kraPin;
+    }
+
+    /**
+     * @param string $kraPin
+     */
+    public function setKraPin($kraPin)
+    {
+        $this->kraPin = $kraPin;
     }
 
     /**
