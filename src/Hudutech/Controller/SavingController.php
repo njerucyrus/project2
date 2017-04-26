@@ -149,7 +149,28 @@ class SavingController implements SavingInterface
 
     public static function showGroupSavingsLog($group)
     {
+        $db = new DB();
+        $conn = $db->connect();
 
+        try{
+
+            $sql = "((SELECT g.group_name, SUM(s.contribution) as total_group_savings, s.date_paid FROM savings s,
+                    sacco_group g  WHERE g.id = s.group_id GROUP BY group_name))";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt->execute() && $stmt->rowCount() > 0) {
+                $groupSavingsLog = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $db->closeConnection();
+                return $groupSavingsLog;
+            }
+            else{
+                return [];
+            }
+
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
     }
 
     public static function all()
