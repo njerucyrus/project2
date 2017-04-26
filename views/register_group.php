@@ -5,6 +5,8 @@
  * Date: 25/04/2017
  * Time: 11:19
  */
+require_once __DIR__.'/../vendor/autoload.php';
+include  __DIR__.'/includes/register_group.inc.php';
 ?>
 <!doctype html>
 <html>
@@ -19,8 +21,16 @@
 <body>
 <!-- Name Section -->
 <div class="row">
+    <div>
+        <?php if($errorMsg == '' and $successMsg != '') {?>
+            <div class="alert alert-success">
+                <?php echo $successMsg; ?>
+            </div>
+        <?php } ?>
+    </div>
+
     <div class="col-md-8 col-md-offset-1">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" METHOD="post">
             <fieldset>
 
                 <!-- Form Name -->
@@ -39,7 +49,7 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-5">
-                        <input type="text" name="reference_number" placeholder="Reference number" class="form-control">
+                        <input type="text" name="ref_no" placeholder="Reference number" class="form-control">
                     </div>
                      </div>
 
@@ -54,7 +64,7 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-5">
-                        <input type="text" name="location" placeholder="Region of location" class="form-control">
+                        <input type="text" name="region" placeholder="Region of location" class="form-control">
                     </div>
 
                 </div>
@@ -62,7 +72,7 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-5">
-                        <input type="text" name="officials_contact" placeholder="Group officials’ contact" class="form-control">
+                        <input type="text" name="official_contact" placeholder="Group officials’ contact" class="form-control">
                     </div>
 
                 </div>
@@ -70,7 +80,7 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-5">
-                        <input type="text" name="monthly_meeting_schedules" placeholder="Monthly meeting schedules" class="form-control">
+                        <input type="text" name="monthly_meeting_schedule" placeholder="Monthly meeting schedules" class="form-control">
                     </div>
 
                 </div>
@@ -79,7 +89,7 @@
                 <div class="form-group">
                 <div class="col-sm-5">
 
-                    <input placeholder="Date of formation" name="date_of_formation" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
+                    <input placeholder="Date of formation" name="date_formed" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
                 </div>
                 </div>
 
@@ -89,7 +99,7 @@
                     <div class="col-sm-2 col-sm-offset-1">
                         <div class="pull-right">
                             <button type="submit" class="btn btn-danger  ">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <input type="submit" class="btn btn-primary" value="Save">
                         </div>
                     </div>
                 </div>

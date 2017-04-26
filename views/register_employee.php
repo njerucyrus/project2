@@ -29,7 +29,7 @@ include  __DIR__.'/includes/register_employee.inc.php';
         <?php } ?>
     </div>
     <div class="col-md-8 col-md-offset-1">
-        <form class="form-horizontal" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" METHOD="post">
+        <form class="form-horizontal" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" METHOD="post">
             <fieldset>
 
                 <!-- Form Name -->
@@ -38,7 +38,7 @@ include  __DIR__.'/includes/register_employee.inc.php';
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="text" name="fist_name" placeholder="First Name" class="form-control">
+                        <input type="text" name="first_name" placeholder="First Name" class="form-control">
                     </div>
                     <div class="col-sm-4">
                         <input type="text" name="middle_name" placeholder="Middle Name" class="form-control">
@@ -53,7 +53,7 @@ include  __DIR__.'/includes/register_employee.inc.php';
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="text" name="pf_number" placeholder="Personal file number (PF No)" class="form-control">
+                        <input type="text" name="pf_no" placeholder="Personal file number (PF No)" class="form-control">
                     </div>
                     <div class="col-sm-4">
                         <input type="text" name="id_no" placeholder="Identity card number" class="form-control">

@@ -5,7 +5,7 @@
  * Date: 26/04/2017
  * Time: 12:49
  */
-require_once __DIR__.'/../../vendor/autoload.php';
+
 
 $successMsg = '';
 $errorMsg = '';
@@ -32,11 +32,13 @@ if(isset($_POST['first_name'], $_POST['middle_name'], $_POST['last_name'])) {
     $employee-> setNokRelationship($_POST['nok_relationship']);
     $employee-> setNokContact($_POST['nok_contact']);
 
+
     $employeeControl= new \Hudutech\Controller\EmployeeController();
     $created= $employeeControl->create($employee);
 
+
     if ($created) {
-        $successMsg .= "Client details saved successfully";
+        $successMsg .= "Employee details saved successfully";
     } else {
         $errorMsg .= "error occured";
 
@@ -52,4 +54,7 @@ if(isset($_POST['first_name'], $_POST['middle_name'], $_POST['last_name'])) {
 else{
     $errorMsg .= "KEY  FIELDS REQUIERED";
 }
+
+
+
 ?>
