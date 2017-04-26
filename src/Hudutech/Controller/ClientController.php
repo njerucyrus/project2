@@ -35,7 +35,7 @@ class ClientController implements ClientInterface
         $subLocation = $client->getSubLocation();
         $village = $client->getVillage();
         $emergencyContact = $client->getEmergencyContact();
-        $isMemberOfOtherOrg = $client->isMemberOfOtherOrg();
+        $isMemberOfOtherOrg = $client->getMemberOfOtherOrg();
         $expectation = $client->getExpectation();
         $nokName = $client->getNokName();
         $nokRelationship = $client->getNokRelationShip();
@@ -144,7 +144,7 @@ class ClientController implements ClientInterface
         $subLocation = $client->getSubLocation();
         $village = $client->getVillage();
         $emergencyContact = $client->getEmergencyContact();
-        $isMemberOfOtherOrg = $client->isMemberOfOtherOrg();
+        $isMemberOfOtherOrg = $client->getMemberOfOtherOrg();
         $expectation = $client->getExpectation();
         $nokName = $client->getNokName();
         $nokRelationship = $client->getNokRelationShip();
