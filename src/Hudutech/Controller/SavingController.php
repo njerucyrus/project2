@@ -122,7 +122,26 @@ class SavingController implements SavingInterface
 
     public static function all()
     {
-        // TODO: Implement all() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $sql = "SELECT c.full_name, g.group_name, s.contribution,s.payment_method, s.date_paid
+                    FROM clients c , sacco_group g, savings s
+                    WHERE s.client_id=c.id AND s.group_id=g.id";
+            $stmt = $conn->prepare($sql);
+            if ($stmt->execute() && $stmt->rowCount() > 0) {
+                $savings = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $db->closeConnection();
+                return $savings;
+            } else{
+                return [];
+            }
+
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
     }
 
 }
