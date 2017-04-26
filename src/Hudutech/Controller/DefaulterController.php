@@ -142,12 +142,15 @@ class DefaulterController implements DefaulterInterface
         try{
             $stmt = $conn->prepare("SELECT d.* FROM defaulters d WHERE  1");
             $stmt->execute();
-            $defaulters = array();
             if ($stmt->rowCount() > 0){
-               $defaulters[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+               $defaulters = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+               $db->closeConnection();
+               return $defaulters;
             }
-            $db->closeConnection();
-            return $defaulters;
+            else{
+                return [];
+            }
+
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return false;
