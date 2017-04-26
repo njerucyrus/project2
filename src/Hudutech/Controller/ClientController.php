@@ -12,6 +12,7 @@ namespace Hudutech\Controller;
 use Hudutech\AppInterface\ClientInterface;
 use Hudutech\DBManager\DB;
 use Hudutech\Entity\Client;
+use Hudutech\Entity\Saving;
 
 class ClientController implements ClientInterface
 {
@@ -308,6 +309,14 @@ class ClientController implements ClientInterface
             echo $exception->getMessage();
             return [];
         }
+    }
+
+    public static function getLoanLimit($clientId)
+    {
+        $savings = SavingController::getClientTotalSavings($clientId);
+
+        $loanLimit = (float)($savings['total_savings']*3);
+        return $savings;
     }
 
 }

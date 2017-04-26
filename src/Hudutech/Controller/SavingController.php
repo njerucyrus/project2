@@ -65,10 +65,13 @@ class SavingController implements SavingInterface
         $conn = $db->connect();
 
         try {
+
             $sql = "(SELECT c.full_name , g.group_name , SUM(s.contribution) as total_savings FROM
-                      clients c , sacco_group g , savings s
-                       WHERE c.id = (SELECT s.client_id FROM savings s WHERE s.client_id=:id LIMIT 1)
-                        AND g.id = (SELECT s.group_id FROM savings s WHERE s.group_id=g.id LIMIT 1))";
+                    clients c , sacco_group g , savings s
+                    WHERE c.id = (SELECT s.client_id FROM savings s WHERE s.client_id=:id LIMIT 1)
+                    AND g.id = (SELECT s.group_id FROM savings s WHERE c.id = s.client_id LIMIT 1)
+                    AND c.id=s.client_id)";
+
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":id", $id);
             $total_saving = array();
