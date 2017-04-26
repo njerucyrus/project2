@@ -26,6 +26,7 @@ class EmployeeController implements EmployeeInterface
         $idNo = $employee->getIdNo();
         $nssfNo = $employee->getNssfNo();
         $nhifNo = $employee->getNhifNo();
+        $kraPin = $employee->getKraPin();
         $remuneration = $employee->getRemuneration();
         $jobDescription = $employee->getJobDescription();
         $qualification = $employee->getQualification();
@@ -48,6 +49,7 @@ class EmployeeController implements EmployeeInterface
                                             id_no, 
                                             nssf_no, 
                                             nhif_no,
+                                            kra_pin,
                                             remuneration,
                                             job_description,
                                             qualification,
@@ -68,6 +70,7 @@ class EmployeeController implements EmployeeInterface
                                             :id_no, 
                                             :nssf_no, 
                                             :nhif_no,
+                                            :kra_pin,
                                             :remuneration,
                                             :job_description,
                                             :qualification,
@@ -90,6 +93,7 @@ class EmployeeController implements EmployeeInterface
             $stmt->bindParam(":id_no", $idNo);
             $stmt->bindParam(":nssf_no", $nssfNo);
             $stmt->bindParam(":nhif_no", $nhifNo);
+            $stmt->bindParam(":kra_pin", $kraPin);
             $stmt->bindParam(":remuneration", $remuneration);
             $stmt->bindParam(":job_description", $jobDescription);
             $stmt->bindParam(":qualification", $qualification);
@@ -123,6 +127,7 @@ class EmployeeController implements EmployeeInterface
         $idNo = $employee->getIdNo();
         $nssfNo = $employee->getNssfNo();
         $nhifNo = $employee->getNhifNo();
+        $kraPin = $employee->getKraPin();
         $remuneration = $employee->getRemuneration();
         $jobDescription = $employee->getJobDescription();
         $qualification = $employee->getQualification();
@@ -145,6 +150,7 @@ class EmployeeController implements EmployeeInterface
                                         id_no=:id_no, 
                                         nssf_no=:nssf_no, 
                                         nhif_no=:nssf_no,
+                                        kra_pin=:kra_pin,
                                         remuneration=:remuneration,
                                         job_description=:job_description,
                                         qualification=:qualification,
@@ -169,6 +175,7 @@ class EmployeeController implements EmployeeInterface
             $stmt->bindParam(":id_no", $idNo);
             $stmt->bindParam(":nssf_no", $nssfNo);
             $stmt->bindParam(":nhif_no", $nhifNo);
+            $stmt->bindParam(":kra_pin", $kraPin);
             $stmt->bindParam(":remuneration", $remuneration);
             $stmt->bindParam(":job_description", $jobDescription);
             $stmt->bindParam(":qualification", $qualification);
@@ -238,6 +245,7 @@ class EmployeeController implements EmployeeInterface
                 $employee->setIdNo($row['id_no']);
                 $employee->setNssfNo($row['nssf_no']);
                 $employee->setNhifNo($row['nhif_no']);
+                $employee->setKraPin($row['kra_pin']);
                 $employee->setRemuneration($row['remuneration']);
                 $employee->setJobDescription($row['job_description']);
                 $employee->setQualification($row['qualification']);
