@@ -149,7 +149,7 @@ class SavingController implements SavingInterface
 
     public static function showGroupSavingsLog($group)
     {
-        // TODO: Implement showGroupSavingsLog() method.
+
     }
 
     public static function all()

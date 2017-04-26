@@ -44,7 +44,7 @@ class EmployeeController implements EmployeeInterface
             $sql = "INSERT INTO employees(
                                             pf_no,
                                             full_name,
-                                            job_tile,
+                                            job_title,
                                             id_no, 
                                             nssf_no, 
                                             nhif_no,
@@ -64,7 +64,7 @@ class EmployeeController implements EmployeeInterface
                                       VALUES(
                                             :pf_no,
                                             :full_name,
-                                            :job_tile,
+                                            :job_title,
                                             :id_no, 
                                             :nssf_no, 
                                             :nhif_no,
@@ -86,7 +86,7 @@ class EmployeeController implements EmployeeInterface
 
             $stmt->bindParam(":pf_no", $pfNo);
             $stmt->bindParam(":full_name", $fullName);
-            $stmt->bindParam(":job_tile", $jobTitle);
+            $stmt->bindParam(":job_title", $jobTitle);
             $stmt->bindParam(":id_no", $idNo);
             $stmt->bindParam(":nssf_no", $nssfNo);
             $stmt->bindParam(":nhif_no", $nhifNo);
@@ -141,7 +141,7 @@ class EmployeeController implements EmployeeInterface
             $sql = "UPDATE employees SET
                                         pf_no=:pf_no,
                                         full_name=:full_name,
-                                        job_tile=:job_tile,
+                                        job_title=:job_title,
                                         id_no=:id_no, 
                                         nssf_no=:nssf_no, 
                                         nhif_no=:nssf_no,
@@ -165,7 +165,7 @@ class EmployeeController implements EmployeeInterface
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":pf_no", $pfNo);
             $stmt->bindParam(":full_name", $fullName);
-            $stmt->bindParam(":job_tile", $jobTitle);
+            $stmt->bindParam(":job_title", $jobTitle);
             $stmt->bindParam(":id_no", $idNo);
             $stmt->bindParam(":nssf_no", $nssfNo);
             $stmt->bindParam(":nhif_no", $nhifNo);
