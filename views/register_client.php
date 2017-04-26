@@ -19,8 +19,23 @@ include  __DIR__.'/includes/register_client.inc.php';
     <script src="../public/assets/js/respond.js"></script>
 </head>
 <body>
+
+<?php
+if ($successMsg=="")
+    echo $successMsg;
+else
+    echo $errorMsg;
+?>
+
 <!-- Name Section -->
 <div class="row">
+    <div>
+        <?php if($errorMsg == '' and $successMsg != '') {?>
+        <div class="alert alert-success">
+            <?php echo $successMsg; ?>
+        </div>
+        <?php } ?>
+    </div>
     <div class="col-md-8 col-md-offset-1">
         <form class="form-horizontal" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" METHOD="post">
             <fieldset>
@@ -150,7 +165,7 @@ include  __DIR__.'/includes/register_client.inc.php';
                <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <textarea placeholder="expectation" cols="10" rows="3" class="form-control" name="Expectations" ></textarea>
+                        <textarea placeholder="expectation" cols="10" rows="3" class="form-control" name="expectation" ></textarea>
                     </div>
                 </div>
 
@@ -160,7 +175,7 @@ include  __DIR__.'/includes/register_client.inc.php';
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-5">
-                        <input type="text" name="group_reference_number" placeholder="Group reference number" class="form-control">
+                        <input type="text" name="group_ref_no" placeholder="Group reference number" class="form-control">
                     </div>
 
 
@@ -168,7 +183,7 @@ include  __DIR__.'/includes/register_client.inc.php';
 
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="checkbox" name="is_member_of_other_org" data-toggle="modal" data-target="#sibling">   Member of other organization ?
+                        <input type="checkbox" value="1" name="is_member_of_other_org" data-toggle="modal" data-target="#sibling"> Member of other organization ?
                     </div>
                 </div>
 

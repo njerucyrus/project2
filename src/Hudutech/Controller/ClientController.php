@@ -119,7 +119,7 @@ class ClientController implements ClientInterface
             $stmt->bindParam(":nok_contact", $nokContact);
             return $stmt->execute() ? true : false;
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
+            print_r( $exception->getMessage());
             return false;
         }
     }

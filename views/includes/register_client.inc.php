@@ -21,6 +21,27 @@ if(isset($_POST['first_name'], $_POST['middle_name'], $_POST['last_name'])) {
     $client-> setDob($_POST['dob']);
     $client-> setOccupation($_POST['occupation']);
     $client-> setPostalAddress($_POST['postal_address']);
+    $client-> setEmail($_POST['email']);
+    $client-> setPhoneNumber($_POST['phone_number']);
+    $client-> setCounty($_POST['county']);
+    $client-> setSubCounty($_POST['sub_county']);
+    $client-> setLocation($_POST['location']);
+    $client-> setSubLocation($_POST['sub_location']);
+    $client-> setVillage($_POST['village']);
+    $client-> setEmergencyContact($_POST['emergency_contact']);
+    if(isset($_POST['is_member_of_other_org'])){
+        $client-> setMemberOfOtherOrg('YES');
+    }else{
+        $client-> setMemberOfOtherOrg('NO');
+    }
+
+
+    $client-> setExpectation($_POST['expectation']);
+    $client-> setNokName($_POST['nok_name']);
+    $client-> setDateEnrolled('date_enrolled');
+    $client-> setNokContact($_POST['nok_contact']);
+    $client-> setNokRelationShip($_POST['nok_relationship']);
+
 
 
     $clientCtrl = new \Hudutech\Controller\ClientController();
@@ -30,6 +51,7 @@ if(isset($_POST['first_name'], $_POST['middle_name'], $_POST['last_name'])) {
         $successMsg .= "Client details saved successfully";
     } else {
         $errorMsg .= "error occured";
+
     }
 }
 else{
