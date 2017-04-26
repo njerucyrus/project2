@@ -272,11 +272,13 @@ class EmployeeController implements EmployeeInterface
         try {
             $stmt = $conn->prepare("SELECT e.* FROM employees e WHERE 1");
             $stmt->execute();
-            $employees = array();
             if ($stmt->rowCount() > 0) {
-                $employees[] = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $employees = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $employees;
             }
-            return $employees;
+            else{
+                return [];
+            }
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
