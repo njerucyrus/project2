@@ -82,7 +82,7 @@ class Client
      */
     private $emergencyContact;
     /**
-     * @var boolean
+     * @var string
      */
     private $memberOfOtherOrg;
     /**
@@ -380,15 +380,15 @@ class Client
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function isMemberOfOtherOrg()
+    public function getMemberOfOtherOrg()
     {
         return $this->memberOfOtherOrg;
     }
 
     /**
-     * @param bool $memberOfOtherOrg
+     * @param string $memberOfOtherOrg
      */
     public function setMemberOfOtherOrg($memberOfOtherOrg)
     {
