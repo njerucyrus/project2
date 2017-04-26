@@ -5,6 +5,8 @@
  * Date: 25/04/2017
  * Time: 11:19
  */
+require_once __DIR__.'/../vendor/autoload.php';
+include  __DIR__.'/includes/register_employee.inc.php';
 ?>
 <!doctype html>
 <html>
@@ -19,8 +21,15 @@
 <body>
 <!-- Name Section -->
 <div class="row">
+    <div>
+        <?php if($errorMsg == '' and $successMsg != '') {?>
+            <div class="alert alert-success">
+                <?php echo $successMsg; ?>
+            </div>
+        <?php } ?>
+    </div>
     <div class="col-md-8 col-md-offset-1">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" METHOD="post">
             <fieldset>
 
                 <!-- Form Name -->
@@ -161,7 +170,8 @@
                     <div class="col-sm-5 col-sm-offset-1">
                         <div class="pull-right">
                             <button type="submit" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+
+                            <input type="submit" class="btn btn-primary" value="Save">
                         </div>
                     </div>
                 </div>
