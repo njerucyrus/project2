@@ -8,7 +8,7 @@
 ?>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width",initial-scale="1.0">
-<title> rep sacco</title>
+<title> Rep sacco</title>
 <link href= "public/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="public/assets/css/custom.css " rel="stylesheet">
 <script src="public/assets/js/respond.js"></script>

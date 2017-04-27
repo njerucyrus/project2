@@ -118,7 +118,9 @@ include __DIR__.'/right_menu_views.php';
     </div>
 </div>
 <!--javascript-->
-<script src="../public/js/jquery-3.2.0.slim.min.js"></script>
-<script src="../public/js/bootstrap.min.js"></script>
+
+
+<script src="../public/assets/js/jquery-3.2.0.slim.min.js"></script>
+<script src="../public/assets/js/bootstrap.min.js"></script>
 </body>
 </html>
