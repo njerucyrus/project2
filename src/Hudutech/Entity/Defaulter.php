@@ -26,7 +26,7 @@ class Defaulter
     /**
      * @var float
      */
-    private $amountDefulted;
+    private $amountDefaulted;
 
     /**
      * @return int
@@ -79,17 +79,17 @@ class Defaulter
     /**
      * @return float
      */
-    public function getAmountDefulted()
+    public function getAmountDefaulted()
     {
-        return $this->amountDefulted;
+        return $this->amountDefaulted;
     }
 
     /**
      * @param float $amountDefulted
      */
-    public function setAmountDefulted($amountDefulted)
+    public function setAmountDefaulted($amountDefulted)
     {
-        $this->amountDefulted = $amountDefulted;
+        $this->amountDefaulted = $amountDefulted;
     }
 
 }

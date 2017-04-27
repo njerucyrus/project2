@@ -8,7 +8,6 @@
 
 namespace Hudutech\Controller;
 
-
 use Hudutech\AppInterface\DefaulterInterface;
 use Hudutech\DBManager\DB;
 use Hudutech\Entity\Defaulter;
@@ -21,7 +20,7 @@ class DefaulterController implements DefaulterInterface
         $conn = $db->connect();
         $clientId = $defaulter->getClientId();
         $groupId = $defaulter->getGroupId();
-        $amountDefaulted = $defaulter->getAmountDefulted();
+        $amountDefaulted = $defaulter->getAmountDefaulted();
 
         try {
             $stmt = $conn->prepare("INSERT INTO defaulters(
@@ -54,7 +53,7 @@ class DefaulterController implements DefaulterInterface
         $conn = $db->connect();
         $clientId = $defaulter->getClientId();
         $groupId = $defaulter->getGroupId();
-        $amountDefaulted = $defaulter->getAmountDefulted();
+        $amountDefaulted = $defaulter->getAmountDefaulted();
 
         try {
             $stmt = $conn->prepare("UPDATE defaulters SET  
@@ -121,7 +120,7 @@ class DefaulterController implements DefaulterInterface
                 $defaulter = new Defaulter();
                 $defaulter->setClientId($row['client_id']);
                 $defaulter->setGroupId($row['group_id']);
-                $defaulter->setAmountDefulted($row['amount_defaulted']);
+                $defaulter->setAmountDefaulted($row['amount_defaulted']);
                 $db->closeConnection();
                 return $defaulter;
             } else {

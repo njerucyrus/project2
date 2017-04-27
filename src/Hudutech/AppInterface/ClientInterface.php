@@ -20,5 +20,5 @@ interface ClientInterface
   public static function getClientObject($id);
   public static function all();
   public static function getLoanLimit($clientId);
-
+  //public function createLoan($clientId);
 }

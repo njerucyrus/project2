@@ -301,22 +301,23 @@ class ClientController implements ClientInterface
                 $clients = $stmt->fetchAll(\PDO::FETCH_ASSOC);
                 return $clients;
 
-            } else{
-               return [];
+            } else {
+                return [];
             }
 
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
         }
+
     }
 
     public static function getLoanLimit($clientId)
     {
         $savings = SavingController::getClientTotalSavings($clientId);
 
-        $loanLimit = (float)($savings['total_savings']*3);
-        return $savings;
+        $loanLimit = (float)($savings['total_savings'] * 3);
+        return $loanLimit;
     }
 
 }
