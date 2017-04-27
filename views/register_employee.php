@@ -5,6 +5,8 @@
  * Date: 25/04/2017
  * Time: 11:19
  */
+require_once __DIR__.'/../vendor/autoload.php';
+include  __DIR__.'/includes/register_employee.inc.php';
 ?>
 <!doctype html>
 <html>
@@ -19,8 +21,15 @@
 <body>
 <!-- Name Section -->
 <div class="row">
+    <div>
+        <?php if($errorMsg == '' and $successMsg != '') {?>
+            <div class="alert alert-success">
+                <?php echo $successMsg; ?>
+            </div>
+        <?php } ?>
+    </div>
     <div class="col-md-8 col-md-offset-1">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" METHOD="post">
             <fieldset>
 
                 <!-- Form Name -->
@@ -29,13 +38,13 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="text" name="fistName" placeholder="First Name" class="form-control">
+                        <input type="text" name="first_name" placeholder="First Name" class="form-control">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" name="middleName" placeholder="Middle Name" class="form-control">
+                        <input type="text" name="middle_name" placeholder="Middle Name" class="form-control">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" name="lastName" placeholder="Last Name" class="form-control">
+                        <input type="text" name="last_name" placeholder="Last Name" class="form-control">
                     </div>
                 </div>
 
@@ -44,26 +53,25 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="text" name="pf_number" placeholder="Personal file number (PF No)" class="form-control">
+                        <input type="text" name="pf_no" placeholder="Personal file number (PF No)" class="form-control">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" name="job_title" placeholder="Job title" class="form-control">
+                        <input type="text" name="id_no" placeholder="Identity card number" class="form-control">
                     </div>
-                    <div class="col-sm-4">
-                        <input type="text" name="job_grade" placeholder="Job Grade" class="form-control">
-                    </div>
+
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
+
                     <div class="col-sm-4">
-                        <input type="text" name="id_number" placeholder="Identity card number" class="form-control">
+                        <input type="text" name="kra_pin" placeholder="KRA Pin Number" class="form-control">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" name="kra_umber" placeholder="KRA Pin Number" class="form-control">
+                        <input type="text" name="nssf_no" placeholder="NSSF Number" class="form-control">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" name="nssf_number" placeholder="NSSF Number" class="form-control">
+                        <input type="text" name="nhif_no" placeholder="NHIF Number" class="form-control">
                     </div>
                 </div>
 
@@ -72,7 +80,7 @@
                 <div class="form-group">
 
                     <div class="col-sm-4">
-                        <input type="text" name="phone" placeholder="Phone Number" class="form-control">
+                        <input type="text" name="phone_number" placeholder="Phone Number" class="form-control">
                     </div>
                     <div class="col-sm-4">
                         <input type="text" name="email" placeholder="email" class="form-control">
@@ -85,6 +93,14 @@
                 <!-- Address Section -->
                 <!-- Form Name -->
                 <legend>Job Details</legend>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <input type="text" name="job_title" placeholder="Job title" class="form-control">
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" name="job_grade" placeholder="Job Grade" class="form-control">
+                    </div>
+                </div>
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-10">
@@ -94,20 +110,20 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <textarea placeholder="Job description" cols="10" rows="2" class="form-control" name="job description" ></textarea>
+                        <textarea placeholder="Job description" cols="10" rows="2" class="form-control" name="job_description" ></textarea>
                     </div>
                 </div>
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <textarea placeholder="qualifications" cols="10" rows="2" class="form-control" name="Qualifications" ></textarea>
+                        <textarea placeholder="Qualifications" cols="10" rows="2" class="form-control" name="qualification" ></textarea>
                     </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <textarea placeholder="testimonials" cols="10" rows="2" class="form-control" name="Testimonials" ></textarea>
+                        <textarea placeholder="Testimonials" cols="10" rows="2" class="form-control" name="testimonial" ></textarea>
                     </div>
                 </div>
 
@@ -120,7 +136,7 @@
                         <input type="text" name="bank_name" placeholder="Bank Name" class="form-control">
                     </div>
                     <div class="col-sm-5">
-                        <input type="text" name="account_number" placeholder="Account Number" class="form-control">
+                        <input type="text" name="bank_account_no" placeholder="Account Number" class="form-control">
                     </div>
 
                 </div>
@@ -142,11 +158,9 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-5">
-                        <input type="text" name="nok_phone" placeholder="Phone Number" class="form-control">
+                        <input type="text" name="nok_contact" placeholder="Contact" class="form-control">
                     </div>
-                    <div class="col-sm-5">
-                        <input type="text" name="nok_email" placeholder="Email" class="form-control">
-                    </div>
+
 
                 </div>
 
@@ -156,7 +170,8 @@
                     <div class="col-sm-5 col-sm-offset-1">
                         <div class="pull-right">
                             <button type="submit" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+
+                            <input type="submit" class="btn btn-primary" value="Save">
                         </div>
                     </div>
                 </div>
