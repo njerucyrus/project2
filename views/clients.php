@@ -53,7 +53,7 @@ $counter = 1;
                     <td><? echo $client['email']?></td>
                     <td><? echo $client['county']?></td>
 
-                    <td class="3">
+                    <td colspan="3">
                        <button class="btn btn-xs btn-primary">Edit</button>
                        <button class="btn btn-xs btn-success">ViewMore</button>
                        <button class="btn btn-xs btn-danger">Delete</button>

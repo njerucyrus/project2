@@ -12,7 +12,7 @@ include  __DIR__.'/includes/register_employee.inc.php';
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width",initial-scale="1.0">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
     <title> rep sacco</title>
     <link href= "../public/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../public/assets/css/custom.css " rel="stylesheet">
