@@ -26,6 +26,7 @@ class ComposerStaticInit4e3453010ba9f77a6119b03ae3282213
         'Hudutech\\AppInterface\\EmployeeInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/EmployeeInterface.php',
         'Hudutech\\AppInterface\\GroupInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/GroupInterface.php',
         'Hudutech\\AppInterface\\SavingInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/SavingInterface.php',
+        'Hudutech\\Auth\\Auth' => __DIR__ . '/../..' . '/src/Hudutech/Auth/Auth.php',
         'Hudutech\\Controller\\ClientController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/ClientController.php',
         'Hudutech\\Controller\\DefaulterController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/DefaulterController.php',
         'Hudutech\\Controller\\EmployeeController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/EmployeeController.php',

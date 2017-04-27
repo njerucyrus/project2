@@ -11,6 +11,7 @@ return array(
     'Hudutech\\AppInterface\\EmployeeInterface' => $baseDir . '/src/Hudutech/AppInterface/EmployeeInterface.php',
     'Hudutech\\AppInterface\\GroupInterface' => $baseDir . '/src/Hudutech/AppInterface/GroupInterface.php',
     'Hudutech\\AppInterface\\SavingInterface' => $baseDir . '/src/Hudutech/AppInterface/SavingInterface.php',
+    'Hudutech\\Auth\\Auth' => $baseDir . '/src/Hudutech/Auth/Auth.php',
     'Hudutech\\Controller\\ClientController' => $baseDir . '/src/Hudutech/Controller/ClientController.php',
     'Hudutech\\Controller\\DefaulterController' => $baseDir . '/src/Hudutech/Controller/DefaulterController.php',
     'Hudutech\\Controller\\EmployeeController' => $baseDir . '/src/Hudutech/Controller/EmployeeController.php',
