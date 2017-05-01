@@ -11,7 +11,7 @@ namespace Hudutech\Auth;
 
 /**
  * Class Auth
- * @package Auth
+ *
  */
 class Auth
 {
