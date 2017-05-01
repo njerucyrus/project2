@@ -12,6 +12,5 @@ require_once __DIR__.'/vendor/autoload.php';
 //print_r($ctrl);
 
 //$ctrl = \Hudutech\Controller\ClientController::getLoanLimit(1)
-$user = \Hudutech\Controller\UserController::getUserObject(1);
-
-echo $user->getUsername(). " ";
+$ctrl = \Hudutech\Controller\ClientController::getClientObject(1);
+print_r($ctrl);

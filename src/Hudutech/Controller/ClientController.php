@@ -249,38 +249,9 @@ class ClientController implements ClientInterface
 
         try {
             $stmt = $conn->prepare("SELECT c.* FROM clients c WHERE c.id=:id");
-
-            $stmt->execute();
-
-            if ($stmt->rowCount() == 1) {
-                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $client = new Client();
-                $client->setGroupRefNo($row['group_ref_no']);
-                $client->setFullName($row['full_name']);
-                $client->setMembershipNo($row['membership_no']);
-                $client->setIdNo($row['id_no']);
-                $client->setKraPin($row['kra_pin']);
-                $client->setDob($row['dob']);
-                $client->setOccupation($row['occupation']);
-                $client->setPostalAddress($row['postal_address']);
-                $client->setEmail($row['email']);
-                $client->setPhoneNumber($row['phone_number']);
-                $client->setCounty($row['county']);
-                $client->setSubCounty($row['sub_county']);
-                $client->setLocation($row['location']);
-                $client->setSubLocation($row['sub_location']);
-                $client->setVillage($row['village']);
-                $client->setEmergencyContact($row['emergency_contact']);
-                $client->setMemberOfOtherOrg($row['is_member_of_other_org']);
-                $client->setExpectation($row['expectation']);
-                $client->setNokName($row['nok_name']);
-                $client->setNokRelationShip($row['nok_relationship']);
-                $client->setNokContact($row['nok_contact']);
-                $client->setDateEnrolled($row['date_enrolled']);
-                return $client;
-            } else {
-                return null;
-            }
+            $stmt->bindParam(":id", $id);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS| \PDO::FETCH_PROPS_LATE, Client::class);
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch() : null;
 
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
