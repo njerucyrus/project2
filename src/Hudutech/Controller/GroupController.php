@@ -28,29 +28,29 @@ class GroupController implements GroupInterface
 
         try {
             $sql = "INSERT INTO sacco_group(
-                                                group_name,
-                                                ref_no,
+                                                groupName,
+                                                refNo,
                                                 region,
-                                                official_contact,
-                                                date_formed,
-                                                monthly_meeting_schedule
+                                                officialContact,
+                                                dateFormed,
+                                                monthlyMeetingSchedule
                                             )
                                         VALUES 
                                         (
-                                                :group_name,
-                                                :ref_no,
+                                                :groupName,
+                                                :refNo,
                                                 :region,
-                                                :official_contact,
-                                                :date_formed,
-                                                :monthly_meeting_schedule
+                                                :officialContact,
+                                                :dateFormed,
+                                                :monthlyMeetingSchedule
                                         )";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(":group_name", $groupName);
-            $stmt->bindParam(":ref_no", $refNo);
+            $stmt->bindParam(":groupName", $groupName);
+            $stmt->bindParam(":refNo", $refNo);
             $stmt->bindParam(":region", $region);
-            $stmt->bindParam(":official_contact", $officialContact);
-            $stmt->bindParam(":date_formed", $dateFormed);
-            $stmt->bindParam(":monthly_meeting_schedule", $monthlyMeetingSchedule);
+            $stmt->bindParam(":officialContact", $officialContact);
+            $stmt->bindParam(":dateFormed", $dateFormed);
+            $stmt->bindParam(":monthlyMeetingSchedule", $monthlyMeetingSchedule);
 
             return $stmt->execute() ? true : false;
         } catch (\PDOException $exception) {
@@ -71,22 +71,22 @@ class GroupController implements GroupInterface
         $dateFormed = $group->getDateFormed();
         $monthlyMeetingSchedule = $group->getMonthlyMeetingSchedule();
         $sql = " UPDATE  sacco_group SET
-                                        group_name:=group_name,
-                                        ref_no:=ref_no,
-                                        region:=ref_no,
-                                        official_contact:=official_contact,
-                                        date_formed:=date_formed,
-                                        monthly_meeting_schedule:=monthly_meeting_schedule
+                                        groupName:=groupName,
+                                        refNo:=refNo,
+                                        region:=refNo,
+                                        officialContact:=officialContact,
+                                        dateFormed:=dateFormed,
+                                        monthlyMeetingSchedule:=monthlyMeetingSchedule
                                       WHERE id=:id
                                         ";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":group_name", $groupName);
-        $stmt->bindParam(":ref_no", $refNo);
+        $stmt->bindParam(":groupName", $groupName);
+        $stmt->bindParam(":refNo", $refNo);
         $stmt->bindParam(":region", $region);
-        $stmt->bindParam(":official_contact", $officialContact);
-        $stmt->bindParam(":date_formed", $dateFormed);
-        $stmt->bindParam(":monthly_meeting_schedule", $monthlyMeetingSchedule);
+        $stmt->bindParam(":officialContact", $officialContact);
+        $stmt->bindParam(":dateFormed", $dateFormed);
+        $stmt->bindParam(":monthlyMeetingSchedule", $monthlyMeetingSchedule);
         return $stmt->execute() ? true : false;
     }
 
@@ -129,26 +129,11 @@ class GroupController implements GroupInterface
         try{
             $stmt = $conn->prepare("SELECT g.* FROM sacco_group g WHERE g.id=:id");
             $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            if($stmt->rowCount() == 1) {
-                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $group = new Group();
-                $group->setGroupName($row['group_name']);
-                $group->setRefNo($row['ref_no']);
-                $group->setRegion($row['region']);
-                $group->setOfficialContact($row['official_contact']);
-                $group->setDateFormed($row['date_formed']);
-                $group->setMonthlyMeetingSchedule($row['monthly_meeting_schedule']);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Group::class);
 
-                $db->closeConnection();
-                return $group;
-            }
-            else{
-                $db->closeConnection();
-                return null;
-            }
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch() : null;
+
         } catch (\PDOException $exception) {
-
             echo $exception->getMessage();
             return null;
         }

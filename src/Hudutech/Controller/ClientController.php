@@ -12,6 +12,7 @@ namespace Hudutech\Controller;
 use Hudutech\AppInterface\ClientInterface;
 use Hudutech\DBManager\DB;
 use Hudutech\Entity\Client;
+use Hudutech\Entity\Saving;
 
 class ClientController implements ClientInterface
 {
@@ -45,78 +46,78 @@ class ClientController implements ClientInterface
         try {
 
             $sql = "INSERT INTO clients(
-                                            group_ref_no,
-                                            full_name,
-                                            membership_no,
-                                            id_no,
-                                            kra_pin,
+                                            groupRefNo,
+                                            fullName,
+                                            membershipNo,
+                                            idNo,
+                                            kraPin,
                                             dob,
                                             occupation,
-                                            postal_address,
+                                            postalAddress,
                                             email,
-                                            phone_number,
+                                            phoneNumber,
                                             county,
-                                            sub_county,
+                                            subCounty,
                                             location,
-                                            sub_location,
+                                            subLocation,
                                             village,
-                                            emergency_contact,
-                                            is_member_of_other_org,
+                                            emergencyContact,
+                                            isMemberOfOtherOrg,
                                             expectation,
-                                            nok_name,
-                                            nok_relationship,
-                                            date_enrolled,
-                                            nok_contact
+                                            nokName,
+                                            nokRelationship,
+                                            dateEnrolled,
+                                            nokContact
                                         ) 
                                     VALUES (
-                                            :group_ref_no,
-                                            :full_name,
-                                            :membership_no,
-                                            :id_no,
-                                            :kra_pin,
+                                            :groupRefNo,
+                                            :fullName,
+                                            :membershipNo,
+                                            :idNo,
+                                            :kraPin,
                                             :dob,
                                             :occupation,
-                                            :postal_address,
+                                            :postalAddress,
                                             :email,
-                                            :phone_number,
+                                            :phoneNumber,
                                             :county,
-                                            :sub_county,
+                                            :subCounty,
                                             :location,
-                                            :sub_location,
+                                            :subLocation,
                                             :village,
-                                            :emergency_contact,
-                                            :is_member_of_other_org,
+                                            :emergencyContact,
+                                            :isMemberOfOtherOrg,
                                             :expectation,
-                                            :nok_name,
-                                            :nok_relationship,
-                                            :date_enrolled,
-                                            :nok_contact
+                                            :nokName,
+                                            :nokRelationship,
+                                            :dateEnrolled,
+                                            :nokContact
                                         )";
 
             $stmt = $conn->prepare($sql);
 
-            $stmt->bindParam(":group_ref_no", $groupRefNo);
-            $stmt->bindParam(":full_name", $fullName);
-            $stmt->bindParam(":membership_no", $membershipNo);
-            $stmt->bindParam(":id_no", $idNo);
-            $stmt->bindParam(":kra_pin", $kraPin);
+            $stmt->bindParam(":groupRefNo", $groupRefNo);
+            $stmt->bindParam(":fullName", $fullName);
+            $stmt->bindParam(":membershipNo", $membershipNo);
+            $stmt->bindParam(":idNo", $idNo);
+            $stmt->bindParam(":kraPin", $kraPin);
             $stmt->bindParam(":dob", $dob);
             $stmt->bindParam(":occupation", $occupation);
-            $stmt->bindParam(":postal_address", $postalAddress);
+            $stmt->bindParam(":postalAddress", $postalAddress);
             $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":phone_number", $phoneNumber);
+            $stmt->bindParam(":phoneNumber", $phoneNumber);
             $stmt->bindParam(":county", $county);
-            $stmt->bindParam(":sub_county", $subCounty);
+            $stmt->bindParam(":subCounty", $subCounty);
             $stmt->bindParam(":location", $location);
-            $stmt->bindParam(":sub_location", $subLocation);
+            $stmt->bindParam(":subLocation", $subLocation);
             $stmt->bindParam(":village", $village);
-            $stmt->bindParam(":emergency_contact", $emergencyContact);
-            $stmt->bindParam(":is_member_of_other_org", $isMemberOfOtherOrg);
+            $stmt->bindParam(":emergencyContact", $emergencyContact);
+            $stmt->bindParam(":isMemberOfOtherOrg", $isMemberOfOtherOrg);
             $stmt->bindParam(":expectation", $expectation);
-            $stmt->bindParam(":nok_name", $nokName);
-            $stmt->bindParam(":nok_relationship", $nokRelationship);
-            $stmt->bindParam(":date_enrolled", $dateEnrolled);
-            $stmt->bindParam(":nok_contact", $nokContact);
+            $stmt->bindParam(":nokName", $nokName);
+            $stmt->bindParam(":nokRelationship", $nokRelationship);
+            $stmt->bindParam(":dateEnrolled", $dateEnrolled);
+            $stmt->bindParam(":nokContact", $nokContact);
             return $stmt->execute() ? true : false;
         } catch (\PDOException $exception) {
             print_r( $exception->getMessage());
@@ -154,28 +155,28 @@ class ClientController implements ClientInterface
         try {
 
             $sql = "UPDATE clients SET
-                                    group_ref_no=:group_ref_no,
-                                    full_name=:full_name,
-                                    membership_no=:membership_no,
-                                    id_no=:id_no,
-                                    kra_pin=:kra_pin,
+                                    groupRefNo=:groupRefNo,
+                                    fullName=:fullName,
+                                    membershipNo=:membershipNo,
+                                    idNo=:idNo,
+                                    kraPin=:kraPin,
                                     dob=:dob,
                                     occupation=:occupation,
-                                    postal_address=:postal_address,
+                                    postalAddress=:postalAddress,
                                     email=:email,
-                                    phone_number=:phone_number,
+                                    phoneNumber=:phoneNumber,
                                     county=:county,
-                                    sub_county=:sub_county,
+                                    subCounty=:subCounty,
                                     location=:location,
-                                    sub_location=:sub_location,
+                                    subLocation=:subLocation,
                                     village=:village,
-                                    emergency_contact=:emergency_contact,
-                                    is_member_of_other_org=:is_member_of_other_org,
+                                    emergencyContact=:emergencyContact,
+                                    isMemberOfOtherOrg=:isMemberOfOtherOrg,
                                     expectation=:expectation,
-                                    nok_name=:nok_name,
-                                    nok_relationship=:nok_relationship,
-                                    date_enrolled=:date_enrolled,
-                                    nok_contact=:nok_contact
+                                    nokName=:nokName,
+                                    nokRelationship=:nokRelationship,
+                                    dateEnrolled=:dateEnrolled,
+                                    nokContact=:nokContact
                             WHERE  
                                 id=:id
                             ";
@@ -183,28 +184,28 @@ class ClientController implements ClientInterface
             $stmt = $conn->prepare($sql);
 
             $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":group_ref_no", $groupRefNo);
-            $stmt->bindParam(":full_name", $fullName);
-            $stmt->bindParam(":membership_no", $membershipNo);
-            $stmt->bindParam(":id_no", $idNo);
-            $stmt->bindParam(":kra_pin", $kraPin);
+            $stmt->bindParam(":groupRefNo", $groupRefNo);
+            $stmt->bindParam(":fullName", $fullName);
+            $stmt->bindParam(":membershipNo", $membershipNo);
+            $stmt->bindParam(":idNo", $idNo);
+            $stmt->bindParam(":kraPin", $kraPin);
             $stmt->bindParam(":dob", $dob);
             $stmt->bindParam(":occupation", $occupation);
-            $stmt->bindParam(":postal_address", $postalAddress);
+            $stmt->bindParam(":postalAddress", $postalAddress);
             $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":phone_number", $phoneNumber);
+            $stmt->bindParam(":phoneNumber", $phoneNumber);
             $stmt->bindParam(":county", $county);
-            $stmt->bindParam(":sub_county", $subCounty);
+            $stmt->bindParam(":subCounty", $subCounty);
             $stmt->bindParam(":location", $location);
-            $stmt->bindParam(":sub_location", $subLocation);
+            $stmt->bindParam(":subLocation", $subLocation);
             $stmt->bindParam(":village", $village);
-            $stmt->bindParam(":emergency_contact", $emergencyContact);
-            $stmt->bindParam(":is_member_of_other_org", $isMemberOfOtherOrg);
+            $stmt->bindParam(":emergencyContact", $emergencyContact);
+            $stmt->bindParam(":isMemberOfOtherOrg", $isMemberOfOtherOrg);
             $stmt->bindParam(":expectation", $expectation);
-            $stmt->bindParam(":nok_name", $nokName);
-            $stmt->bindParam(":nok_relationship", $nokRelationship);
-            $stmt->bindParam(":date_enrolled", $dateEnrolled);
-            $stmt->bindParam(":nok_contact", $nokContact);
+            $stmt->bindParam(":nokName", $nokName);
+            $stmt->bindParam(":nokRelationship", $nokRelationship);
+            $stmt->bindParam(":dateEnrolled", $dateEnrolled);
+            $stmt->bindParam(":nokContact", $nokContact);
             return $stmt->execute() ? true : false;
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
@@ -248,38 +249,9 @@ class ClientController implements ClientInterface
 
         try {
             $stmt = $conn->prepare("SELECT c.* FROM clients c WHERE c.id=:id");
-
-            $stmt->execute();
-
-            if ($stmt->rowCount() == 1) {
-                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $client = new Client();
-                $client->setGroupRefNo($row['group_ref_no']);
-                $client->setFullName($row['full_name']);
-                $client->setMembershipNo($row['membership_no']);
-                $client->setIdNo($row['id_no']);
-                $client->setKraPin($row['kra_pin']);
-                $client->setDob($row['dob']);
-                $client->setOccupation($row['occupation']);
-                $client->setPostalAddress($row['postal_address']);
-                $client->setEmail($row['email']);
-                $client->setPhoneNumber($row['phone_number']);
-                $client->setCounty($row['county']);
-                $client->setSubCounty($row['sub_county']);
-                $client->setLocation($row['location']);
-                $client->setSubLocation($row['sub_location']);
-                $client->setVillage($row['village']);
-                $client->setEmergencyContact($row['emergency_contact']);
-                $client->setMemberOfOtherOrg($row['is_member_of_other_org']);
-                $client->setExpectation($row['expectation']);
-                $client->setNokName($row['nok_name']);
-                $client->setNokRelationShip($row['nok_relationship']);
-                $client->setNokContact($row['nok_contact']);
-                $client->setDateEnrolled($row['date_enrolled']);
-                return $client;
-            } else {
-                return null;
-            }
+            $stmt->bindParam(":id", $id);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS| \PDO::FETCH_PROPS_LATE, Client::class);
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch() : null;
 
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
@@ -300,14 +272,23 @@ class ClientController implements ClientInterface
                 $clients = $stmt->fetchAll(\PDO::FETCH_ASSOC);
                 return $clients;
 
-            } else{
-               return [];
+            } else {
+                return [];
             }
 
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
         }
+
+    }
+
+    public static function getLoanLimit($clientId)
+    {
+        $savings = SavingController::getClientTotalSavings($clientId);
+
+        $loanLimit = (float)($savings['total_savings'] * 3);
+        return $loanLimit;
     }
 
 }

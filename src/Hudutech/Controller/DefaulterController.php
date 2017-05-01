@@ -8,7 +8,6 @@
 
 namespace Hudutech\Controller;
 
-
 use Hudutech\AppInterface\DefaulterInterface;
 use Hudutech\DBManager\DB;
 use Hudutech\Entity\Defaulter;
@@ -21,23 +20,23 @@ class DefaulterController implements DefaulterInterface
         $conn = $db->connect();
         $clientId = $defaulter->getClientId();
         $groupId = $defaulter->getGroupId();
-        $amountDefaulted = $defaulter->getAmountDefulted();
+        $amountDefaulted = $defaulter->getAmountDefaulted();
 
         try {
             $stmt = $conn->prepare("INSERT INTO defaulters(
-                                                            client_id,
-                                                            group_id,
-                                                            amount_defaulted
+                                                            clientId,
+                                                            groupId,
+                                                            amountDefaulted
                                                           ) 
                                                     VALUES
                                                      (
-                                                        :client_id,
-                                                        :group_id,
-                                                        :amount_defaulted
+                                                        :clientId,
+                                                        :groupId,
+                                                        :amountDefaulted
                                                      )");
-            $stmt->bindParam(":client_id", $clientId);
-            $stmt->bindParam(":group_id", $groupId);
-            $stmt->bindParam(":amount_defaulted", $amountDefaulted);
+            $stmt->bindParam(":clientId", $clientId);
+            $stmt->bindParam(":groupId", $groupId);
+            $stmt->bindParam(":amountDefaulted", $amountDefaulted);
 
             return $stmt->execute() ? true : false;
 
@@ -54,19 +53,19 @@ class DefaulterController implements DefaulterInterface
         $conn = $db->connect();
         $clientId = $defaulter->getClientId();
         $groupId = $defaulter->getGroupId();
-        $amountDefaulted = $defaulter->getAmountDefulted();
+        $amountDefaulted = $defaulter->getAmountDefaulted();
 
         try {
             $stmt = $conn->prepare("UPDATE defaulters SET  
-                                                            client_id:=client_id,
-                                                            group_id:=group_id,
-                                                            amount_defaulted:=amount_defaulted
+                                                            clientId:=clientId,
+                                                            groupId:=groupId,
+                                                            amountDefaulted:=amountDefaulted
                                                       WHERE id=:id
                                   ");
 
-            $stmt->bindParam(":client_id", $clientId);
-            $stmt->bindParam(":group_id", $groupId);
-            $stmt->bindParam(":amount_defaulted", $amountDefaulted);
+            $stmt->bindParam(":clientId", $clientId);
+            $stmt->bindParam(":groupId", $groupId);
+            $stmt->bindParam(":amountDefaulted", $amountDefaulted);
 
             return $stmt->execute() ? true : false;
 
@@ -115,18 +114,9 @@ class DefaulterController implements DefaulterInterface
         try {
             $stmt = $conn->prepare("SELECT d.* FROM defaulters d WHERE d.id=:id");
             $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            if ($stmt->rowCount() == 0) {
-                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $defaulter = new Defaulter();
-                $defaulter->setClientId($row['client_id']);
-                $defaulter->setGroupId($row['group_id']);
-                $defaulter->setAmountDefulted($row['amount_defaulted']);
-                $db->closeConnection();
-                return $defaulter;
-            } else {
-                return null;
-            }
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Defaulter::class);
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch() : null;
+
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return null;

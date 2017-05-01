@@ -11,7 +11,6 @@ namespace Hudutech\DBManager;
 
 class ComplexQuery
 {
-
     /**
      * @param $table = database table
      * @param $tableColumns = array table columns

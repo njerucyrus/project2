@@ -26,11 +26,14 @@ class ComposerStaticInit4e3453010ba9f77a6119b03ae3282213
         'Hudutech\\AppInterface\\EmployeeInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/EmployeeInterface.php',
         'Hudutech\\AppInterface\\GroupInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/GroupInterface.php',
         'Hudutech\\AppInterface\\SavingInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/SavingInterface.php',
+        'Hudutech\\AppInterface\\UserInterface' => __DIR__ . '/../..' . '/src/Hudutech/AppInterface/UserInterface.php',
+        'Hudutech\\Auth\\Auth' => __DIR__ . '/../..' . '/src/Hudutech/Auth/Auth.php',
         'Hudutech\\Controller\\ClientController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/ClientController.php',
         'Hudutech\\Controller\\DefaulterController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/DefaulterController.php',
         'Hudutech\\Controller\\EmployeeController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/EmployeeController.php',
         'Hudutech\\Controller\\GroupController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/GroupController.php',
         'Hudutech\\Controller\\SavingController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/SavingController.php',
+        'Hudutech\\Controller\\UserController' => __DIR__ . '/../..' . '/src/Hudutech/Controller/UserController.php',
         'Hudutech\\DBManager\\ComplexQuery' => __DIR__ . '/../..' . '/src/Hudutech/DBManager/ComplexQuery.php',
         'Hudutech\\DBManager\\DB' => __DIR__ . '/../..' . '/src/Hudutech/DBManager/DB.php',
         'Hudutech\\Entity\\Client' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Client.php',
@@ -38,6 +41,7 @@ class ComposerStaticInit4e3453010ba9f77a6119b03ae3282213
         'Hudutech\\Entity\\Employee' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Employee.php',
         'Hudutech\\Entity\\Group' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Group.php',
         'Hudutech\\Entity\\Saving' => __DIR__ . '/../..' . '/src/Hudutech/Entity/Saving.php',
+        'Hudutech\\Entity\\User' => __DIR__ . '/../..' . '/src/Hudutech/Entity/User.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
