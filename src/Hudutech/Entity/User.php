@@ -39,6 +39,14 @@ class User
      * @var string
      */
     private $role;
+    /**
+     * @var string
+     */
+    private $ip;
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
 
     /**
      * @return int
@@ -152,4 +160,35 @@ class User
         $this->role = $role;
     }
 
+    /**
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @param string $ip
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
 }

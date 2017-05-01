@@ -65,7 +65,7 @@ class Auth
      * Unset the session on successful form submission
      * @return string
      */
-    function generateCSRFToken()
+   public function generateCSRFToken()
     {
         $this->token = md5(uniqid('auth', true));
         return $this->token;
