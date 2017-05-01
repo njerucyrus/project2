@@ -102,8 +102,8 @@ include __DIR__.'/right_menu_views.php';
 
                 <!-- Command -->
                 <div class="form-group">
-                    <div class="col-sm-2 col-sm-offset-1">
-                        <div class="pull-right">
+                    <div class="col-sm-5 col-sm-offset-1">
+                        <div class="pull-left">
                             <button type="submit" class="btn btn-danger  ">Cancel</button>
                             <input type="submit" class="btn btn-primary" value="Save">
                         </div>

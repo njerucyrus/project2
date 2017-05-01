@@ -9,7 +9,9 @@
 <!doctype html>
 <html>
 <head>
-
+    <?php
+    include __DIR__.'/views/head.php';
+    ?>
 </head>
 <body>
 <!--start of menu-->

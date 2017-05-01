@@ -10,15 +10,23 @@ include  __DIR__.'/includes/register_employee.inc.php';
 ?>
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width",initial-scale="1.0">
-    <title> rep sacco</title>
-    <link href= "../public/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../public/assets/css/custom.css " rel="stylesheet">
-    <script src="../public/assets/js/respond.js"></script>
-</head>
+<!--start head-->
+<?php
+include 'head_views.php';
+?>
+<!--stop head-->
 <body>
+
+<!--start menu-->
+<?php
+include __DIR__.'/right_menu_views.php';
+?>
+<!--stop menu-->
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row" id="main" >
 <!-- Name Section -->
 <div class="row">
     <div>
@@ -180,9 +188,12 @@ include  __DIR__.'/includes/register_employee.inc.php';
     </div><!-- /.col-lg-12 -->
 </div><!-- /.row -->
 
-
+        </div>
+    </div>
+</div>
 <!--javascript-->
-<script src="../public/js/jquery-3.2.0.slim.min.js"></script>
-<script src="../public/js/bootstrap.min.js"></script>
+
+<script src="../public/assets/js/jquery-3.2.0.slim.min.js"></script>
+<script src="../public/assets/js/bootstrap.min.js"></script>
 </body>
 </html>

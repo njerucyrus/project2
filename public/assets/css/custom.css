@@ -30,11 +30,13 @@
 
 .top-nav {
     padding: 0 15px;
+    background-color: #39639C !important;
 }
 
 .top-nav>li {
     display: inline-block;
     float: left;
+
 }
 
 .top-nav>li>a {
@@ -51,7 +53,7 @@
 .top-nav>.open>a:focus {
     color: #fff;
    /* background-color: #1a242f;*/
-    background-color:  0 6px 12px rgba(0,0,0,.175);
+    background-color: #39639C !important;
 }
 
 .top-nav>.open>.dropdown-menu {
@@ -83,7 +85,7 @@
         border-radius: 0;
         border-top: 1px rgba(0,0,0,.5) solid;
         overflow-y: auto;
-        background-color: #222;
+        background-color: #39639C !important;
         /*background-color: #5A6B7D;*/
         bottom: 0;
         overflow-x: hidden;
@@ -98,7 +100,7 @@
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #1a242f !important;
+        background-color: #39639C !important;
     }
 }
 
