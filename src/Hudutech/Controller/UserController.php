@@ -141,4 +141,21 @@ class UserController extends Auth implements UserInterface
             return [];
         }
     }
+
+    public static function getUserObject($id)
+    {
+        $db = new DB();
+        $conn = $db->connect();
+        try{
+            $stmt = $conn->prepare("SELECT * FROM users WHERE id=:id");
+            $stmt->bindParam(":id", $id);
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_CLASS, User::class) : null;
+
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return null;
+        }
+    }
+
+
 }

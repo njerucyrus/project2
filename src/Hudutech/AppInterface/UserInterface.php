@@ -19,5 +19,6 @@ interface UserInterface
     public static function destroy();
     public static function getId($id);
     public static function all();
+    public static function getUserObject($id);
 
 }
