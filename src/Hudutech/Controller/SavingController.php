@@ -30,27 +30,27 @@ class SavingController implements SavingInterface
         try {
 
             $stmt = $conn->prepare("INSERT INTO savings(
-                                                        client_id,
-                                                        group_id,
-                                                        cash_received,
+                                                        clientId,
+                                                        groupId,
+                                                        cashReceived,
                                                         contribution,
-                                                        payment_method,
-                                                        date_paid
+                                                        paymentMethod,
+                                                        datePaid
                                                         )
                                                 VALUES (
-                                                        :client_id,
-                                                        :group_id,
+                                                        :clientId,
+                                                        :groupId,
                                                         :cash_recieved,
                                                         :contribution,
-                                                        :payment_method,
-                                                        :date_paid
+                                                        :paymentMethod,
+                                                        :datePaid
                                                         )");
-            $stmt->bindParam(":client_id", $clientId);
-            $stmt->bindParam(":group_id", $groupId);
-            $stmt->bindParam(":cash_received", $cashReceived);
+            $stmt->bindParam(":clientId", $clientId);
+            $stmt->bindParam(":groupId", $groupId);
+            $stmt->bindParam(":cashReceived", $cashReceived);
             $stmt->bindParam(":contribution", $contribution);
-            $stmt->bindParam(":payment_method", $paymentMethod);
-            $stmt->bindParam(":date_paid", $datePaid);
+            $stmt->bindParam(":paymentMethod", $paymentMethod);
+            $stmt->bindParam(":datePaid", $datePaid);
             return $stmt->execute() ? true : false;
 
         } catch (\PDOException $exception) {
@@ -66,11 +66,11 @@ class SavingController implements SavingInterface
 
         try {
 
-            $sql = "(SELECT c.full_name , g.group_name , SUM(s.contribution) as total_savings FROM
+            $sql = "(SELECT c.fullName , g.groupName , SUM(s.contribution) as total_savings FROM
                     clients c , sacco_group g , savings s
-                    WHERE c.id = (SELECT s.client_id FROM savings s WHERE s.client_id=:id LIMIT 1)
-                    AND g.id = (SELECT s.group_id FROM savings s WHERE c.id = s.client_id LIMIT 1)
-                    AND c.id=s.client_id)";
+                    WHERE c.id = (SELECT s.clientId FROM savings s WHERE s.clientId=:id LIMIT 1)
+                    AND g.id = (SELECT s.groupId FROM savings s WHERE c.id = s.clientId LIMIT 1)
+                    AND c.id=s.clientId)";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":id", $id);
@@ -95,18 +95,18 @@ class SavingController implements SavingInterface
         $conn = $db->connect();
 
         try{
-            $sql = "(SELECT g.group_name, SUM(s.contribution) as total_group_savings FROM savings s,
-            sacco_group g WHERE s.group_id =(SELECT g.id from sacco_group g WHERE g.id=:group_id LIMIT 1)
-            AND s.group_id=g.id)";
+            $sql = "(SELECT g.groupName, SUM(s.contribution) as total_group_savings FROM savings s,
+            sacco_group g WHERE s.groupId =(SELECT g.id from sacco_group g WHERE g.id=:groupId LIMIT 1)
+            AND s.groupId=g.id)";
 
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(":group_id", $groupId);
+            $stmt->bindParam(":groupId", $groupId);
 
             if ( $stmt->execute() && $stmt->rowCount() == 1){
                 $row = $stmt->fetch(\PDO::FETCH_ASSOC);
                 $groupSavings = array(
-                    "group_name"=>$row['group_name'],
-                    "total_group_savings"=>$row['total_group_savings']
+                    "groupName"=>$row['group_name'],
+                    "totalGroupSavings"=>$row['total_group_savings']
                 );
                 $db->closeConnection();
                 return $groupSavings;
@@ -130,12 +130,12 @@ class SavingController implements SavingInterface
 
         try{
 
-            $sql = "SELECT c.full_name, g.group_name, s.contribution,s.payment_method, s.date_paid
+            $sql = "SELECT c.fullName, g.groupName, s.contribution,s.paymentMethod, s.datePaid
                     FROM clients c , sacco_group g, savings s
-                    WHERE s.client_id=:client_id AND s.group_id=g.id";
+                    WHERE s.clientId=:clientId AND s.groupId=g.id";
 
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(":client_id", $clientId);
+            $stmt->bindParam(":clientId", $clientId);
             if ($stmt->execute() && $stmt->rowCount() > 0) {
                 $savingsLog = $stmt->fetchAll(\PDO::FETCH_ASSOC);
                 $db->closeConnection();
@@ -157,8 +157,8 @@ class SavingController implements SavingInterface
 
         try{
 
-            $sql = "((SELECT g.group_name, SUM(s.contribution) as total_group_savings, s.date_paid FROM savings s,
-                    sacco_group g  WHERE g.id = s.group_id GROUP BY group_name))";
+            $sql = "((SELECT g.groupName, SUM(s.contribution) as total_group_savings, s.datePaid FROM savings s,
+                    sacco_group g  WHERE g.id = s.groupId GROUP BY groupName))";
             $stmt = $conn->prepare($sql);
 
             if ($stmt->execute() && $stmt->rowCount() > 0) {
@@ -182,9 +182,9 @@ class SavingController implements SavingInterface
         $conn = $db->connect();
 
         try{
-            $sql = "SELECT c.full_name, g.group_name, s.contribution,s.payment_method, s.date_paid
+            $sql = "SELECT c.fullName, g.groupName, s.contribution,s.paymentMethod, s.datePaid
                     FROM clients c , sacco_group g, savings s
-                    WHERE s.client_id=c.id AND s.group_id=g.id";
+                    WHERE s.clientId=c.id AND s.groupId=g.id";
             $stmt = $conn->prepare($sql);
             if ($stmt->execute() && $stmt->rowCount() > 0) {
                 $savings = $stmt->fetchAll(\PDO::FETCH_ASSOC);

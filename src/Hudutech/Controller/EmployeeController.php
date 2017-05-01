@@ -43,69 +43,69 @@ class EmployeeController implements EmployeeInterface
         try {
 
             $sql = "INSERT INTO employees(
-                                            pf_no,
-                                            full_name,
-                                            job_title,
-                                            id_no, 
-                                            nssf_no, 
-                                            nhif_no,
-                                            kra_pin,
+                                            pfNo,
+                                            fullName,
+                                            jobTitle,
+                                            idNo, 
+                                            nssfNo, 
+                                            nhifNo,
+                                            kraPin,
                                             remuneration,
-                                            job_description,
+                                            jobDescription,
                                             qualification,
                                             testimonial,
-                                            bank_name,
-                                            bank_account_no,
-                                            postal_address,
+                                            bankName,
+                                            bankAccountNo,
+                                            postalAddress,
                                             email, 
-                                            phone_number,
-                                            nok_name, 
-                                            nok_relationship,
-                                            nok_contact
+                                            phoneNumber,
+                                            nokName, 
+                                            nokRelationship,
+                                            nokContact
                                             ) 
                                       VALUES(
-                                            :pf_no,
-                                            :full_name,
-                                            :job_title,
-                                            :id_no, 
-                                            :nssf_no, 
-                                            :nhif_no,
-                                            :kra_pin,
+                                            :pfNo,
+                                            :fullName,
+                                            :jobTitle,
+                                            :idNo, 
+                                            :nssfNo, 
+                                            :nhifNo,
+                                            :kraPin,
                                             :remuneration,
-                                            :job_description,
+                                            :jobDescription,
                                             :qualification,
                                             :testimonial,
-                                            :bank_name,
-                                            :bank_account_no,
-                                            :postal_address,
+                                            :bankName,
+                                            :bankAccountNo,
+                                            :postalAddress,
                                             :email, 
-                                            :phone_number,
-                                            :nok_name, 
-                                            :nok_relationship,
-                                            :nok_contact
+                                            :phoneNumber,
+                                            :nokName, 
+                                            :nokRelationship,
+                                            :nokContact
                                          )";
 
             $stmt = $conn->prepare($sql);
 
-            $stmt->bindParam(":pf_no", $pfNo);
-            $stmt->bindParam(":full_name", $fullName);
-            $stmt->bindParam(":job_title", $jobTitle);
-            $stmt->bindParam(":id_no", $idNo);
-            $stmt->bindParam(":nssf_no", $nssfNo);
-            $stmt->bindParam(":nhif_no", $nhifNo);
-            $stmt->bindParam(":kra_pin", $kraPin);
+            $stmt->bindParam(":pfNo", $pfNo);
+            $stmt->bindParam(":fullName", $fullName);
+            $stmt->bindParam(":jobTitle", $jobTitle);
+            $stmt->bindParam(":idNo", $idNo);
+            $stmt->bindParam(":nssfNo", $nssfNo);
+            $stmt->bindParam(":nhifNo", $nhifNo);
+            $stmt->bindParam(":kraPin", $kraPin);
             $stmt->bindParam(":remuneration", $remuneration);
-            $stmt->bindParam(":job_description", $jobDescription);
+            $stmt->bindParam(":jobDescription", $jobDescription);
             $stmt->bindParam(":qualification", $qualification);
             $stmt->bindParam(":testimonial", $testimonial);
-            $stmt->bindParam(":bank_name", $bankName);
-            $stmt->bindParam(":bank_account_no", $bankAccountNo);
-            $stmt->bindParam(":postal_address", $postalAddress);
+            $stmt->bindParam(":bankName", $bankName);
+            $stmt->bindParam(":bankAccountNo", $bankAccountNo);
+            $stmt->bindParam(":postalAddress", $postalAddress);
             $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":phone_number", $phoneNumber);
-            $stmt->bindParam(":nok_name", $nokName);
-            $stmt->bindParam(":nok_relationship", $nokRelationship);
-            $stmt->bindParam(":nok_contact", $nokContact);
+            $stmt->bindParam(":phoneNumber", $phoneNumber);
+            $stmt->bindParam(":nokName", $nokName);
+            $stmt->bindParam(":nokRelationship", $nokRelationship);
+            $stmt->bindParam(":nokContact", $nokContact);
             return $stmt->execute() ? true : false;
 
         } catch (\PDOException $exception) {
@@ -144,50 +144,50 @@ class EmployeeController implements EmployeeInterface
         try {
 
             $sql = "UPDATE employees SET
-                                        pf_no=:pf_no,
-                                        full_name=:full_name,
-                                        job_title=:job_title,
-                                        id_no=:id_no, 
-                                        nssf_no=:nssf_no, 
-                                        nhif_no=:nssf_no,
-                                        kra_pin=:kra_pin,
+                                        pfNo=:pfNo,
+                                        fullName=:fullName,
+                                        jobTitle=:jobTitle,
+                                        idNo=:idNo, 
+                                        nssfNo=:nssfNo, 
+                                        nhifNo=:nssfNo,
+                                        kraPin=:kraPin,
                                         remuneration=:remuneration,
-                                        job_description=:job_description,
+                                        jobDescription=:jobDescription,
                                         qualification=:qualification,
                                         testimonial=:testimonial,
-                                        bank_name=:bank_name,
-                                        bank_account_no=:bank_account_no,
-                                        postal_address=:postal_address,
+                                        bankName=:bankName,
+                                        bankAccountNo=:bankAccountNo,
+                                        postalAddress=:postalAddress,
                                         email=:email, 
-                                        phone_number=:phone_number,
-                                        nok_name=:nok_name, 
-                                        nok_relationship=:nok_relationship,
-                                        nok_contact=:nok_contact
+                                        phoneNumber=:phoneNumber,
+                                        nokName=:nokName, 
+                                        nokRelationship=:nokRelationship,
+                                        nokContact=:nokContact
                                     WHERE 
                                         id=:id
                                     ";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":pf_no", $pfNo);
-            $stmt->bindParam(":full_name", $fullName);
-            $stmt->bindParam(":job_title", $jobTitle);
-            $stmt->bindParam(":id_no", $idNo);
-            $stmt->bindParam(":nssf_no", $nssfNo);
-            $stmt->bindParam(":nhif_no", $nhifNo);
-            $stmt->bindParam(":kra_pin", $kraPin);
+            $stmt->bindParam(":pfNo", $pfNo);
+            $stmt->bindParam(":fullName", $fullName);
+            $stmt->bindParam(":jobTitle", $jobTitle);
+            $stmt->bindParam(":idNo", $idNo);
+            $stmt->bindParam(":nssfNo", $nssfNo);
+            $stmt->bindParam(":nhifNo", $nhifNo);
+            $stmt->bindParam(":kraPin", $kraPin);
             $stmt->bindParam(":remuneration", $remuneration);
-            $stmt->bindParam(":job_description", $jobDescription);
+            $stmt->bindParam(":jobDescription", $jobDescription);
             $stmt->bindParam(":qualification", $qualification);
             $stmt->bindParam(":testimonial", $testimonial);
-            $stmt->bindParam(":bank_name", $bankName);
-            $stmt->bindParam(":bank_account_no", $bankAccountNo);
-            $stmt->bindParam(":postal_address", $postalAddress);
+            $stmt->bindParam(":bankName", $bankName);
+            $stmt->bindParam(":bankAccountNo", $bankAccountNo);
+            $stmt->bindParam(":postalAddress", $postalAddress);
             $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":phone_number", $phoneNumber);
-            $stmt->bindParam(":nok_name", $nokName);
-            $stmt->bindParam(":nok_relationship", $nokRelationship);
-            $stmt->bindParam(":nok_contact", $nokContact);
+            $stmt->bindParam(":phoneNumber", $phoneNumber);
+            $stmt->bindParam(":nokName", $nokName);
+            $stmt->bindParam(":nokRelationship", $nokRelationship);
+            $stmt->bindParam(":nokContact", $nokContact);
             return $stmt->execute() ? true : false;
 
         } catch (\PDOException $exception) {
@@ -239,25 +239,25 @@ class EmployeeController implements EmployeeInterface
             if ($stmt->rowCount() == 1) {
                 $employee = new Employee();
                 $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $employee->setPfNo($row['pf_no']);
-                $employee->setFullName($row['full_name']);
-                $employee->setJobTitle($row['job_title']);
-                $employee->setIdNo($row['id_no']);
-                $employee->setNssfNo($row['nssf_no']);
-                $employee->setNhifNo($row['nhif_no']);
-                $employee->setKraPin($row['kra_pin']);
+                $employee->setPfNo($row['pfNo']);
+                $employee->setFullName($row['fullName']);
+                $employee->setJobTitle($row['jobTitle']);
+                $employee->setIdNo($row['idNo']);
+                $employee->setNssfNo($row['nssfNo']);
+                $employee->setNhifNo($row['nhifNo']);
+                $employee->setKraPin($row['kraPin']);
                 $employee->setRemuneration($row['remuneration']);
-                $employee->setJobDescription($row['job_description']);
+                $employee->setJobDescription($row['jobDescription']);
                 $employee->setQualification($row['qualification']);
                 $employee->setTestimonial($row['testimonial']);
-                $employee->setBankName($row['bank_name']);
-                $employee->setBankAccountNo($row['bank_account_no']);
-                $employee->setPostalAddress($row['postal_address']);
+                $employee->setBankName($row['bankName']);
+                $employee->setBankAccountNo($row['bankAccountNo']);
+                $employee->setPostalAddress($row['postalAddress']);
                 $employee->setEmail($row['email']);
-                $employee->setPhoneNumber($row['phone_number']);
-                $employee->setNokName($row['nok_name']);
-                $employee->setNokRelationship($row['nok_relationship']);
-                $employee->setNokContact($row['nok_contact']);
+                $employee->setPhoneNumber($row['phoneNumber']);
+                $employee->setNokName($row['nokName']);
+                $employee->setNokRelationship($row['nokRelationship']);
+                $employee->setNokContact($row['nokContact']);
 
                 $db->closeConnection();
 
