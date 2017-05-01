@@ -26,7 +26,7 @@ class Auth
      * @param $password
      * @return bool
      */
-    public function authenticate($username, $password)
+    public  static function authenticate($username, $password)
     {
         $db = new DB();
         $conn = $db->connect();
