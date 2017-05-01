@@ -129,26 +129,11 @@ class GroupController implements GroupInterface
         try{
             $stmt = $conn->prepare("SELECT g.* FROM sacco_group g WHERE g.id=:id");
             $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            if($stmt->rowCount() == 1) {
-                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $group = new Group();
-                $group->setGroupName($row['groupName']);
-                $group->setRefNo($row['refNo']);
-                $group->setRegion($row['region']);
-                $group->setOfficialContact($row['officialContact']);
-                $group->setDateFormed($row['dateFormed']);
-                $group->setMonthlyMeetingSchedule($row['monthlyMeetingSchedule']);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Group::class);
 
-                $db->closeConnection();
-                return $group;
-            }
-            else{
-                $db->closeConnection();
-                return null;
-            }
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch() : null;
+
         } catch (\PDOException $exception) {
-
             echo $exception->getMessage();
             return null;
         }

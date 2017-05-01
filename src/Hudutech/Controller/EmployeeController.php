@@ -235,37 +235,8 @@ class EmployeeController implements EmployeeInterface
         try {
             $stmt = $conn->prepare("SELECT e.* FROM employees e WHERE e.id=:id");
             $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            if ($stmt->rowCount() == 1) {
-                $employee = new Employee();
-                $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-                $employee->setPfNo($row['pfNo']);
-                $employee->setFullName($row['fullName']);
-                $employee->setJobTitle($row['jobTitle']);
-                $employee->setIdNo($row['idNo']);
-                $employee->setNssfNo($row['nssfNo']);
-                $employee->setNhifNo($row['nhifNo']);
-                $employee->setKraPin($row['kraPin']);
-                $employee->setRemuneration($row['remuneration']);
-                $employee->setJobDescription($row['jobDescription']);
-                $employee->setQualification($row['qualification']);
-                $employee->setTestimonial($row['testimonial']);
-                $employee->setBankName($row['bankName']);
-                $employee->setBankAccountNo($row['bankAccountNo']);
-                $employee->setPostalAddress($row['postalAddress']);
-                $employee->setEmail($row['email']);
-                $employee->setPhoneNumber($row['phoneNumber']);
-                $employee->setNokName($row['nokName']);
-                $employee->setNokRelationship($row['nokRelationship']);
-                $employee->setNokContact($row['nokContact']);
-
-                $db->closeConnection();
-
-                return $employee;
-            } else {
-                $db->closeConnection();
-                return null;
-            }
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Employee::class);
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch() : null;
 
         } catch (\PDOException $exception) {
             echo $exception->getMessage();

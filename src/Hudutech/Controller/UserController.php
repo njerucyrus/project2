@@ -149,7 +149,7 @@ class UserController extends Auth implements UserInterface
         try{
             $stmt = $conn->prepare("SELECT * FROM users WHERE id=:id");
             $stmt->bindParam(":id", $id);
-            $stmt->setFetchMode(\PDO::FETCH_CLASS, User::class);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, User::class);
             return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch() : null;
 
         } catch (\PDOException $exception) {
