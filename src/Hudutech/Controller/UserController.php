@@ -11,43 +11,134 @@ namespace Hudutech\Controller;
 
 use Hudutech\AppInterface\UserInterface;
 use Hudutech\Auth\Auth;
+use Hudutech\DBManager\DB;
 use Hudutech\Entity\User;
 
 class UserController extends Auth implements UserInterface
 {
     public function create(User $user)
     {
+        $db = new DB();
+        $conn = $db->connect();
 
+        $username = $user->getUsername();
+        $password = $user->getPassword();
+        $email = $user->getEmail();
+        $role = $user->getRole();
+
+        try{
+            $stmt = $conn->prepare("INSERT INTO users(
+                                                        username,
+                                                        email,
+                                                        password,
+                                                        role
+                                                      ) 
+                                                VALUES (
+                                                    :username,
+                                                    :email,
+                                                    :password,
+                                                    :role)"
+                                                );
+
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":password", $password);
+            $stmt->bindParam(":role", $role);
+            return $stmt->execute() ? true : false;
+
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
+    }
+
+    public function update(User $user, $id)
+    {
+        $db = new DB();
+        $conn = $db->connect();
+
+        $username = $user->getUsername();
+        $password = $user->getPassword();
+        $email = $user->getEmail();
+        $role = $user->getRole();
+
+        try {
+            $stmt = $conn->prepare("UPDATE users SET 
+                                                    username=:username,
+                                                    password=:password,
+                                                    role=:role, email=:email
+                                                  WHERE
+                                                        id=:id
+                                                    ");
+
+
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":password", $password);
+            $stmt->bindParam(":role", $role);
+            return $stmt->execute() ? true : false;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
     }
 
     public static function delete($id)
     {
-        // TODO: Implement delete() method.
+        $db = new DB();
+        $conn = $db->connect();
+      try{
+         $stmt = $conn->prepare("DELETE FROM sacco.users WHERE id=:id");
+         $stmt->bindParam(":id", $id);
+         return $stmt->execute() ? true : false;
+      } catch (\PDOException $exception) {
+          echo $exception->getMessage();
+          return false;
+      }
+
     }
 
     public static function destroy()
     {
-        // TODO: Implement destroy() method.
+        $db = new DB();
+        $conn = $db->connect();
+        try{
+            $stmt = $conn->prepare("DELETE FROM sacco.users");
+            return $stmt->execute() ? true : false;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
     }
 
     public static function getId($id)
     {
-        // TODO: Implement getId() method.
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+
+            $stmt = $conn->prepare("SELECT u.* FROM users u WHERE u.id=:id");
+            $stmt->bindParam(":id", $id);
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
     }
 
     public static function all()
     {
-        // TODO: Implement all() method.
-    }
+        $db = new DB();
+        $conn = $db->connect();
 
-    public function resetPassword($userId, $newPassword)
-    {
-        // TODO: Implement resetPassword() method.
-    }
+        try{
 
-    public function changeRole($userId, $role)
-    {
-        // TODO: Implement changeRole() method.
+            $stmt = $conn->prepare("SELECT u.* FROM users u WHERE 1");
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
     }
-
 }

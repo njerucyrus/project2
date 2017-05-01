@@ -7,7 +7,7 @@
  */
 
 namespace Hudutech\Auth;
-
+use Hudutech\DBManager\DB;
 
 /**
  * Class Auth
@@ -28,7 +28,8 @@ class Auth
      */
     public function authenticate($username, $password)
     {
-        global $conn;
+        $db = new DB();
+        $conn = $db->connect();
         try {
             $stmt = $conn->prepare("SELECT * FROM users WHERE username=:username");
             $stmt->bindParam(":username", $username);
@@ -70,4 +71,6 @@ class Auth
         $this->token = md5(uniqid('auth', true));
         return $this->token;
     }
+
+
 }
