@@ -14,3 +14,4 @@ require_once __DIR__.'/vendor/autoload.php';
 //$ctrl = \Hudutech\Controller\ClientController::getLoanLimit(1)
 $ctrl = \Hudutech\Controller\EmployeeController::getEmployeeObject(1);
 print_r($ctrl);
+
