@@ -10,15 +10,16 @@ include  __DIR__.'/includes/register_employee.inc.php';
 ?>
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width", initial-scale="1.0">
-    <title> rep sacco</title>
-    <link href= "../public/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../public/assets/css/custom.css " rel="stylesheet">
-    <script src="../public/assets/js/respond.js"></script>
-</head>
+<?php
+include __DIR__.'/head_views.php';
+?>
 <body>
+<!--start menu-->
+<?php
+include __DIR__.'/right_menu_views.php';
+?>
+<!--stop menu-->
+<br/>
 <!-- Name Section -->
 <div class="row">
     <div>

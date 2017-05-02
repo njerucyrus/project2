@@ -39,19 +39,33 @@
                 </ul>
             </li>
         </ul>
+
+        <div class="heading">Rep Kenya </div>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
+        <div class="collapse navbar-collapse navbar-ex1-collapse " >
+
+            <ul class="nav navbar-nav side-nav ">
+                <li>
+
+
+            <a href="#" data-toggle="collapse" data-target="#submenu-1"> <div class="menu-links"><i class="fa fa-fw fa-user-plus"></i> Registration <i class="fa fa-fw fa-angle-down pull-right"></i></div></a>
+            <ul id="submenu-1" class="collapse">
+                <li >
+                    <a href="register_client.php"><div class="menu-links" > <i class="fa fa-fw fa-user-plus"></i> Register Client</div> </a>
+                </li>
 
                 <li>
-                    <h3><a href="register_client.php"><i class="fa fa-fw fa-user-plus"></i>  Register Client</a></h3>
-                    <a href="register_employee.php"><i class="fa fa-fw  fa-user"></i>  Register Employee</a>
+                    <a href="register_employee.php"><div class="menu-links" ><i class="fa fa-fw  fa-user"></i>  Register Employee</div></a>
                 </li>
                 <li>
-                    <a href="register_group.php"><i class="fa fa-fw  fa-group"></i> Register Group</a>
+                    <a href="register_group.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> Register Group</div></a>
                 </li>
-
             </ul>
+                </li>
+            </ul>
+
+
+
         </div>
         <!-- /.navbar-collapse -->
     </nav>

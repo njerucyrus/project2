@@ -7,8 +7,8 @@
  */
 ?>
 
-<div id="throbber" style="display:none; min-height:120px;  "></div>
-<div id="noty-holder"></div>
+<div id="throbber" style="display:none; min-height:120px;  "> </div>
+<div id="noty-holder"> </div>
 <div id="wrapper"  >
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -23,7 +23,10 @@
             <a class="navbar-brand" href="http://cijulenlinea.ucr.ac.cr/dev-users/">
                 <img src="http://placehold.it/200x50&text=LOGO" alt="LOGO"">
             </a>
+
+
         </div>
+
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav" >
             <li><a href="#" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Stats"><i class="fa fa-bar-chart-o"></i>
@@ -39,19 +42,34 @@
                 </ul>
             </li>
         </ul>
+        <div class="heading">Rep Kenya </div>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse"  >
-            <ul class="nav navbar-nav side-nav" style="text-decoration-color: white;">
 
-                <li>
-                    <h3><a href="views/register_client.php"><i class="fa fa-fw fa-user-plus"></i>  Register Client</a></h3>
-                    <a href="views/register_employee.php"><i class="fa fa-fw fa-user-plus"></i>  Register Employee</a>
-                </li>
-                <li>
-                    <a href="views/register_group.php"><i class="fa fa-fw fa-paper-plane-o"></i> Register Group</a>
-                </li>
 
+        <div class="collapse navbar-collapse navbar-ex1-collapse " >
+
+            <ul class="nav navbar-nav side-nav ">
+                <li>
+
+
+                    <a href="#" data-toggle="collapse" data-target="#submenu-1"> <div class="menu-links"><i class="fa fa-fw fa-user-plus"></i> Registration <i class="fa fa-fw fa-angle-down pull-right"></i></div></a>
+                    <ul id="submenu-1" class="collapse">
+                        <li >
+                            <a href="views/register_client.php"><div class="menu-links" > <i class="fa fa-fw fa-user-plus"></i> Register Client</div> </a>
+                        </li>
+
+                        <li>
+                            <a href="views/register_employee.php"><div class="menu-links" ><i class="fa fa-fw  fa-user"></i>  Register Employee</div></a>
+                        </li>
+                        <li>
+                            <a href="views/register_group.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> Register Group</div></a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
+
+
+
         </div>
         <!-- /.navbar-collapse -->
     </nav>

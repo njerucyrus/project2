@@ -26,7 +26,7 @@ include __DIR__.'/views/right_menu.php';
             <div class="row" id="main" >
                 <div class="col-sm-12 col-md-12 well" id="content">
                     <?php
-                    include __DIR__.'/views/register_client.php';
+
                     ?>
                 </div>
             </div>

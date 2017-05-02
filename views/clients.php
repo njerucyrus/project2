@@ -7,13 +7,19 @@
  */
 require_once __DIR__.'/../vendor/autoload.php';
 $clients = \Hudutech\Controller\ClientController::all();
+//print_r($clients);
 $counter = 1;
 ?>
 <!DOCTYPE html>
 <html>
 <?php include 'head_views.php'; ?>
 <body>
-<div class="container-fluid">
+<!--start menu-->
+<?php
+include __DIR__.'/right_menu_views.php';
+?>
+<!--stop menu-->
+<div class="container-fluid" style="margin-top: 70px;">
 
     <div class="table-responsive">
         <div class="col-md-4 pull-right">
@@ -43,15 +49,15 @@ $counter = 1;
             <tbody>
             <?php foreach ($clients as $client ): ?>
                 <tr>
-                    <td><? echo $counter++?></td>
-                    <td><? echo $client['full_name']?></td>
-                    <td><? echo $client['group_ref_no']?></td>
-                    <td><? echo $client['membership_no']?></td>
-                    <td><? echo $client['id_no']?></td>
-                    <td><? echo $client['kra_pin']?></td>
-                    <td><? echo $client['phone_number']?></td>
-                    <td><? echo $client['email']?></td>
-                    <td><? echo $client['county']?></td>
+                    <td><?php echo $counter++?></td>
+                    <td><?php echo $client['fullName']?></td>
+                    <td><?php echo $client['groupRefNo']?></td>
+                    <td><?php echo $client['membershipNo']?></td>
+                    <td><?php echo $client['idNo']?></td>
+                    <td><?php echo $client['kraPin']?></td>
+                    <td><?php echo $client['phoneNumber']?></td>
+                    <td><?php echo $client['email']?></td>
+                    <td><?php echo $client['county']?></td>
 
                     <td colspan="3">
                        <button class="btn btn-xs btn-primary">Edit</button>
@@ -65,7 +71,8 @@ $counter = 1;
     </div>
 
 </div>
-
+<script src="../public/assets/js/jquery-3.2.0.slim.min.js"></script>
+<script src="../public/assets/js/bootstrap.min.js"></script>
 </body>
 </html>
 
