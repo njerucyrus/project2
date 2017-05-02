@@ -8,6 +8,7 @@
  * Time: 11:46 PM
  */
 namespace Hudutech\DBManager;
+
 class DB
 {
     /**

@@ -19,4 +19,5 @@ interface GroupInterface
     public static function destroy();
     public static function getGroupObject($id);
     public static function all();
+    public static function groupMembers($groupRefNo);
 }
