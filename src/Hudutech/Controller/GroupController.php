@@ -162,4 +162,19 @@ class GroupController implements GroupInterface
 
     }
 
+    public static function groupMembers($groupRefNo)
+    {
+        $db = new DB();
+        $conn = $db->connect();
+        try{
+           $sql = "SELECT c.fullName, c.membershipNo, c.idNo, c.phoneNumber FROM clients c  WHERE c.groupRefNo='{$groupRefNo}'";
+           $stmt = $conn->prepare($sql);
+            return $stmt->execute() && $stmt->rowCount() > 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
+    }
+
+
 }
