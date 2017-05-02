@@ -26,11 +26,13 @@ class LoanController implements LoanInterface
     {
         $loanType = $loan->getLoanType();
         $interestRate = $loan->getInterestRate();
+        $defaulterFine = $loan->getDefaulterFine();
 
         try{
-            $stmt = $this->conn->prepare("INSERT INTO loans(loanType, interestRate) VALUES (:loanType, :interestRate)");
+            $stmt = $this->conn->prepare("INSERT INTO loans(loanType, interestRate, defaulterFine) VALUES (:loanType, :interestRate, :defaulterFine)");
             $stmt->bindParam(":loanType", $loanType);
             $stmt->bindParam(":interestRate", $interestRate);
+            $stmt->bindParam(":defaulterFine", $defaulterFine);
             return $stmt->execute() ? true : false;
 
         } catch (\PDOException $exception) {
@@ -43,13 +45,15 @@ class LoanController implements LoanInterface
     {
         $loanType = $loan->getLoanType();
         $interestRate = $loan->getInterestRate();
+        $defaulterFine = $loan->getDefaulterFine();
 
         try{
-            $stmt = $this->conn->prepare("UPDATE loans SET loanType=:loanType, interestRate=:interestRate
+            $stmt = $this->conn->prepare("UPDATE loans SET loanType=:loanType, interestRate=:interestRate, defaulterFine=:defaulterFine
                                           WHERE id=:id");
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":loanType", $loanType);
             $stmt->bindParam(":interestRate", $interestRate);
+            $stmt->bindParam(":defaulterFine", $defaulterFine);
             return $stmt->execute() ? true : false;
 
         }catch (\PDOException $exception){

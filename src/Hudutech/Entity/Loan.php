@@ -23,7 +23,10 @@ class Loan
      * @var float
      */
     private $interestRate;
-
+    /**
+     * @var float
+     */
+    private $defaulterFine;
     /**
      * @return int
      */
@@ -72,4 +75,19 @@ class Loan
         $this->interestRate = $interestRate;
     }
 
+    /**
+     * @return float
+     */
+    public function getDefaulterFine()
+    {
+        return $this->defaulterFine;
+    }
+
+    /**
+     * @param float $defaulterFine
+     */
+    public function setDefaulterFine($defaulterFine)
+    {
+        $this->defaulterFine = $defaulterFine;
+    }
 }
