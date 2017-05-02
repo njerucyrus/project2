@@ -66,6 +66,24 @@
                         </li>
                     </ul>
                 </li>
+
+                <li>
+
+
+                    <a href="#" data-toggle="collapse" data-target="#submenu-2"> <div class="menu-links"><i class="fa fa-fw  fa-search"></i> View <i class="fa fa-fw fa-angle-down pull-right"></i></div></a>
+                    <ul id="submenu-2" class="collapse">
+                        <li >
+                            <a href="views/clients.php"><div class="menu-links" > <i class="fa fa-fw fa-user"></i> View Clients</div> </a>
+                        </li>
+
+                        <li>
+                            <a href="views/employees.php"><div class="menu-links" ><i class="fa fa-fw  fa-user"></i>  View Employees</div></a>
+                        </li>
+                        <li>
+                            <a href="views/groups.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> View Groups</div></a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
 
 

@@ -20,7 +20,9 @@ include __DIR__.'/right_menu_views.php';
 ?>
 <!--stop menu-->
 <div class="container-fluid" style="margin-top: 70px;">
-
+    <div class="h2" style="text-align: center;">
+        Clients
+    </div>
     <div class="table-responsive">
         <div class="col-md-4 pull-right">
             <form style="padding: 10px;">

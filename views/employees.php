@@ -14,7 +14,15 @@ $counter = 1;
 <html>
 <?php include 'head_views.php'; ?>
 <body>
-<div class="container-fluid">
+<!--start menu-->
+<?php
+include __DIR__.'/right_menu_views.php';
+?>
+<!--stop menu-->
+<div class="container-fluid" style="padding-top: 10px;">
+    <div class="h2" style="text-align: center;">
+        Employees
+    </div>
 
     <div class="table-responsive">
         <div class="col-md-4 pull-right">
@@ -46,18 +54,18 @@ $counter = 1;
             <tbody>
             <?php foreach ($employees as $employee ): ?>
                 <tr>
-                    <td><? echo $counter++ ?></td>
-                    <td><? echo $employee['pf_no'] ?></td>
-                    <td><? echo $employee['full_name'] ?></td>
-                    <td><? echo $employee['job_title'] ?></td>
-                    <td><? echo $employee['id_no'] ?></td>
-                    <td><? echo $employee['nssf_no'] ?></td>
-                    <td><? echo $employee['nhif_no'] ?></td>
-                    <td><? echo $employee['kra_pin'] ?></td>
-                    <td><? echo $employee['remuneration'] ?></td>
-                    <td><? echo $employee['bank_name'] ?></td>
-                    <td><? echo $employee['bank_account_no'] ?></td>
-                    <td><? echo $employee['phone_number'] ?></td>
+                    <td><?php echo $counter++ ?></td>
+                    <td><?php echo $employee['pfNo'] ?></td>
+                    <td><?php echo $employee['fullName'] ?></td>
+                    <td><?php echo $employee['jobTitle'] ?></td>
+                    <td><?php echo $employee['idNo'] ?></td>
+                    <td><?php echo $employee['nssfNo'] ?></td>
+                    <td><?php echo $employee['nhifNo'] ?></td>
+                    <td><?php echo $employee['kraPin'] ?></td>
+                    <td><?php echo $employee['remuneration'] ?></td>
+                    <td><?php echo $employee['bankName'] ?></td>
+                    <td><?php echo $employee['bankAccountNo'] ?></td>
+                    <td><?php echo $employee['phoneNumber'] ?></td>
                     <td colspan="3">
                         <button class="btn btn-xs btn-primary">Edit</button>
                         <button class="btn btn-xs btn-success">ViewMore</button>
@@ -70,6 +78,7 @@ $counter = 1;
     </div>
 
 </div>
-
+<script src="../public/assets/js/jquery-3.2.0.slim.min.js"></script>
+<script src="../public/assets/js/bootstrap.min.js"></script>
 </body>
 </html>

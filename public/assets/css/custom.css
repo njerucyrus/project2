@@ -161,8 +161,8 @@
 }
 
 .menu-links:hover {
-    background-color:white;
-    color:#a6e1ec;
+    background-color:#a6e1ec;
+    color:black;
     font-weight: bold;
 }
 
