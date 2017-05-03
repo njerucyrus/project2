@@ -10,11 +10,12 @@ namespace Hudutech\Controller;
 
 
 use Hudutech\AppInterface\ClientInterface;
+use Hudutech\DBManager\ComplexQuery;
 use Hudutech\DBManager\DB;
 use Hudutech\Entity\Client;
 use Hudutech\Entity\Saving;
 
-class ClientController implements ClientInterface
+class ClientController  extends ComplexQuery implements ClientInterface
 {
     public function create(Client $client)
     {

@@ -185,7 +185,7 @@ else
                         <select name="group_ref_no" class="form-control">
                             <option>--Select Group here--</option>
                             <?php foreach ($groups as $group): ?>
-                            <option value="<?php echo $group['ref_no']?>"><?php echo $group['group_name']?></option>
+                            <option value="<?php echo $group['refNo']?>"><?php echo $group['groupName']?></option>
                             <?php endforeach ?>
 
                         </select>

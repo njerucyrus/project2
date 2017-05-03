@@ -10,10 +10,11 @@ namespace Hudutech\Controller;
 
 
 use Hudutech\AppInterface\GroupInterface;
+use Hudutech\DBManager\ComplexQuery;
 use Hudutech\DBManager\DB;
 use Hudutech\Entity\Group;
 
-class GroupController implements GroupInterface
+class GroupController extends ComplexQuery implements GroupInterface
 {
     public function create(Group $group)
     {
