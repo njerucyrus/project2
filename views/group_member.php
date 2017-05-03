@@ -59,7 +59,7 @@ include __DIR__.'/right_menu_views.php';
 
     <div class="table-responsive">
         <div class="col-md-5 pull-left">
-            <div class="col-sm-5">
+            <div class="col-sm-5 form-horizontal">
 
                 <form   role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" METHOD="post">
                 <select name="group_ref_no" class="form-control">

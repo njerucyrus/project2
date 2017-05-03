@@ -66,7 +66,7 @@ class SavingController implements SavingInterface
 
         try {
 
-            $sql = "(SELECT c.fullName , g.groupName , SUM(s.contribution) as total_savings FROM
+            $sql = "(SELECT c.fullName , g.groupName , SUM(s.contribution) as totalSavings FROM
                     clients c , sacco_group g , savings s
                     WHERE c.id = (SELECT s.clientId FROM savings s WHERE s.clientId=:id LIMIT 1)
                     AND g.id = (SELECT s.groupId FROM savings s WHERE c.id = s.clientId LIMIT 1)
@@ -78,9 +78,9 @@ class SavingController implements SavingInterface
             if ($stmt->execute() && $stmt->rowCount() > 0) {
                 $row = $stmt->fetch(\PDO::FETCH_ASSOC);
                 $total_saving = array(
-                    "client_name" => $row['full_name'],
-                    "group_name" => $row['group_name'],
-                    "total_savings" => $row['total_savings']
+                    "clientName" => $row['fullName'],
+                    "groupName" => $row['groupName'],
+                    "totalSavings" => $row['totalSavings']
                 );
             }
             return $total_saving;
@@ -95,7 +95,7 @@ class SavingController implements SavingInterface
         $conn = $db->connect();
 
         try{
-            $sql = "(SELECT g.groupName, SUM(s.contribution) as total_group_savings FROM savings s,
+            $sql = "(SELECT g.groupName, SUM(s.contribution) as totalGroupSavings FROM savings s,
             sacco_group g WHERE s.groupId =(SELECT g.id from sacco_group g WHERE g.id=:groupId LIMIT 1)
             AND s.groupId=g.id)";
 
@@ -105,8 +105,8 @@ class SavingController implements SavingInterface
             if ( $stmt->execute() && $stmt->rowCount() == 1){
                 $row = $stmt->fetch(\PDO::FETCH_ASSOC);
                 $groupSavings = array(
-                    "groupName"=>$row['group_name'],
-                    "totalGroupSavings"=>$row['total_group_savings']
+                    "groupName"=>$row['groupName'],
+                    "totalGroupSavings"=>$row['totalGroupSavings']
                 );
                 $db->closeConnection();
                 return $groupSavings;
@@ -150,7 +150,7 @@ class SavingController implements SavingInterface
         }
     }
 
-    public static function showGroupSavingsLog($group)
+    public static function showGroupSavingsLog()
     {
         $db = new DB();
         $conn = $db->connect();
