@@ -119,8 +119,8 @@ class LoanController extends ComplexQuery implements LoanInterface
         $db = new DB();
         $conn = $db->connect();
         try {
-            $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(principal, clientId, clientLoadId, loanInterest, loanBal)
-                                  VALUES (:principal, :clientId, :clientLoadId, :loanInterest, :loanBal)");
+            $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(principal, clientId, clientLoanId, loanInterest, loanBal)
+                                  VALUES (:principal, :clientId, :clientLoanId, :loanInterest, :loanBal)");
             $stmt->bindParam(":principal", $principal);
             $stmt->bindParam(":clientId", $clientId);
             $stmt->bindParam(":clientLoanId", $clientLoanId);
@@ -244,12 +244,14 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $db = new DB();
                 $conn = $db->connect();
 
-                $stmt = $conn->prepare("INSERT INTO client_loans(clientId, loanAmount, loadType, loanDate, status)
-                          VALUES (:clientId, :loanAmount, :loadType, :loanDate, :status)");
+                $stmt = $conn->prepare("INSERT INTO client_loans(clientId, loanAmount, loanType, loanDate, status)
+                                          VALUES (:clientId, :loanAmount, :loanType, :loanDate, :status)");
+
+
                 $stmt->bindParam(":clientId", $clientId);
                 $stmt->bindParam(":loanAmount", $amount);
                 $stmt->bindParam(":loanType", $loanType);
-                $stmt->bindParam(":loadDate", $loanDate);
+                $stmt->bindParam(":loanDate", $loanDate);
                 $stmt->bindParam(":status", $status);
                 if ($stmt->execute()) {
                     $config = array(
@@ -284,7 +286,7 @@ class LoanController extends ComplexQuery implements LoanInterface
         try {
             $stmt = $conn->prepare("SELECT * FROM monthly_loan_servicing 
                                     WHERE clientId='{$clientId}' AND
-                                     clientLoadId='{$clientLoanId}'
+                                     clientLoanId='{$clientLoanId}'
                                       ORDER BY id DESC LIMIT 1");
             return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [];
 
@@ -379,7 +381,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(
                                                                             principal,
                                                                             clientId,
-                                                                            clientLoadId,
+                                                                            clientLoanId,
                                                                             loanInterest,
                                                                             loanBal,
                                                                             amountPaid,
@@ -390,7 +392,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                                                 VALUES (
                                                                             :principal,
                                                                             :clientId,
-                                                                            :clientLoadId,
+                                                                            :clientLoanId,
                                                                             :loanInterest,
                                                                             :loanBal,
                                                                             :amountPaid,
@@ -398,7 +400,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                                                             :datePaid,
                                                                             :createdAt
                                                                         )");
-                $stmt->bindParam(":principal", $newLoanCF);
+                $stmt->bindParam(":principal", $previousLoanCF);
                 $stmt->bindParam(":clientId", $clientId);
                 $stmt->bindParam(":clientLoanId", $clientLoanId);
                 $stmt->bindParam(":loanInterest", $newInterest);
@@ -430,7 +432,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(
                                                                             principal,
                                                                             clientId,
-                                                                            clientLoadId,
+                                                                            clientLoanId,
                                                                             loanInterest,
                                                                             loanBal,
                                                                             amountPaid,
@@ -441,7 +443,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                                                 VALUES (
                                                                             :principal,
                                                                             :clientId,
-                                                                            :clientLoadId,
+                                                                            :clientLoanId,
                                                                             :loanInterest,
                                                                             :loanBal,
                                                                             :amountPaid,
@@ -449,7 +451,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                                                             :datePaid,
                                                                             :createdAt
                                                                         )");
-                $stmt->bindParam(":principal", $newLoanCF);
+                $stmt->bindParam(":principal", $previousLoanCF);
                 $stmt->bindParam(":clientId", $clientId);
                 $stmt->bindParam(":clientLoanId", $clientLoanId);
                 $stmt->bindParam(":loanInterest", $newInterest);
