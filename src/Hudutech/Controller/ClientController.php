@@ -243,6 +243,22 @@ class ClientController  extends ComplexQuery implements ClientInterface
         }
     }
 
+    public static function getId($clientId)
+    {
+       $db = new DB();
+       $conn = $db->connect();
+
+       try{
+           $stmt = $conn->prepare("SELECT t.* FROM clients t WHERE t.id=:id");
+           $stmt->bindParam(":id", $clientId);
+           return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [];
+       }catch (\PDOException $exception) {
+           echo $exception->getMessage();
+           return [];
+       }
+    }
+
+
     public static function getClientObject($id)
     {
         $db = new DB();

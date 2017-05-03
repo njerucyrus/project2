@@ -63,7 +63,7 @@ include __DIR__.'/right_menu_views.php';
 
                     <td colspan="3">
                        <button class="btn btn-xs btn-primary">Edit</button>
-                       <button class="btn btn-xs btn-success">ViewMore</button>
+                       <a href="client_profile.php?id=<?php echo urlencode($client['id'])?>" class="btn btn-xs btn-primary"> View Profile</a>
                        <button class="btn btn-xs btn-danger">Delete</button>
                     </td>
                 </tr>

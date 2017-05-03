@@ -18,6 +18,7 @@ interface ClientInterface
   public static function delete($id);
   public static function destroy();
   public static function getClientObject($id);
+  public static function getId($clientId);
   public static function all();
   public static function getLoanLimit($clientId);
 

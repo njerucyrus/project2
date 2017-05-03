@@ -158,7 +158,7 @@ else
                         <input type="text" name="nok_name" placeholder="Full Name" class="form-control">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" name="nok_contact" placeholder="Relationship" class="form-control">
+                        <input type="text" name="nok_contact" placeholder="Contact" class="form-control">
                     </div>
                     <div class="col-sm-4">
                         <input type="text" name="nok_relationship" placeholder="Relationship" class="form-control">
@@ -172,7 +172,7 @@ else
                <!-- Text input-->
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <textarea placeholder="expectation" cols="10" rows="3" class="form-control" name="expectation" ></textarea>
+                        <textarea placeholder="Expectation" cols="10" rows="3" class="form-control" name="expectation" ></textarea>
                     </div>
                 </div>
 

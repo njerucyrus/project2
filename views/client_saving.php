@@ -7,8 +7,8 @@
  */
 require_once __DIR__.'/../vendor/autoload.php';
 $counter=1;
-$clientSavings=\Hudutech\Controller\SavingController::showClientSavingsLog();
-print_r($clientSaving);
+$clientSavings=\Hudutech\Controller\SavingController::clientsTotalSavingsLog();
+//print_r($clientSavings);
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@ include_once 'head_views.php';
 <!--end of head-->
 <!--start of menu-->
 <?php
-//include_once 'right_menu_views.php';
+include_once 'right_menu_views.php';
 ?>
 <!--end of menu-->
 <div class="container-fluid" style="margin-top: 70px;">
@@ -36,18 +36,18 @@ include_once 'head_views.php';
             <thead>
             <tr class="bg-primary">
                 <th>#</th>
-                <th>GroupName</th>
-                <th>GroupSaving</th>
+                <th>Full Name</th>
+                <th>Group Name</th>
+                <th>Total Saving</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($groupSavings as $groupSaving ): ?>
+            <?php foreach ($clientSavings as $clientSaving ): ?>
                 <tr>
                     <td><?php echo $counter++?></td>
-                    <td><?php echo $groupSaving['groupName']?></td>
-                    <td><?php echo $groupSaving['total_group_savings']?></td>
-
-
+                    <td><?php echo $clientSaving['fullName']?></td>
+                    <td><?php echo $clientSaving['groupName']?></td>
+                    <td><?php echo $clientSaving['totalSaving']?></td>
 
                 </tr>
             <?php endforeach; ?>
