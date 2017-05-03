@@ -200,4 +200,21 @@ class SavingController implements SavingInterface
         }
     }
 
+    /**
+     *shows total saving for every clients
+     */
+    public static function clientsTotalSavingsLog(){
+       $db = new DB();
+       $conn = $db->connect();
+       try{
+            $sql = "SELECT c.fullName, g.groupName, SUM(s.contribution) as totalSaving
+                     FROM clients c, sacco_group g, savings s
+                     WHERE c.groupRefNo = g.refNo AND s.groupId=g.id GROUP BY g.groupName";
+                                $stmt = $conn->prepare($sql);
+            return $stmt->execute() && $stmt->rowCount() > 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+       } catch (\PDOException $exception) {
+
+       }
+    }
+
 }
