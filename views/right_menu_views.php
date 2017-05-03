@@ -77,6 +77,9 @@
                         <li>
                             <a href="groups.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> View Groups</div></a>
                         </li>
+                        <li>
+                            <a href="group_member.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> View Group Members</div></a>
+                        </li>
                     </ul>
                 </li>
             </ul>

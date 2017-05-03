@@ -77,10 +77,13 @@
                         </li>
 
                         <li>
-                            <a href="views/employees.php"><div class="menu-links" ><i class="fa fa-fw  fa-user"></i>  View Employees</div></a>
+                            <a href="views/employees.php"><div class="menu-links" ><i class="fa fa-fw  fa-user"></i> View Employees</div></a>
                         </li>
                         <li>
                             <a href="views/groups.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> View Groups</div></a>
+                        </li>
+                        <li>
+                            <a href="views/group_member.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> View Group Members</div></a>
                         </li>
                     </ul>
                 </li>

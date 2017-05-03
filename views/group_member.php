@@ -69,7 +69,8 @@ include __DIR__.'/right_menu_views.php';
                     <?php endforeach ?>
 
                 </select>
-                    <input type="submit" value="Select Group"/>
+
+                    <input type="submit" class="btn btn-primary" style="padding-top: 10px; margin-top: 5px; margin-bottom: 5px; margin-left: 5px;" value="View Group Members"/>
                 </form>
             </div>
         </div>
