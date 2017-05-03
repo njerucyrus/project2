@@ -266,6 +266,11 @@ class LoanController extends ComplexQuery implements LoanInterface
                     self::createRepaymentDates($clientId, $loanType);
                     self::createLoanStatus($clientId, $loanType);
                     self::createLoanServicing($config);
+                    ClientController::createTransactionLog(array(
+                        "amount"=>$amount,
+                        "details"=>"Received Loan of Ksh ".$amount." To be repaid in ".$loanType." Plan",
+                        "clientId"=>$clientId
+                    ));
                     return true;
                 } else {
                     return false;
@@ -313,6 +318,8 @@ class LoanController extends ComplexQuery implements LoanInterface
             return false;
         }
     }
+
+
 
     public static function serviceLoan($clientId, $clientLoanId, $amount)
     {
@@ -363,7 +370,19 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $stmt->bindParam(":id", $id);
                 $stmt->bindParam(":amountPaid", $amount);
                 $stmt->bindParam(":loanCF", $loanCF);
-                return $stmt->execute() ? true : false;
+
+                if ($stmt->execute()) {
+                    //create transaction log
+                    ClientController::createTransactionLog(array(
+                        "amount"=>$amount,
+                        "details"=>"Repayment of Loan",
+                        "clientId"=>$clientId
+                    ));
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
             if (sizeof($loanServicing) == 1 && !empty($loanServicing[0]['loanCF']) && !empty($loanServicing[0]['amountPaid']) && $loanServicing[0]['loanCF'] > 0){
                 // get the previous payment and create an new record
@@ -412,7 +431,18 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $stmt->bindParam(":loanCF", $newLoanCF);
                 $stmt->bindParam(":datePaid", $datePaid);
                 $stmt->bindParam(":createdAt", $createdAt);
-                return $stmt->execute() ? true : false;
+
+                if ($stmt->execute()) {
+                    ClientController::createTransactionLog(array(
+                        "amount"=>$amount,
+                        "details"=>"Repayment of Loan",
+                        "clientId"=>$clientId
+                    ));
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
 
 
@@ -463,7 +493,18 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $stmt->bindParam(":loanCF", $newLoanCF);
                 $stmt->bindParam(":datePaid", $datePaid);
                 $stmt->bindParam(":createdAt", $createdAt);
-                return $stmt->execute() ? true : false;
+
+                if ($stmt->execute()) {
+                    ClientController::createTransactionLog(array(
+                        "amount"=>$amount,
+                        "details"=>"Repayment of Loan",
+                        "clientId"=>$clientId
+                    ));
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
 
 
@@ -474,6 +515,5 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
 
     }
-
 
 }

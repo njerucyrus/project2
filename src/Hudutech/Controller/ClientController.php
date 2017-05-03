@@ -308,4 +308,28 @@ class ClientController  extends ComplexQuery implements ClientInterface
         return $loanLimit;
     }
 
+    /**
+     * @param array $config
+     * @return boolean
+     * $config => array("amount"=>val, "details"=>val, "clientId"=>val)
+     */
+    public static function createTransactionLog(array $config)
+    {
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("INSERT INTO transactions_log(amount, details, clientId)
+                                    VALUES(:amount, :details, :clientId)");
+            $stmt->bindParam(":amount", $config['amount']);
+            $stmt->bindParam(":details", $config['details']);
+            $stmt->bindParam(":clientId", $config['clientId']);
+            return $stmt->execute() ? true : false;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return false;
+        }
+    }
+
+
 }

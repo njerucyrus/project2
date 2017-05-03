@@ -22,4 +22,12 @@ interface ClientInterface
   public static function all();
   public static function getLoanLimit($clientId);
 
+    /**
+     * @param array $config
+     * @return boolean
+     * $config => array("amount"=>val, "details"=>val, "clientId"=>val)
+     *
+     */
+    public static function createTransactionLog(array $config);
+
 }

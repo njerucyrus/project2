@@ -22,4 +22,5 @@ interface LoanInterface
     public static function getPreviousRepayment($clientId, $clientLoanId);
     public static function markLoanCleared($clientId, $clientLoanId);
     public static function serviceLoan($clientId, $clientLoanId, $amount);
+
 }
