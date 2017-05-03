@@ -115,17 +115,19 @@ class LoanController extends ComplexQuery implements LoanInterface
         $loanInterest = $config['loanInterest'];
         $loanBal = $config['loanBal'];
         $clientLoanId = $config['clientLoanId'];
+        $createdAt = date("Y-m-d h:i:s");
 
         $db = new DB();
         $conn = $db->connect();
         try {
-            $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(principal, clientId, clientLoanId, loanInterest, loanBal)
-                                  VALUES (:principal, :clientId, :clientLoanId, :loanInterest, :loanBal)");
+            $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(principal, clientId, clientLoanId, loanInterest, loanBal,createdAt)
+                                  VALUES (:principal, :clientId, :clientLoanId, :loanInterest, :loanBal, :createdAt)");
             $stmt->bindParam(":principal", $principal);
             $stmt->bindParam(":clientId", $clientId);
             $stmt->bindParam(":clientLoanId", $clientLoanId);
             $stmt->bindParam(":loanInterest", $loanInterest);
             $stmt->bindParam(":loanBal", $loanBal);
+            $stmt->bindParam(":createdAt", $createdAt);
             return $stmt->execute() ? true : false;
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
