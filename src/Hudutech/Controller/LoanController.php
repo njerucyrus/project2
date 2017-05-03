@@ -222,7 +222,7 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
-    public  function lendLoan($clientId, $loanId, $amount)
+    public  static function lendLoan($clientId, $loanId, $amount)
     {
 
         // check if the client can be given amount requested
@@ -337,6 +337,7 @@ class LoanController extends ComplexQuery implements LoanInterface
 
 
         $clientLoan = self::customFilter($table, $tableColumns, $options);
+
         $loanType = $clientLoan[0]['loanType'];
 
         // make first payment
@@ -413,11 +414,11 @@ class LoanController extends ComplexQuery implements LoanInterface
             }
 
 
-            if (sizeof($loanServicing) > 1 && !empty($loanServicing[0]['loanCF']) && !empty($loanServicing[0]['amountPaid']) && $loanServicing[0]['loanCF']>0){
+            if (sizeof($loanServicing) > 1 && !empty($previousPayment['loanCF']) && !empty($previousPayment['amountPaid']) && $previousPayment['loanCF'] > 0){
                 // get the previous payment and create an new record
                 //previous LoanCF = new principal
-                $previousLoanCF = $loanServicing[0]['loanCF'];
-                $createdAt = $loanServicing[0]['createdAt'];
+                $previousLoanCF = $previousPayment['loanCF'];
+                $createdAt = $previousPayment['createdAt'];
                 $newInterest = self::calculateInterest($loanType, $previousLoanCF);
                 $newLoanBal = $previousLoanCF + $newInterest;
                 $newLoanCF = (float)($newLoanBal - $amount);
