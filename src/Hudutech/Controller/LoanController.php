@@ -70,7 +70,7 @@ class LoanController extends ComplexQuery implements LoanInterface
         try {
             $stmt = $conn->prepare("SELECT t.* FROM loans t WHERE t.id=:id");
             $stmt->bindParam(":id", $id);
-            return $stmt->execute() && $stmt->rowCount() == 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [];
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
@@ -84,7 +84,7 @@ class LoanController extends ComplexQuery implements LoanInterface
         try {
             $stmt = $conn->prepare("SELECT t.* FROM loans t WHERE 1");
             $stmt->bindParam(":id", $id);
-            return $stmt->execute() && $stmt->rowCount() == 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+            return $stmt->execute() && $stmt->rowCount() > 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
@@ -222,7 +222,7 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
-    public function lendLoan($clientId, $loanId, $amount)
+    public static function lendLoan($clientId, $loanId, $amount)
     {
         $db = new DB();
         $conn = $db->connect();
@@ -280,7 +280,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                     WHERE clientId='{$clientId}' AND
                                      clientLoadId='{$clientLoanId}'
                                       ORDER BY id DESC LIMIT 1");
-            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [];
 
 
         } catch (\PDOException $exception) {

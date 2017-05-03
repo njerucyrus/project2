@@ -287,7 +287,7 @@ class ClientController implements ClientInterface
     {
         $savings = SavingController::getClientTotalSavings($clientId);
 
-        $loanLimit = (float)($savings['total_savings'] * 3);
+        $loanLimit = (float)($savings['totalSavings'] * 3);
         return $loanLimit;
     }
 

@@ -18,5 +18,5 @@ interface LoanInterface
     public static function getId($id);
     public static function all();
     public static function getLoanObject($id);
-    public function lendLoan($clientId, $loanId, $amount);
+    public static function lendLoan($clientId, $loanId, $amount);
 }
