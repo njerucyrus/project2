@@ -70,7 +70,7 @@ class LoanController extends ComplexQuery implements LoanInterface
         try {
             $stmt = $conn->prepare("SELECT t.* FROM loans t WHERE t.id=:id");
             $stmt->bindParam(":id", $id);
-            return $stmt->execute() && $stmt->rowCount() == 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [];
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
@@ -84,7 +84,7 @@ class LoanController extends ComplexQuery implements LoanInterface
         try {
             $stmt = $conn->prepare("SELECT t.* FROM loans t WHERE 1");
             $stmt->bindParam(":id", $id);
-            return $stmt->execute() && $stmt->rowCount() == 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+            return $stmt->execute() && $stmt->rowCount() > 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
@@ -119,8 +119,8 @@ class LoanController extends ComplexQuery implements LoanInterface
         $db = new DB();
         $conn = $db->connect();
         try {
-            $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(principal, clientId, clientLoadId, loanInterest, loanBal)
-                                  VALUES (:principal, :clientId, :clientLoadId, :loanInterest, :loanBal)");
+            $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(principal, clientId, clientLoanId, loanInterest, loanBal)
+                                  VALUES (:principal, :clientId, :clientLoanId, :loanInterest, :loanBal)");
             $stmt->bindParam(":principal", $principal);
             $stmt->bindParam(":clientId", $clientId);
             $stmt->bindParam(":clientLoanId", $clientLoanId);
@@ -171,9 +171,9 @@ class LoanController extends ComplexQuery implements LoanInterface
     {
         $table = 'loans';
         $tableColumn = array();
-        $options = array("loanType" => $loanType);
+        $options = array("loanType" => $loanType, "limit"=>1);
         $loan = self::customFilter($table, $tableColumn, $options);
-        $interestRate = $loan['interestRate'];
+        $interestRate = $loan[0]['interestRate'];
         return (float)($amount * $interestRate);
     }
 
@@ -222,29 +222,37 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
-    public function lendLoan($clientId, $loanId, $amount)
+    public  static function lendLoan($clientId, $loanId, $amount)
     {
-        $db = new DB();
-        $conn = $db->connect();
+
         // check if the client can be given amount requested
         $loanLimit = ClientController::getLoanLimit($clientId);
         $loanDate = date('Y-m-d');
         if ($amount <= $loanLimit) {
+
             $loan = self::getId($loanId);
+
             $loanType = $loan['loanType'];
+            print_r($loan['loanType']);
             $interest = self::calculateInterest($loanType, $amount);
             $loanBal = $amount + $interest;
+            $status = "active";
 
 
             //save loan detain to client loan table.
             try {
-                $stmt = $conn->prepare("INSERT INTO client_loans(clientId, loanAmount, loadType, loanDate)
-                          VALUES (:clientId, :loanAmount, :loadType, :loanDate)");
+                $db = new DB();
+                $conn = $db->connect();
+
+                $stmt = $conn->prepare("INSERT INTO client_loans(clientId, loanAmount, loanType, loanDate, status)
+                                          VALUES (:clientId, :loanAmount, :loanType, :loanDate, :status)");
+
+
                 $stmt->bindParam(":clientId", $clientId);
                 $stmt->bindParam(":loanAmount", $amount);
                 $stmt->bindParam(":loanType", $loanType);
-                $stmt->bindParam(":loadDate", $loanDate);
-
+                $stmt->bindParam(":loanDate", $loanDate);
+                $stmt->bindParam(":status", $status);
                 if ($stmt->execute()) {
                     $config = array(
                         "clientId" => $clientId,
@@ -262,7 +270,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                 }
 
             } catch (\PDOException $exception) {
-                echo $exception->getMessage();
+                print_r( array("error"=>$exception->getMessage()));
                 return false;
             }
         } else {
@@ -278,9 +286,9 @@ class LoanController extends ComplexQuery implements LoanInterface
         try {
             $stmt = $conn->prepare("SELECT * FROM monthly_loan_servicing 
                                     WHERE clientId='{$clientId}' AND
-                                     clientLoadId='{$clientLoanId}'
+                                     clientLoanId='{$clientLoanId}'
                                       ORDER BY id DESC LIMIT 1");
-            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [];
 
 
         } catch (\PDOException $exception) {
@@ -314,7 +322,8 @@ class LoanController extends ComplexQuery implements LoanInterface
         $options = array(
             "clientId" => $clientId,
             "status" => "active",
-            "id" => $clientLoanId
+            "id" => $clientLoanId,
+            "limit"=>1
         );
 
         $table2 = "monthly_loan_servicing";
@@ -322,12 +331,14 @@ class LoanController extends ComplexQuery implements LoanInterface
         $options2 = array(
             "clientId" => $clientId,
             "clientLoanId" => $clientLoanId
+
         );
         $loanServicing = self::customFilter($table2, $cols, $options2);
 
 
         $clientLoan = self::customFilter($table, $tableColumns, $options);
-        $loanType = $clientLoan['loanType'];
+
+        $loanType = $clientLoan[0]['loanType'];
 
         // make first payment
 
@@ -335,11 +346,11 @@ class LoanController extends ComplexQuery implements LoanInterface
              $previousPayment = self::getPreviousRepayment($clientId, $clientLoanId);
 
             if (sizeof($loanServicing) == 1 &&
-                empty($loanServicing['loanCF']) &&
-                empty($loanServicing['amountPaid'])
+                empty($loanServicing[0]['loanCF']) &&
+                empty($loanServicing[0]['amountPaid'])
             ) {
 
-                $loanCF = (float)($loanServicing['loanBal'] - $amount);
+                $loanCF = (float)($loanServicing[0]['loanBal'] - $amount);
                 $id = $previousPayment['id'];
                 if ($loanCF == 0){
                     self::markLoanCleared($clientId, $clientLoanId);
@@ -352,11 +363,11 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $stmt->bindParam(":loanCF", $loanCF);
                 return $stmt->execute() ? true : false;
             }
-            if (sizeof($loanServicing) == 1 && !empty($loanServicing['loanCF']) && !empty($loanServicing['amountPaid']) && $loanServicing['loanCF'] > 0){
+            if (sizeof($loanServicing) == 1 && !empty($loanServicing[0]['loanCF']) && !empty($loanServicing[0]['amountPaid']) && $loanServicing[0]['loanCF'] > 0){
                 // get the previous payment and create an new record
                 //previous LoanCF = new principal
-                $previousLoanCF = $loanServicing['loanCF'];
-                $createdAt = $loanServicing['createdAt'];
+                $previousLoanCF = $loanServicing[0]['loanCF'];
+                $createdAt = $loanServicing[0]['createdAt'];
                 $newInterest = self::calculateInterest($loanType, $previousLoanCF);
                 $newLoanBal = $previousLoanCF + $newInterest;
                 $newLoanCF = (float)($newLoanBal - $amount);
@@ -371,7 +382,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(
                                                                             principal,
                                                                             clientId,
-                                                                            clientLoadId,
+                                                                            clientLoanId,
                                                                             loanInterest,
                                                                             loanBal,
                                                                             amountPaid,
@@ -382,7 +393,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                                                 VALUES (
                                                                             :principal,
                                                                             :clientId,
-                                                                            :clientLoadId,
+                                                                            :clientLoanId,
                                                                             :loanInterest,
                                                                             :loanBal,
                                                                             :amountPaid,
@@ -390,7 +401,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                                                             :datePaid,
                                                                             :createdAt
                                                                         )");
-                $stmt->bindParam(":principal", $newLoanCF);
+                $stmt->bindParam(":principal", $previousLoanCF);
                 $stmt->bindParam(":clientId", $clientId);
                 $stmt->bindParam(":clientLoanId", $clientLoanId);
                 $stmt->bindParam(":loanInterest", $newInterest);
@@ -403,11 +414,11 @@ class LoanController extends ComplexQuery implements LoanInterface
             }
 
 
-            if (sizeof($loanServicing) > 1 && !empty($loanServicing['loanCF']) && !empty($loanServicing['amountPaid']) && $loanServicing['loanCF']>0){
+            if (sizeof($loanServicing) > 1 && !empty($previousPayment['loanCF']) && !empty($previousPayment['amountPaid']) && $previousPayment['loanCF'] > 0){
                 // get the previous payment and create an new record
                 //previous LoanCF = new principal
-                $previousLoanCF = $loanServicing['loanCF'];
-                $createdAt = $loanServicing['createdAt'];
+                $previousLoanCF = $previousPayment['loanCF'];
+                $createdAt = $previousPayment['createdAt'];
                 $newInterest = self::calculateInterest($loanType, $previousLoanCF);
                 $newLoanBal = $previousLoanCF + $newInterest;
                 $newLoanCF = (float)($newLoanBal - $amount);
@@ -422,7 +433,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                 $stmt = $conn->prepare("INSERT INTO monthly_loan_servicing(
                                                                             principal,
                                                                             clientId,
-                                                                            clientLoadId,
+                                                                            clientLoanId,
                                                                             loanInterest,
                                                                             loanBal,
                                                                             amountPaid,
@@ -433,7 +444,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                                                 VALUES (
                                                                             :principal,
                                                                             :clientId,
-                                                                            :clientLoadId,
+                                                                            :clientLoanId,
                                                                             :loanInterest,
                                                                             :loanBal,
                                                                             :amountPaid,
@@ -441,7 +452,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                                                                             :datePaid,
                                                                             :createdAt
                                                                         )");
-                $stmt->bindParam(":principal", $newLoanCF);
+                $stmt->bindParam(":principal", $previousLoanCF);
                 $stmt->bindParam(":clientId", $clientId);
                 $stmt->bindParam(":clientLoanId", $clientLoanId);
                 $stmt->bindParam(":loanInterest", $newInterest);

@@ -88,12 +88,7 @@ class ComplexQuery
                 $stmt->execute();
 
                 if ($stmt->rowCount() > 0) {
-                    $results = array();
-                    while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-                        $results[] = $row;
-                    }
-                    $db->closeConnection();
-                    return $results;
+                    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
                 } else {
                     return [];
