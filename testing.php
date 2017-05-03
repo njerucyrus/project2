@@ -22,3 +22,5 @@ $monthTwo = date('Y-m-d', strtotime($monthOne. ' + 30 days'));
 $monthThree = date('Y-m-d', strtotime($monthTwo. ' + 30 days'));
 echo $monthTwo.PHP_EOL;
 echo $monthThree;
+
+echo "datetime ". date("Y-m-d h:i:s");
