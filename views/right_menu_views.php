@@ -82,6 +82,20 @@
                         </li>
                     </ul>
                 </li>
+
+                <li>
+
+
+                    <a href="#" data-toggle="collapse" data-target="#submenu-3"> <div class="menu-links"><i class="fa fa-fw  fa-dollar"></i> Savings <i class="fa fa-fw fa-angle-down pull-right"></i></div></a>
+                    <ul id="submenu-3" class="collapse">
+
+                        <li>
+                            <a href="group_saving.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> Groups Savings</div></a>
+                        </li>
+                        <li>
+                            <a href="client_saving.php"><div class="menu-links" ><i class="fa fa-fw  fa-user"></i> Clients Savings</div></a>
+                        </li>
+                    </ul>
             </ul>
 
 
