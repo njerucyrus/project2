@@ -7,7 +7,19 @@
  */
 require_once __DIR__.'/../vendor/autoload.php';
 $client = \Hudutech\Controller\ClientController::getId($_GET['id']);
+$groups= \Hudutech\Controller\GroupController::all();
+$savings= \Hudutech\Controller\SavingController::getClientTotalSavings($_GET['id']);
+//print_r($client);
+foreach ($groups as $group):
+
+if($group['refNo'] == $client['groupRefNo'] )
+{
+$groupName = $group['groupName'];
+
+}
+endforeach;
 ?>
+
 <!DOCTYPE html>
 <html>
 <!--starting head-->
@@ -23,14 +35,15 @@ include_once 'head_views.php';
 include __DIR__.'/right_menu_views.php';
 ?>
 <!--stop menu-->
-<div class="container-fluid">
+<div class="container-fluid" style="padding-top: 100px;">
     <div class="row">
-        <div class="fb-profile">
+        <div class="fb-profile" >
 
-            <img align="left" class="fb-image-profile thumbnail " src="../public/assets/img/profile_default.jpg" alt="Profile image example"/>
-            <div class="fb-profile-text">
-                <h1>Name: <?php echo $client['fullName']?></h1>
-                <h1>Group: Kamakwa Group</h1>
+             <div class="fb-profile-text">
+                 <img align="left" class="fb-image-profile thumbnail " height="150px" width="100px" src="../public/assets/img/profile_default.jpg" alt="Profile image example"/>
+
+                 <h2><b>Name:</b> <?php echo $client['fullName']?></h2>
+                <h3><b>Group:</b> <?php echo $groupName?></h3>
 
             </div>
         </div>
@@ -73,33 +86,33 @@ include __DIR__.'/right_menu_views.php';
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="name">Full Name:</label>
-                                    <p> MBA/PGDM</p>
+                                    <p><?php echo $client['fullName']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Membership Number:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['membershipNo']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Identity card number:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['idNo']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">KRA Pin Number:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['kraPin']?></p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="email">Date Of Birth:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['dob']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Date of enrollment:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['dateEnrolled']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Occupation:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['occupation']?></p>
                                 </div>
 
 
@@ -115,19 +128,19 @@ include __DIR__.'/right_menu_views.php';
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="email">Phone Number:</label>
-                                    <p> MBA/PGDM</p>
+                                    <p> <?php echo $client['phoneNumber']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['email']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Postal Address:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['postalAddress']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Emergency contacts:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['emergencyContact']?></p>
                                 </div>
                             </div>
 
@@ -144,25 +157,25 @@ include __DIR__.'/right_menu_views.php';
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="email">County:</label>
-                                    <p> MBA/PGDM</p>
+                                    <p><?php echo $client['county']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Sub County:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['subCounty']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Location:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['location']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Sub Location:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p><?php echo $client['subLocation']?></p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="email">Village/Estate:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['village']?></p>
                                 </div>
 
 
@@ -178,16 +191,16 @@ include __DIR__.'/right_menu_views.php';
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="email">Full Name:</label>
-                                    <p> MBA/PGDM</p>
+                                    <p> <?php echo $client['nokName']?></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Contact:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['nokContact']?></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Relationship:</label>
-                                    <p> pune, maharashtra</p>
+                                    <p> <?php echo $client['nokRelationship']?></p>
                                 </div>
                             </div>
 
@@ -202,7 +215,7 @@ include __DIR__.'/right_menu_views.php';
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="email">Expectation:</label>
-                                    <p> MBA/PGDM</p>
+                                    <p> <?php echo $client['expectation']?></p>
                                 </div>
 
 
@@ -213,10 +226,18 @@ include __DIR__.'/right_menu_views.php';
                 </div>
             </div>
         </div>
-
+        <div class="row">
+        <div class="col col-md-12" style="margin: 5px;">
+            <div class="jumbotron">
+            <h3>Total Savings <?php echo $savings['totalSavings']?></h3>
+              </div>
+        </div>
+        </div>
     </div>
 
 </div>
+
+
 <script src="../public/assets/js/jquery-3.2.0.slim.min.js"></script>
 <script src="../public/assets/js/bootstrap.min.js"></script>
 </body>
