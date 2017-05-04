@@ -36,9 +36,9 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
-                    <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-cog"></i> Account</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    <li><a href="views/logout.php"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
                 </ul>
             </li>
         </ul>
