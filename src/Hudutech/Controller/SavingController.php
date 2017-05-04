@@ -59,6 +59,13 @@ class SavingController implements SavingInterface
         }
     }
 
+    public function createMultiple(array $savings)
+    {
+       $db = new DB();
+       $conn = $db->connect();
+    }
+
+
     public static function getClientTotalSavings($id)
     {
         $db = new DB();
