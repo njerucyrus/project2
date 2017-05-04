@@ -9,6 +9,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $clients = \Hudutech\Controller\ClientController::all();
 $loans= \Hudutech\Controller\LoanController::all();
+include  __DIR__.'/includes/lead_loan.inc.php';
 
 ?>
 <!DOCTYPE html>
@@ -27,7 +28,7 @@ $loans= \Hudutech\Controller\LoanController::all();
     <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-    <title>Admin</title>
+
 </head>
 <body style="height: 100%; margin-bottom: 15%;
     background-repeat: no-repeat;
@@ -79,7 +80,7 @@ include __DIR__.'/right_menu_views.php';
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <select name="group_ref_no" class="form-control">
+                            <select name="clientId" class="form-control">
                                 <option>--Select Client here--</option>
                                 <?php foreach ($clients as $client): ?>
                                     <option value="<?php echo $client['id']?>"><?php echo $client['fullName']?></option>
@@ -95,7 +96,7 @@ include __DIR__.'/right_menu_views.php';
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-cog fa" aria-hidden="true"></i></span>
-                            <select name="group_ref_no" class="form-control">
+                            <select name="loanId" class="form-control">
                                 <option>--Select Loan type--</option>
                                 <?php foreach ($loans as $loan): ?>
                                     <option value="<?php echo $loan['id']?>"><?php echo $loan['loanType']?></option>
@@ -111,7 +112,7 @@ include __DIR__.'/right_menu_views.php';
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-money fa" aria-hidden="true"></i></span>
-                            <input type="number" class="form-control" name="amount" id="amount"  placeholder="Loan amount"/>
+                            <input type="number" class="form-control" name="amount"   placeholder="Loan amount" />
 
                         </div>
                     </div>
