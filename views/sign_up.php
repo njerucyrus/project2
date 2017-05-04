@@ -30,7 +30,9 @@ include __DIR__.'/includes/signup.inc.php';
 <body style="height: 100%; margin-bottom: 4%;
     background-repeat: no-repeat;
     background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));">
-
+<?php
+include __DIR__.'/right_menu_views.php';
+?>
 
 <div class="container">
     <div class="row main">
