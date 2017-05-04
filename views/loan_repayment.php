@@ -40,7 +40,7 @@ include __DIR__.'/right_menu_views.php';
     <div class="row main">
         <div class="panel-heading">
             <div class="panel-title text-center">
-                <h1 class="title">Loan Leading</h1>
+                <h1 class="title">Loan Repayment</h1>
                 <hr />
             </div>
         </div>
@@ -91,7 +91,7 @@ include __DIR__.'/right_menu_views.php';
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">Loan Type</label>
+                    <label for="email" class="cols-sm-2 control-label">Loan </label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-cog fa" aria-hidden="true"></i></span>
@@ -107,7 +107,18 @@ include __DIR__.'/right_menu_views.php';
                 </div>
 
                 <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Amount</label>
+                    <label for="username" class="cols-sm-2 control-label">Loan Balance</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-money fa" aria-hidden="true"></i></span>
+                            <input type="number" class="form-control" name="loanBalance" id="amount"  placeholder="Loan amount"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username" class="cols-sm-2 control-label">Amount Paid</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-money fa" aria-hidden="true"></i></span>

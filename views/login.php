@@ -14,7 +14,7 @@ include __DIR__.'/includes/login.inc.php';
 include_once 'head_views.php';
 
 ?>
-<body style=" margin-bottom: 13.5%;height: 100%;background-repeat: no-repeat; background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));">
+<body style=" margin-bottom: 15%;height: 100%;background-repeat: no-repeat; background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));">
 <div class="container" >
     <div>
 

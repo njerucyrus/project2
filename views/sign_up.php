@@ -29,7 +29,7 @@ include __DIR__.'/includes/signup.inc.php';
 </head>
 <body style="height: 100%; margin-bottom: 4%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));">
+    background-image: linear-gradient(rgb(250,250,250), rgb(236, 236, 236));">
 <?php
 include __DIR__.'/right_menu_views.php';
 ?>
@@ -138,6 +138,7 @@ include __DIR__.'/right_menu_views.php';
     </div>
 </div>
 
-<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+<script src="../public/assets/js/jquery-3.2.0.slim.min.js"></script>
+<script src="../public/assets/js/bootstrap.min.js"></script>
 </body>
 </html>
