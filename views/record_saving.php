@@ -6,26 +6,43 @@
  * Time: 13:58
  */
 require_once __DIR__ . '/../vendor/autoload.php';
-$groups = \Hudutech\Controller\GroupController::all();
-$counter = 1;
+$contributions = \Hudutech\Controller\SavingController::getTodaySaving();
+$successMsg = '';
+$errorMsg = '';
+if (isset($_POST['submit'])) {
+    if (!empty($_POST['clientIdNo']) && !empty($_POST['contribution'])) {
+        $table = "clients";
+        $tableColumn = ["id", "groupRefNo"];
+        $options = ["idNo" => $_POST['clientIdNo'], "limit" => 1];
+        $client = \Hudutech\DBManager\ComplexQuery::customFilter($table, $tableColumn, $options);
+        $clientId = $client[0]['id'];
+        $groupRefNo = $client[0]['groupRefNo'];
+        $table2 = "sacco_group";
+        $tableColumn2 = ['id'];
+        $options2 = ["refNo" => $groupRefNo, "limit" => 1];
+        $group = \Hudutech\DBManager\ComplexQuery::customFilter($table2, $tableColumn2, $options2);
+        $groupId = $group[0]['id'];
+        $datePaid = date("Y-m-d h:i:s");
 
+        $saving = new \Hudutech\Entity\Saving();
+        $saving->setGroupId($groupId);
+        $saving->setClientId($clientId);
+        $saving->setCashRecieved($_POST['contribution']);
+        $saving->setPaymentMethod("Cash");
+        $saving->setDatePaid($datePaid);
 
-$refNo = isset($_POST['group_ref_no']) ? $_POST['group_ref_no'] : false;
+        $savingCtrl = new \Hudutech\Controller\SavingController();
+        $created = $savingCtrl->createSingle($saving);
 
-if ($refNo) {
-    $table = 'clients';
-    $searchText = $refNo;
-    $tableColumns = ['groupRefNo'];
-    $options = array(
-        // "groupName"=>'KAMAKWA GROUP',
-        "refNo" => $refNo
-    );
-
-    $clients = \Hudutech\Controller\ClientController::search($table, $tableColumns, $searchText);
-
-} else {
-    $clients = \Hudutech\Controller\ClientController::all();
-
+        if ($created) {
+            $successMsg .= "Contribution Received Successfully";
+            header("Refresh:0");
+        } else {
+            $errorMsg .= "Error Occurred Contribution not recorded. Try again later";
+        }
+    } else {
+        $errorMsg .= "All fields required";
+    }
 }
 ?>
 
@@ -39,6 +56,7 @@ include_once 'head_views.php';
 <!--start menu-->
 <?php
 include __DIR__ . '/right_menu_views.php';
+
 ?>
 <!--stop menu-->
 <div class="container-fluid" style="margin-top: 70px;">
@@ -49,6 +67,28 @@ include __DIR__ . '/right_menu_views.php';
         <div class="col col-md-12">
             <div class="col col-md-10">
             <div class="jumbotron">
+                <div>
+                    <?php
+                    if(empty($successMsg) && !empty($errorMsg)){
+                        ?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <?php echo $errorMsg ?>
+                        </div>
+                        <?php
+                    }
+                    elseif(empty($errorMsg) and !empty($successMsg)){
+                        ?>
+                        <div class="alert alert-success alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <?php echo $successMsg ?>
+                        </div>
+
+                        <?php
+                    }
+
+                    ?>
+                </div>
 
                     <form class="form-group" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>"
                           method="post">
@@ -65,6 +105,7 @@ include __DIR__ . '/right_menu_views.php';
                         <thead>
                             <tr>
                                 <th>FullName</th>
+                                <th>Group</th>
                                 <th>Today Contribution</th>
                             </tr>
                         </thead>
@@ -72,7 +113,8 @@ include __DIR__ . '/right_menu_views.php';
                         <?php foreach ($contributions as $contribution): ?>
                           <tr>
                               <td><?php echo $contribution['fullName'] ?></td>
-                              <td><?php echo $contribution['amount'] ?></td>
+                              <td><?php echo $contribution['groupName'] ?></td>
+                              <td><?php echo $contribution['contribution'] ?></td>
                           </tr>
                         <?php endforeach; ?>
                         </tbody>

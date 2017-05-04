@@ -23,10 +23,9 @@ class SavingController implements SavingInterface
         $clientId = $saving->getClientId();
         $groupId = $saving->getGroupId();
         $cashReceived = $saving->getCashRecieved();
-        $contribution = $saving->getContribution();
         $paymentMethod = $saving->getPaymentMethod();
         $datePaid = $saving->getDatePaid();
-
+        $contribution = null;
         $dumpedSaving = null;
         $fine = null;
         $previousSavings = self::getPreviousSavings($clientId);
@@ -48,7 +47,7 @@ class SavingController implements SavingInterface
             $dumpedSaving = $cashReceived- 5000;
             $contribution = 5000;
         }
-        if($cashReceived > 200 && $cashReceived < 5000 && empty($previousSavings['dumpedSaving'])){
+        if($cashReceived >= 200 && $cashReceived < 5000 && empty($previousSavings['dumpedSaving'])){
             $contribution = $cashReceived;
         }
 
@@ -59,20 +58,20 @@ class SavingController implements SavingInterface
                                                         groupId,
                                                         cashReceived,
                                                         contribution,
-                                                        dumpedSaving,
-                                                        fine,
                                                         paymentMethod,
-                                                        datePaid
+                                                        datePaid, 
+                                                        dumpedSaving,
+                                                        fine
                                                         )
                                                 VALUES (
                                                         :clientId,
                                                         :groupId,
-                                                        :cash_recieved,
+                                                        :cashReceived,
                                                         :contribution,
-                                                        :dumpedSaving,
-                                                        :fine,
                                                         :paymentMethod,
-                                                        :datePaid
+                                                        :datePaid, 
+                                                        :dumpedSaving,
+                                                        :fine
                                                         )");
             $stmt->bindParam(":clientId", $clientId);
             $stmt->bindParam(":groupId", $groupId);
@@ -82,7 +81,20 @@ class SavingController implements SavingInterface
             $stmt->bindParam(":fine", $fine);
             $stmt->bindParam(":paymentMethod", $paymentMethod);
             $stmt->bindParam(":datePaid", $datePaid);
-            return $stmt->execute() ? true : false;
+
+            if ($stmt->execute()){
+                ClientController::createTransactionLog(
+                    array(
+                        "clientId"=>$clientId,
+                        "amount"=>$cashReceived,
+                        "details"=>"Savings Payment"
+                    )
+                );
+                return true;
+            }
+            else{
+                return false;
+            }
 
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
@@ -146,7 +158,7 @@ class SavingController implements SavingInterface
                    $dumpedSaving = $cashReceived- 5000;
                    $contribution = 5000;
                }
-               if($cashReceived > 200 && $cashReceived < 5000 && empty($previousSavings['dumpedSaving'])){
+               if($cashReceived >= 200 && $cashReceived < 5000 && empty($previousSavings['dumpedSaving'])){
                    $contribution = $cashReceived;
                }
 
@@ -159,7 +171,13 @@ class SavingController implements SavingInterface
                $stmt->bindParam(":paymentMethod", $paymentMethod);
                $stmt->bindParam(":datePaid", $datePaid);
                $stmt->execute();
-
+               ClientController::createTransactionLog(
+                   array(
+                       "clientId"=>$clientId,
+                       "amount"=>$cashReceived,
+                       "details"=>"Savings Payment"
+                   )
+               );
            }
            $db->closeConnection();
            return true;

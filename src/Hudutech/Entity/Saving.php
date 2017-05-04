@@ -36,7 +36,7 @@ class Saving
      */
     private $paymentMethod;
     /**
-     * @var \DateTime
+     * @var mixed
      */
     private $datePaid;
 
@@ -145,7 +145,7 @@ class Saving
     }
 
     /**
-     * @param \DateTime $datePaid
+     * @param  $datePaid
      */
     public function setDatePaid($datePaid)
     {
