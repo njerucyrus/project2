@@ -9,6 +9,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $clients = \Hudutech\Controller\ClientController::all();
 $loans= \Hudutech\Controller\LoanController::all();
+
 include  __DIR__.'/includes/lead_loan.inc.php';
 
 ?>
@@ -119,9 +120,8 @@ include __DIR__.'/right_menu_views.php';
                 </div>
 
                 <div class="form-group ">
-                    <input type="submit" name="submit" value="Save" class="btn btn-primary btn-lg btn-block login-button"></input>
+                    <input type="submit" name="submit" value="Save" class="btn btn-primary btn-lg btn-block login-button">
                 </div>
-
             </form>
         </div>
     </div>
