@@ -139,7 +139,7 @@ class SavingController implements SavingInterface
 
             $sql = "SELECT c.fullName, g.groupName, s.contribution,s.paymentMethod, s.datePaid
                     FROM clients c , sacco_group g, savings s
-                    WHERE s.clientId=:clientId AND s.groupId=g.id";
+                    WHERE s.clientId=:clientId AND c.groupRefNo = g.refNo AND s.groupId=g.id ";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":clientId", $clientId);

@@ -6,9 +6,11 @@
  * Time: 20:33
  */
 require_once __DIR__.'/../vendor/autoload.php';
+$counter=1;
 $client = \Hudutech\Controller\ClientController::getId($_GET['id']);
 $groups= \Hudutech\Controller\GroupController::all();
 $savings= \Hudutech\Controller\SavingController::getClientTotalSavings($_GET['id']);
+$singleClientSavings= \Hudutech\Controller\SavingController::showClientSavingsLog($_GET['id']);
 //print_r($client);
 foreach ($groups as $group):
 
@@ -226,8 +228,39 @@ include __DIR__.'/right_menu_views.php';
                 </div>
             </div>
         </div>
+
+
+
         <div class="row">
+
         <div class="col col-md-12" style="margin: 5px;">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <h3>Saving Log</h3>
+                    <thead>
+                    <tr class="bg-primary">
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Contribution</th>
+                        <th>Payment Method</th>
+                        <th>Date Paid</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($singleClientSavings as $clientSaving ): ?>
+                        <tr>
+                            <td><?php echo $counter++?></td>
+                            <td><?php echo $clientSaving['fullName']?></td>
+                            <td><?php echo $clientSaving['contribution']?></td>
+                            <td><?php echo $clientSaving['paymentMethod']?></td>
+                            <td><?php echo $clientSaving['datePaid']?></td>
+
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
             <div class="jumbotron">
             <h3>Total Savings <?php echo $savings['totalSavings']?></h3>
               </div>
