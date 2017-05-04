@@ -15,13 +15,24 @@ use Hudutech\Entity\Loan;
 
 class LoanController extends ComplexQuery implements LoanInterface
 {
+    /**
+     * @var null|\PDO
+     */
     private $conn;
 
+    /**
+     * LoanController constructor.
+     * @param DB $db
+     */
     public function __construct(DB $db)
     {
         $this->conn = $db->connect();
     }
 
+    /**
+     * @param Loan $loan
+     * @return bool
+     */
     public function create(Loan $loan)
     {
         $loanType = $loan->getLoanType();
@@ -41,6 +52,11 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
+    /**
+     * @param Loan $loan
+     * @param $id
+     * @return bool
+     */
     public function update(Loan $loan, $id)
     {
         $loanType = $loan->getLoanType();
@@ -63,6 +79,10 @@ class LoanController extends ComplexQuery implements LoanInterface
     }
 
 
+    /**
+     * @param $id
+     * @return array|mixed
+     */
     public static function getId($id)
     {
         $db = new DB();
@@ -77,6 +97,9 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
+    /**
+     * @return array
+     */
     public static function all()
     {
         $db = new DB();
@@ -91,6 +114,10 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public static function getLoanObject($id)
     {
         $db = new DB();
@@ -107,6 +134,10 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
+    /**
+     * @param array $config
+     * @return bool
+     */
     public static function createLoanServicing(array $config)
     {
 
@@ -135,6 +166,11 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
+    /**
+     * @param $clientId
+     * @param $loanType
+     * @return bool
+     */
     public static function createRepaymentDates($clientId, $loanType)
     {
         $db = new DB();
@@ -169,6 +205,11 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
+    /**
+     * @param $loanType
+     * @param $amount
+     * @return float
+     */
     public static function calculateInterest($loanType, $amount)
     {
         $table = 'loans';
@@ -179,6 +220,11 @@ class LoanController extends ComplexQuery implements LoanInterface
         return (float)($amount * $interestRate);
     }
 
+    /**
+     * @param $clientId
+     * @param $loanType
+     * @return bool
+     */
     public static function createLoanStatus($clientId, $loanType)
     {
         $db = new DB;
@@ -217,6 +263,7 @@ class LoanController extends ComplexQuery implements LoanInterface
                     $stmt->bindParam(":loanDate", $currentDate);
                     $stmt->execute();
                 }
+                return true;
             }
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
@@ -224,6 +271,12 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
+    /**
+     * @param $clientId
+     * @param $loanId
+     * @param $amount
+     * @return bool
+     */
     public  static function lendLoan($clientId, $loanId, $amount)
     {
 
@@ -233,9 +286,7 @@ class LoanController extends ComplexQuery implements LoanInterface
         if ($amount <= $loanLimit) {
 
             $loan = self::getId($loanId);
-
             $loanType = $loan['loanType'];
-            print_r($loan['loanType']);
             $interest = self::calculateInterest($loanType, $amount);
             $loanBal = $amount + $interest;
             $status = "active";
@@ -286,6 +337,11 @@ class LoanController extends ComplexQuery implements LoanInterface
     }
 
 
+    /**
+     * @param $clientId
+     * @param $clientLoanId
+     * @return array|mixed
+     */
     public static function getPreviousRepayment($clientId, $clientLoanId)
     {
         $db = new DB();
@@ -304,6 +360,11 @@ class LoanController extends ComplexQuery implements LoanInterface
         }
     }
 
+    /**
+     * @param $clientId
+     * @param $clientLoanId
+     * @return bool
+     */
     public static function markLoanCleared($clientId, $clientLoanId){
         $db = new DB();
         $conn = $db->connect();
@@ -320,7 +381,12 @@ class LoanController extends ComplexQuery implements LoanInterface
     }
 
 
-
+    /**
+     * @param $clientId
+     * @param $clientLoanId
+     * @param $amount
+     * @return bool
+     */
     public static function serviceLoan($clientId, $clientLoanId, $amount)
     {
         $db = new DB();
