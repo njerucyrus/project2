@@ -74,4 +74,5 @@ interface ClientInterface
      */
     public static function getClientTransactionLog($clientId);
 
+
 }
