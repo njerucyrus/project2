@@ -15,6 +15,7 @@ interface SavingInterface
 {
     public function create(Saving $saving);
     public function createMultiple(array $savings);
+    public static function getPreviousSavings($clientId);
     public static function getClientTotalSavings($id);
     public static function getGroupTotalSavings($groupId);
     public static function showClientSavingsLog($clientId);

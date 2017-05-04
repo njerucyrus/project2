@@ -96,6 +96,20 @@ class SavingController implements SavingInterface
                $contribution = $cashReceived;
                $fine = null;
                $datePaid = date("Y-m-d h:i:s");
+               $previousSavings = self::getPreviousSavings($clientId);
+
+               if (!empty($previousSavings['dumpedSaving'])){
+                  $previousDump = $previousSavings['dumpedSaving'];
+                  $totalCash = $cashReceived + $previousDump;
+                  if ($totalCash>=200 && $totalCash <= 5000 && $cashReceived<5000){
+                      $contribution = $totalCash;
+                  }
+                  elseif($totalCash> 5000) {
+
+                      $contribution = 5000;
+                      $dumpedSaving = $totalCash - 5000;
+                  }
+               }
                if ($cashReceived > 5000){
                   $dumpedSaving = $cashReceived- 5000;
                   $contribution = 5000;
@@ -119,6 +133,21 @@ class SavingController implements SavingInterface
            echo $exception->getMessage();
            return false;
        }
+    }
+
+    public static function getPreviousSavings($clientId)
+    {
+        $db = new DB();
+        $conn = $db->connect();
+
+        try{
+            $stmt = $conn->prepare("SELECT * FROM savings WHERE clientId=:clientId ORDER BY id DESC LIMIT 1");
+            $stmt->bindParam(":clientId", $clientId);
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [] ;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
     }
 
 
