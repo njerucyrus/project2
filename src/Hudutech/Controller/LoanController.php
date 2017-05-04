@@ -573,8 +573,6 @@ class LoanController extends ComplexQuery implements LoanInterface
                 }
             }
 
-
-
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return false;

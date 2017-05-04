@@ -345,4 +345,21 @@ class SavingController implements SavingInterface
        }
     }
 
+    public static function getTodaySaving(){
+        $db = new DB();
+        $conn = $db->connect();
+        $datePaid = date('Y-m-d');
+        $sql = "SELECT c.fullName, g.groupName, s.contribution,s.paymentMethod, s.datePaid
+                    FROM clients c , sacco_group g, savings s
+                    WHERE s.clientId=c.id AND s.groupId=g.id AND DATE(s.datePaid)='{$datePaid}'";
+
+        try{
+            $stmt = $conn->prepare($sql);
+            return $stmt->execute() && $stmt->rowCount() > 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC): [];
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
+    }
+
 }
