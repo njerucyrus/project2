@@ -66,6 +66,7 @@ include __DIR__.'/right_menu_views.php';
                 </form>
             </div>
         </div>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" METHOD="post" name="saving">
         <table class="table ">
             <thead>
             <tr class="bg-primary">
@@ -74,7 +75,7 @@ include __DIR__.'/right_menu_views.php';
 
 
                 <th>Id Number</th>
-                <th>Savings</th>
+                <th>Contribution</th>
 
 
 
@@ -88,15 +89,16 @@ include __DIR__.'/right_menu_views.php';
 
 
                     <td><?php echo $client['idNo']?></td>
-                    <td><input type="number" min="1" class="form-control" /></td>
+                    <td><input type="number" min="200" name="amount[]" class="form-control" /></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
 
         <div class="form-group col-md-3 col-md-offset-4">
-            <input type="submit" name="submit" value="Submit Savings" class="btn btn-primary btn-lg btn-block login-button"></input>
+            <input type="submit" name="submit" value="Submit Savings" class="btn btn-primary btn-lg btn-block login-button"/>
         </div>
+        </form>
     </div>
 
 </div>

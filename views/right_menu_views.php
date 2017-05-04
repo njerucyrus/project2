@@ -83,11 +83,24 @@
                     </ul>
                 </li>
 
+
                 <li>
 
 
-                    <a href="#" data-toggle="collapse" data-target="#submenu-3"> <div class="menu-links"><i class="fa fa-fw  fa-dollar"></i> Savings <i class="fa fa-fw fa-angle-down pull-right"></i></div></a>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-3"> <div class="menu-links"><i class="fa fa-fw  fa-pencil"></i> Record Savings <i class="fa fa-fw fa-angle-down pull-right"></i></div></a>
                     <ul id="submenu-3" class="collapse">
+
+
+                        <li>
+                            <a href="record_saving.php"><div class="menu-links" ><i class="fa fa-fw  fa-user"></i> Clients Saving</div></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+
+
+                    <a href="#" data-toggle="collapse" data-target="#submenu-4"> <div class="menu-links"><i class="fa fa-fw  fa-dollar"></i>View Savings <i class="fa fa-fw fa-angle-down pull-right"></i></div></a>
+                    <ul id="submenu-4" class="collapse">
 
                         <li>
                             <a href="group_saving.php"><div class="menu-links" ><i class="fa fa-fw  fa-group"></i> Groups Savings</div></a>
@@ -96,6 +109,23 @@
                             <a href="client_saving.php"><div class="menu-links" ><i class="fa fa-fw  fa-user"></i> Clients Savings</div></a>
                         </li>
                     </ul>
+
+
+
+                <li>
+
+
+                    <a href="#" data-toggle="collapse" data-target="#submenu-5"> <div class="menu-links"><i class="fa fa-fw  fa-suitcase" ></i> Loans <i class="fa fa-fw fa-angle-down pull-right"></i></div></a>
+                    <ul id="submenu-5" class="collapse">
+
+                        <li>
+                            <a href="lead_loan.php"><div class="menu-links" ><i class="fa fa-fw fa-university"></i> Loan Leading</div></a>
+                        </li>
+                        <li>
+                            <a href="loan_repayment.php"><div class="menu-links" ><i class="fa fa-fw  fa-check-square"></i> Loan Repayments</div></a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
 
 
