@@ -13,14 +13,52 @@ use Hudutech\Entity\Client;
 
 interface ClientInterface
 {
-  public function create(Client $client);
-  public function update(Client $client, $id);
-  public static function delete($id);
-  public static function destroy();
-  public static function getClientObject($id);
-  public static function getId($clientId);
-  public static function all();
-  public static function getLoanLimit($clientId);
+    /**
+     * @param Client $client
+     * @return mixed
+     */
+    public function create(Client $client);
+
+    /**
+     * @param Client $client
+     * @param $id
+     * @return boolean
+     */
+    public function update(Client $client, $id);
+
+    /**
+     * @param $id
+     * @return boolean
+     */
+    public static function delete($id);
+
+    /**
+     * @return boolean
+     */
+    public static function destroy();
+
+    /**
+     * @param $id
+     * @return object|null
+     */
+    public static function getClientObject($id);
+
+    /**
+     * @param $clientId
+     * @return array
+     */
+    public static function getId($clientId);
+
+    /**
+     * @return array
+     */
+    public static function all();
+
+    /**
+     * @param $clientId
+     * @return float
+     */
+    public static function getLoanLimit($clientId);
 
     /**
      * @param array $config
@@ -29,5 +67,11 @@ interface ClientInterface
      *
      */
     public static function createTransactionLog(array $config);
+
+    /**
+     * @param $clientId
+     * @return array
+     */
+    public static function getClientTransactionLog($clientId);
 
 }

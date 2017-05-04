@@ -15,7 +15,7 @@ use Hudutech\DBManager\DB;
 use Hudutech\Entity\Client;
 use Hudutech\Entity\Saving;
 
-class ClientController  extends ComplexQuery implements ClientInterface
+class ClientController extends ComplexQuery implements ClientInterface
 {
     public function create(Client $client)
     {
@@ -121,7 +121,7 @@ class ClientController  extends ComplexQuery implements ClientInterface
             $stmt->bindParam(":nokContact", $nokContact);
             return $stmt->execute() ? true : false;
         } catch (\PDOException $exception) {
-            print_r( $exception->getMessage());
+            print_r($exception->getMessage());
             return false;
         }
     }
@@ -245,17 +245,17 @@ class ClientController  extends ComplexQuery implements ClientInterface
 
     public static function getId($clientId)
     {
-       $db = new DB();
-       $conn = $db->connect();
+        $db = new DB();
+        $conn = $db->connect();
 
-       try{
-           $stmt = $conn->prepare("SELECT t.* FROM clients t WHERE t.id=:id");
-           $stmt->bindParam(":id", $clientId);
-           return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [];
-       }catch (\PDOException $exception) {
-           echo $exception->getMessage();
-           return [];
-       }
+        try {
+            $stmt = $conn->prepare("SELECT t.* FROM clients t WHERE t.id=:id");
+            $stmt->bindParam(":id", $clientId);
+            return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch(\PDO::FETCH_ASSOC) : [];
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
     }
 
 
@@ -267,7 +267,7 @@ class ClientController  extends ComplexQuery implements ClientInterface
         try {
             $stmt = $conn->prepare("SELECT c.* FROM clients c WHERE c.id=:id");
             $stmt->bindParam(":id", $id);
-            $stmt->setFetchMode(\PDO::FETCH_CLASS| \PDO::FETCH_PROPS_LATE, Client::class);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Client::class);
             return $stmt->execute() && $stmt->rowCount() == 1 ? $stmt->fetch() : null;
 
         } catch (\PDOException $exception) {
@@ -318,7 +318,7 @@ class ClientController  extends ComplexQuery implements ClientInterface
         $db = new DB();
         $conn = $db->connect();
 
-        try{
+        try {
             $stmt = $conn->prepare("INSERT INTO transactions_log(amount, details, clientId)
                                     VALUES(:amount, :details, :clientId)");
             $stmt->bindParam(":amount", $config['amount']);
@@ -331,5 +331,22 @@ class ClientController  extends ComplexQuery implements ClientInterface
         }
     }
 
+    public static function getClientTransactionLog($clientId)
+    {
+        $db = new DB();
+        $conn = $db->connect();
+
+        try {
+            $sql = "SELECT c.fullName, l.amount, l.details, l.transaction_date
+                      FROM clients c, transactions_log l
+                      WHERE l.clientId=:clientId AND l.clientId=c.id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":clientId", $clientId);
+            return $stmt->execute() ? true : false;
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+            return [];
+        }
+    }
 
 }
