@@ -63,6 +63,62 @@ class SavingController implements SavingInterface
     {
        $db = new DB();
        $conn = $db->connect();
+
+       try{
+
+           $stmt = $conn->prepare("INSERT INTO savings(
+                                                        clientId,
+                                                        groupId,
+                                                        cashReceived,
+                                                        contribution,
+                                                        dumpedSaving,
+                                                        fine,
+                                                        paymentMethod,
+                                                        datePaid
+                                                        )
+                                                VALUES (
+                                                        :clientId,
+                                                        :groupId,
+                                                        :cash_recieved,
+                                                        :contribution,
+                                                        :dumpedSaving,
+                                                        :fine,
+                                                        :paymentMethod,
+                                                        :datePaid
+                                                        )");
+
+           foreach ($savings as $saving) {
+               $clientId = $saving['clientId'];
+               $groupId = $saving['groupId'];
+               $cashReceived = (float)$saving['cashReceived'];
+               $paymentMethod = $saving['paymentMethod'];
+               $dumpedSaving = null;
+               $contribution = $cashReceived;
+               $fine = null;
+               $datePaid = date("Y-m-d h:i:s");
+               if ($cashReceived > 5000){
+                  $dumpedSaving = $cashReceived- 5000;
+                  $contribution = 5000;
+               }
+
+               $stmt->bindParam(":clientId", $clientId);
+               $stmt->bindParam(":groupId", $groupId);
+               $stmt->bindParam(":cashReceived", $cashReceived);
+               $stmt->bindParam(":contribution", $contribution);
+               $stmt->bindParam(":dumpedSaving", $dumpedSaving);
+               $stmt->bindParam(":fine", $fine);
+               $stmt->bindParam(":paymentMethod", $paymentMethod);
+               $stmt->bindParam(":datePaid", $datePaid);
+               $stmt->execute();
+
+           }
+           $db->closeConnection();
+           return true;
+
+       } catch (\PDOException $exception) {
+           echo $exception->getMessage();
+           return false;
+       }
     }
 
 
@@ -220,7 +276,8 @@ class SavingController implements SavingInterface
                                 $stmt = $conn->prepare($sql);
             return $stmt->execute() && $stmt->rowCount() > 0 ? $stmt->fetchAll(\PDO::FETCH_ASSOC) : [];
        } catch (\PDOException $exception) {
-
+            echo $exception->getMessage();
+            return [];
        }
     }
 
