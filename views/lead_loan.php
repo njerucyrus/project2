@@ -28,13 +28,13 @@ include  __DIR__.'/includes/lead_loan.inc.php';
     <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-    <title>Admin</title>
+
 </head>
 <body style="height: 100%; margin-bottom: 15%;
     background-repeat: no-repeat;
     background-image: linear-gradient(rgb(250,250,250), rgb(236, 236, 236));">
 <?php
-//include __DIR__.'/right_menu_views.php';
+include __DIR__.'/right_menu_views.php';
 ?>
 
 <div class="container">
