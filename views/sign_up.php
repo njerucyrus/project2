@@ -5,6 +5,9 @@
  * Date: 04/05/2017
  * Time: 00:42
  */
+require_once __DIR__.'/../vendor/autoload.php';
+include __DIR__.'/includes/signup.inc.php';
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,23 +30,52 @@
 <body style="height: 100%; margin-bottom: 4%;
     background-repeat: no-repeat;
     background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));">
+
+
 <div class="container">
     <div class="row main">
         <div class="panel-heading">
             <div class="panel-title text-center">
-                <h1 class="title">Company Name</h1>
+                <h1 class="title">REP KENYA</h1>
                 <hr />
             </div>
         </div>
         <div class="main-login main-center">
-            <form class="form-horizontal" method="post" action="#">
+            <div>
+                <?php
+                if(empty($success_msg) && !empty($error_msg)){
+                    ?>
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo $error_msg ?>
+                </div>
+                <?php
+                }
+                elseif(empty($error_msg) and !empty($success_msg)){
+                    ?>
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo $success_msg  ?>
+                </div>
+
+                <?php
+                }
+               else
+               {
+                   echo "";
+               }
+                ?>
+
+
+            </div>
+            <form class="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
 
                 <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                    <label for="name" class="cols-sm-2 control-label">Username</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+                            <input type="text" class="form-control" name="username" id="name"  placeholder="Enter your Name"/>
                         </div>
                     </div>
                 </div>
@@ -59,11 +91,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Username</label>
+                    <label for="username" class="cols-sm-2 control-label">Role</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+                            <span class="input-group-addon"><i class="fa fa-tasks fa" aria-hidden="true"></i></span>
+                            <select name="role" class="form-control">
+
+                                <option value="admin">Admin</option>
+                                <option value="manager">Manager</option>
+                                <option value="employee">Employee</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -89,10 +126,10 @@
                 </div>
 
                 <div class="form-group ">
-                    <button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                    <input type="submit" name="submit" value="Create Account" class="btn btn-primary btn-lg btn-block login-button"></input>
                 </div>
                 <div class="login-register">
-                    <a href="index.php">Login</a>
+                    <a href="login.php">Login</a>
                 </div>
             </form>
         </div>
