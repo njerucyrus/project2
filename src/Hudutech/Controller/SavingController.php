@@ -15,7 +15,7 @@ use Hudutech\Entity\Saving;
 
 class SavingController implements SavingInterface
 {
-    public function create(Saving $saving)
+    public function createSingle(Saving $saving)
     {
         $db = new DB();
         $conn = $db->connect();
@@ -27,6 +27,31 @@ class SavingController implements SavingInterface
         $paymentMethod = $saving->getPaymentMethod();
         $datePaid = $saving->getDatePaid();
 
+        $dumpedSaving = null;
+        $fine = null;
+        $previousSavings = self::getPreviousSavings($clientId);
+
+        if (!empty($previousSavings['dumpedSaving'])){
+            $previousDump = $previousSavings['dumpedSaving'];
+            $totalCash = $cashReceived + $previousDump;
+            if ($totalCash>=200 && $totalCash <= 5000 && $cashReceived<5000){
+                $contribution = $totalCash;
+            }
+            elseif($totalCash> 5000) {
+
+                $contribution = 5000;
+                $dumpedSaving = $totalCash - 5000;
+            }
+        }
+
+        if ($cashReceived > 5000 && empty($previousSavings['dumpedSaving'])){
+            $dumpedSaving = $cashReceived- 5000;
+            $contribution = 5000;
+        }
+        if($cashReceived > 200 && $cashReceived < 5000 && empty($previousSavings['dumpedSaving'])){
+            $contribution = $cashReceived;
+        }
+
         try {
 
             $stmt = $conn->prepare("INSERT INTO savings(
@@ -34,6 +59,8 @@ class SavingController implements SavingInterface
                                                         groupId,
                                                         cashReceived,
                                                         contribution,
+                                                        dumpedSaving,
+                                                        fine,
                                                         paymentMethod,
                                                         datePaid
                                                         )
@@ -42,6 +69,8 @@ class SavingController implements SavingInterface
                                                         :groupId,
                                                         :cash_recieved,
                                                         :contribution,
+                                                        :dumpedSaving,
+                                                        :fine,
                                                         :paymentMethod,
                                                         :datePaid
                                                         )");
@@ -49,6 +78,8 @@ class SavingController implements SavingInterface
             $stmt->bindParam(":groupId", $groupId);
             $stmt->bindParam(":cashReceived", $cashReceived);
             $stmt->bindParam(":contribution", $contribution);
+            $stmt->bindParam(":dumpedSaving", $dumpedSaving);
+            $stmt->bindParam(":fine", $fine);
             $stmt->bindParam(":paymentMethod", $paymentMethod);
             $stmt->bindParam(":datePaid", $datePaid);
             return $stmt->execute() ? true : false;
@@ -110,9 +141,13 @@ class SavingController implements SavingInterface
                       $dumpedSaving = $totalCash - 5000;
                   }
                }
-               if ($cashReceived > 5000){
-                  $dumpedSaving = $cashReceived- 5000;
-                  $contribution = 5000;
+
+               if ($cashReceived > 5000 && empty($previousSavings['dumpedSaving'])){
+                   $dumpedSaving = $cashReceived- 5000;
+                   $contribution = 5000;
+               }
+               if($cashReceived > 200 && $cashReceived < 5000 && empty($previousSavings['dumpedSaving'])){
+                   $contribution = $cashReceived;
                }
 
                $stmt->bindParam(":clientId", $clientId);
