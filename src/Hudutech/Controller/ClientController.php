@@ -43,6 +43,7 @@ class ClientController extends ComplexQuery implements ClientInterface
         $nokRelationship = $client->getNokRelationShip();
         $nokContact = $client->getNokContact();
         $dateEnrolled = $client->getDateEnrolled();
+        $passport =  $client->getPassport();
 
         try {
 
@@ -68,7 +69,8 @@ class ClientController extends ComplexQuery implements ClientInterface
                                             nokName,
                                             nokRelationship,
                                             dateEnrolled,
-                                            nokContact
+                                            nokContact,
+                                            passport
                                         )
                                     VALUES (
                                             :groupRefNo,
@@ -92,7 +94,8 @@ class ClientController extends ComplexQuery implements ClientInterface
                                             :nokName,
                                             :nokRelationship,
                                             :dateEnrolled,
-                                            :nokContact
+                                            :nokContact,
+                                            :passport
                                         )";
 
             $stmt = $conn->prepare($sql);
@@ -119,10 +122,21 @@ class ClientController extends ComplexQuery implements ClientInterface
             $stmt->bindParam(":nokRelationship", $nokRelationship);
             $stmt->bindParam(":dateEnrolled", $dateEnrolled);
             $stmt->bindParam(":nokContact", $nokContact);
-            return $stmt->execute() ? true : false;
+            $stmt->bindParam(":passport", $passport);
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
             print_r($exception->getMessage());
-            return false;
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 

@@ -106,6 +106,10 @@ class Client
      * @var \DateTime
      */
     private $dateEnrolled;
+    /**
+     * @var string
+     */
+    private $passport;
 
     /**
      * @return int
@@ -476,5 +480,22 @@ class Client
     {
         $this->dateEnrolled = $dateEnrolled;
     }
+
+    /**
+     * @return string
+     */
+    public function getPassport()
+    {
+        return $this->passport;
+    }
+
+    /**
+     * @param string $passport
+     */
+    public function setPassport($passport)
+    {
+        $this->passport = $passport;
+    }
+
 
 }
