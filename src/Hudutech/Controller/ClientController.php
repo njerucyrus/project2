@@ -69,7 +69,7 @@ class ClientController extends ComplexQuery implements ClientInterface
                                             nokRelationship,
                                             dateEnrolled,
                                             nokContact
-                                        ) 
+                                        )
                                     VALUES (
                                             :groupRefNo,
                                             :fullName,
@@ -178,7 +178,7 @@ class ClientController extends ComplexQuery implements ClientInterface
                                     nokRelationship=:nokRelationship,
                                     dateEnrolled=:dateEnrolled,
                                     nokContact=:nokContact
-                            WHERE  
+                            WHERE
                                 id=:id
                             ";
 
@@ -346,6 +346,7 @@ class ClientController extends ComplexQuery implements ClientInterface
         } catch (\PDOException $exception) {
             echo $exception->getMessage();
             return [];
+
         }
     }
 
