@@ -19,7 +19,7 @@ include  __DIR__.'/includes/register_employee.inc.php';
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add website</title>
+    <title>Register Employee</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -93,13 +93,16 @@ include  __DIR__.'/includes/register_employee.inc.php';
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-4">
+                                                <label for="first_name">First Name</label>
                                                 <input type="text" name="first_name" placeholder="First Name" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="middle_name" placeholder="Middle Name" class="form-control">
+                                                <label for="middle_name">Middle Name</label>
+                                                <input type="text" name="middle_name" id="middle_name" placeholder="Middle Name" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="last_name" placeholder="Last Name" class="form-control">
+                                                <label for="last_name">Last Name</label>
+                                                <input type="text" name="last_name" id="last_name" placeholder="Last Name" class="form-control">
                                             </div>
                                         </div>
 
@@ -108,10 +111,12 @@ include  __DIR__.'/includes/register_employee.inc.php';
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-4">
-                                                <input type="text" name="pf_no" placeholder="Personal file number (PF No)" class="form-control">
+                                                <label for="pf_no">Personal file number</label>
+                                                <input type="text" name="pf_no" id="pf_no" placeholder="Personal file number (PF No)" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="id_no" placeholder="Identity card number" class="form-control">
+                                                <label for="id_no">Identity card number</label>
+                                                <input type="text" name="id_no" id="id_no" placeholder="Identity card number" class="form-control">
                                             </div>
 
                                         </div>
@@ -120,28 +125,46 @@ include  __DIR__.'/includes/register_employee.inc.php';
                                         <div class="form-group">
 
                                             <div class="col-sm-4">
-                                                <input type="text" name="kra_pin" placeholder="KRA Pin Number" class="form-control">
+                                                <label for="kra_pin">KRA Pin Number</label>
+                                                <input type="text" name="kra_pin" id="kra_pin" placeholder="KRA Pin Number" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="nssf_no" placeholder="NSSF Number" class="form-control">
+                                                <label for="">NSSF Number</label>
+                                                <input type="text" name="nssf_no" id="nssf_no" placeholder="NSSF Number" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="nhif_no" placeholder="NHIF Number" class="form-control">
+                                                <label for="nhif_no">NHIF Number</label>
+                                                <input type="text" name="nhif_no" id="nhif_no" placeholder="NHIF Number" class="form-control">
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label for="passport">Id Copy</label>
+                                            <input type="file" name="passport" id="passport" class="form-control" accept="image/*">
+                                        </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="passport">Passport Photo</label>
+                                                <input type="file" name="passport" id="passport" class="form-control" accept="image/*">
+                                            </div>
+                                        </div>
+                            </div>
 
                                         <legend>Contact Information Details</legend>
                                         <!-- Text input-->
                                         <div class="form-group">
 
                                             <div class="col-sm-4">
+                                                <label for="phone_number">Phone Number</label>
                                                 <input type="text" name="phone_number" placeholder="Phone Number" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="email" placeholder="email" class="form-control">
+                                                <label for="email">Email</label>
+                                                <input type="text" name="email" placeholder="Email" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="postal_address" placeholder="postal address" class="form-control">
+                                                <label for="postal_address">Postal Address</label>
+                                                <input type="text" name="postal_address" placeholder="Postal address" class="form-control">
                                             </div>
                                         </div>
 
@@ -150,35 +173,45 @@ include  __DIR__.'/includes/register_employee.inc.php';
                                         <legend>Job Details</legend>
                                         <div class="form-group">
                                             <div class="col-sm-5">
-                                                <input type="text" name="job_title" placeholder="Job title" class="form-control">
+                                                <label for="job_title">Job title</label>
+                                                <input type="text" name="job_title" id="job_title" placeholder="Job title" class="form-control">
                                             </div>
                                             <div class="col-sm-5">
-                                                <input type="text" name="job_grade" placeholder="Job Grade" class="form-control">
+                                                <label for="job_grade">Job Grade</label>
+                                                <input type="text" name="job_grade" id="job_grade" placeholder="Job Grade" class="form-control">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="col-sm-5">
+                                                <label for="date_hired">Date of Hire</label>
+                                                <input placeholder="Date of Hire" name="date_hired" id="date_hired" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <label for="remuneration">Remuneration</label>
+                                                <input type="number" name="remuneration" id="remuneration" placeholder="Remuneration" class="form-control">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-10">
-                                                <input type="number" name="remuneration" placeholder="Remuneration" class="form-control">
+                                                <label for="">Job description</label>
+                                                <textarea placeholder="Job description" cols="10" rows="2" class="form-control" id="job_description" name="job_description" ></textarea>
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-10">
-                                                <textarea placeholder="Job description" cols="10" rows="2" class="form-control" name="job_description" ></textarea>
-                                            </div>
-                                        </div>
-                                        <!-- Text input-->
-                                        <div class="form-group">
-                                            <div class="col-sm-10">
-                                                <textarea placeholder="Qualifications" cols="10" rows="2" class="form-control" name="qualification" ></textarea>
+                                                <label for="">Qualifications</label>
+                                                <textarea placeholder="Qualifications" cols="10" rows="2" class="form-control" id="qualification" name="qualification" ></textarea>
                                             </div>
                                         </div>
 
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-10">
-                                                <textarea placeholder="Testimonials" cols="10" rows="2" class="form-control" name="testimonial" ></textarea>
+                                                <label for="testimonial">Testimonials</label>
+                                                <textarea placeholder="Testimonials" cols="10" rows="2" class="form-control" id="testimonial" name="testimonial" ></textarea>
                                             </div>
                                         </div>
 
@@ -188,10 +221,12 @@ include  __DIR__.'/includes/register_employee.inc.php';
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-5">
-                                                <input type="text" name="bank_name" placeholder="Bank Name" class="form-control">
+                                                <label for="bank_name">Bank Name</label>
+                                                <input type="text" name="bank_name" id="bank_name" placeholder="Bank Name" class="form-control">
                                             </div>
                                             <div class="col-sm-5">
-                                                <input type="text" name="bank_account_no" placeholder="Account Number" class="form-control">
+                                                <label for="bank_account_no">Account Number</label>
+                                                <input type="text" name="bank_account_no" id="bank_account_no" placeholder="Account Number" class="form-control">
                                             </div>
 
                                         </div>
@@ -203,9 +238,11 @@ include  __DIR__.'/includes/register_employee.inc.php';
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-5">
-                                                <input type="text" name="nok_name" placeholder="Full Name" class="form-control">
+                                                <label for="nok_name">Full Name</label>
+                                                <input type="text" name="nok_name" id="nok_name" placeholder="Full Name" class="form-control">
                                             </div>
                                             <div class="col-sm-5">
+                                                <label for="">Relationship</label>
                                                 <input type="text" name="nok_relationship" placeholder="Relationship" class="form-control">
                                             </div>
 
@@ -213,7 +250,8 @@ include  __DIR__.'/includes/register_employee.inc.php';
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-5">
-                                                <input type="text" name="nok_contact" placeholder="Contact" class="form-control">
+                                                <label for="nok_contact">Contact</label>
+                                                <input type="text" name="nok_contact" id="nok_contact" placeholder="Contact" class="form-control">
                                             </div>
 
 

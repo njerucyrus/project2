@@ -21,7 +21,7 @@ $groups = \Hudutech\Controller\GroupController::all();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add website</title>
+    <title>Register Client</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -95,13 +95,16 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-4">
-                                                <input type="text" name="first_name" placeholder="First Name" class="form-control">
+                                                <label for="first_name">First Name</label>
+                                                <input type="text" name="first_name" id="first_name" placeholder="First Name" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="middle_name" placeholder="Middle Name" class="form-control">
+                                                <label for="middle_name">Middle Name</label>
+                                                <input type="text" name="middle_name" id="middle_name" placeholder="Middle Name" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="last_name" placeholder="Last Name" class="form-control">
+                                                <label for="last_name">Last Name</label>
+                                                <input type="text" name="last_name" id="last_name" placeholder="Last Name" class="form-control">
                                             </div>
                                         </div>
 
@@ -110,14 +113,17 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-4">
-                                                <input type="text" name="membership_no" placeholder="Membership Number" class="form-control">
+                                                <label for="membership_no">Membership Number</label>
+                                                <input type="text" name="membership_no" id="membership_no" placeholder="Membership Number" class="form-control">
                                             </div>
 
                                             <div class="col-sm-4">
-                                                <input type="text" name="id_no" placeholder="Identity card number" class="form-control">
+                                                <label for="id_no">Identity card number</label>
+                                                <input type="text" name="id_no" id="id_no" placeholder="Identity card number" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="kra_pin" placeholder="KRA Pin Number" class="form-control">
+                                                <label for="kra_pin">KRA Pin Number</label>
+                                                <input type="text" name="kra_pin" id="kra_pin" placeholder="KRA Pin Number" class="form-control">
                                             </div>
 
 
@@ -128,17 +134,26 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-4">
+                                                <label for="dob">Date Of Birth</label>
 
-                                                <input placeholder="Date Of Birth" name="dob"  class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
+                                                <input placeholder="Date Of Birth" name="dob" id="dob"  class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
                                             </div>
 
                                             <div class="col-sm-4">
-
-                                                <input placeholder="Date of enrollment" name="date_enrolled" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
+                                                <label for="date_enrolled">Date of enrollment</label>
+                                                <input placeholder="Date of enrollment" name="date_enrolled" id="date_enrolled" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
                                             </div>
 
                                             <div class="col-sm-4">
-                                                <input type="text" name="occupation" placeholder="Occupation" class="form-control">
+                                                <label for="occupation">Occupation</label>
+                                                <input type="text" name="occupation" id="occupation" placeholder="Occupation" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label for="passport">Passport</label>
+                                                <input type="file" name="passport" id="passport" class="form-control" accept="image/*">
                                             </div>
                                         </div>
 
@@ -149,19 +164,23 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <div class="form-group">
 
                                             <div class="col-sm-4">
-                                                <input type="text" name="phone_number" placeholder="Phone Number" class="form-control">
+                                                <label for="phone_number">Phone Number</label>
+                                                <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="email" placeholder="email" class="form-control">
+                                                <label for="email">Email</label>
+                                                <input type="text" name="email" id="email" placeholder="Email" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="postal_address" placeholder="postal address" class="form-control">
+                                                <label for="postal_address">Postal address</label>
+                                                <input type="text" name="postal_address" id="postal_address" placeholder="Postal address" class="form-control">
                                             </div>
                                         </div>
                                         <!--                text input-->
                                         <div class="form-group">
                                             <div class="col-sm-8">
-                                                <input type="text" name="emergency_contact" placeholder="Emergency contacts (not group members)" class="form-control">
+                                                <label for="emergency_contact">Emergency contacts</label>
+                                                <input type="text" name="emergency_contact" id="emergency_contact" placeholder="Emergency contacts (not group members)" class="form-control">
                                             </div>
                                         </div>
 
@@ -170,13 +189,16 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <div class="form-group">
 
                                             <div class="col-sm-4">
-                                                <input type="text" name="county" placeholder="County" class="form-control">
+                                                <label for="county">County</label>
+                                                <input type="text" name="county" id="county" placeholder="County" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="sub_county" placeholder="Sub County" class="form-control">
+                                                <label for="sub_county">Sub County</label>
+                                                <input type="text" name="sub_county" id="sub_county" placeholder="Sub County" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="location" placeholder="Location" class="form-control">
+                                                <label for="location">Location</label>
+                                                <input type="text" name="location" id="location" placeholder="Location" class="form-control">
                                             </div>
                                         </div>
 
@@ -184,10 +206,12 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <div class="form-group">
 
                                             <div class="col-sm-4">
-                                                <input type="text" name="sub_location" placeholder="Sub Location" class="form-control">
+                                                <label for="sub_location">Sub Location</label>
+                                                <input type="text" name="sub_location" id="sub_location" placeholder="Sub Location" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="village" placeholder="village/estate" class="form-control">
+                                                <label for="village">village/estate</label>
+                                                <input type="text" name="village" id="village" placeholder="village/estate" class="form-control">
                                             </div>
 
                                         </div>
@@ -197,13 +221,16 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-4">
-                                                <input type="text" name="nok_name" placeholder="Full Name" class="form-control">
+                                                <label for="nok_name">Full Name</label>
+                                                <input type="text" name="nok_name" id="nok_name" placeholder="Full Name" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="nok_contact" placeholder="Contact" class="form-control">
+                                                <label for="nok_contact">Contact</label>
+                                                <input type="text" name="nok_contact" id="nok_contact" placeholder="Contact" class="form-control">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" name="nok_relationship" placeholder="Relationship" class="form-control">
+                                                <label for="nok_relationship">Relationship</label>
+                                                <input type="text" name="nok_relationship" id="nok_relationship" placeholder="Relationship" class="form-control">
                                             </div>
 
                                         </div>
@@ -214,7 +241,8 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-10">
-                                                <textarea placeholder="Expectation" cols="10" rows="3" class="form-control" name="expectation" ></textarea>
+                                                <label for="expectation">Expectation</label>
+                                                <textarea placeholder="Expectation" cols="10" rows="3" class="form-control" id="expectation" name="expectation" ></textarea>
                                             </div>
                                         </div>
 
@@ -224,7 +252,8 @@ $groups = \Hudutech\Controller\GroupController::all();
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <div class="col-sm-5">
-                                                <select name="group_ref_no" class="form-control">
+                                                <label for="group_ref_no">Select Group</label>
+                                                <select name="group_ref_no" id=="group_ref_no" class="form-control">
                                                     <option>--Select Group here--</option>
                                                     <?php foreach ($groups as $group): ?>
                                                         <option value="<?php echo $group['refNo']?>"><?php echo $group['groupName']?></option>
@@ -240,7 +269,8 @@ $groups = \Hudutech\Controller\GroupController::all();
 
                                         <div class="form-group">
                                             <div class="col-sm-4">
-                                                <input type="checkbox" value="1" name="is_member_of_other_org" data-toggle="modal" data-target="#sibling"> Member of other organization ?
+
+                                                <input type="checkbox" value="1" name="is_member_of_other_org" id="is_member_of_other_org" data-toggle="modal" data-target="#sibling"> Member of other organization ?
                                             </div>
                                         </div>
 
