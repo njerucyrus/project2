@@ -102,22 +102,42 @@ include  __DIR__.'/includes/register_group.inc.php';
                                 <?php } ?>
                             </div>
 
-                            <div id="page-wrapper">
+                            <div class="col-md-12 ">
                                 <div class="container-fluid">
                                     <!-- Page Heading -->
                                     <div class="row" id="main" >
 
-                                        <div class="col-md-12">
-                                            <form class="form-horizontal" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" METHOD="post">
+                                        <div class="col-md-10 ">
+                                            <form class="form-horizontal col-md-offset-2" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" METHOD="post">
                                                 <fieldset>
 
                                                     <!-- Form Name -->
-                                                    <legend>Group Information Details</legend>
+
 
                                                     <!-- Text input-->
                                                     <div class="form-group">
                                                         <div class="col-sm-5">
-                                                            <input type="text" name="group_name" placeholder="Name of group" class="form-control">
+                                                            <label for="group_name">Name of group</label>
+                                                            <input type="text" name="group_name" id="group_name" placeholder="Name of group" class="form-control">
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <label for="ref_no">Reference number</label>
+                                                            <input type="text" name="ref_no" id="ref_no" placeholder="Reference number" class="form-control">
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <!-- Text input-->
+                                                    <div class="form-group">
+                                                        <div class="col-sm-5">
+                                                            <label for="number_of_members">Number of members</label>
+                                                            <input type="text" name="number_of_members" id="number_of_members" placeholder="Number of members" class="form-control">
+                                                        </div>
+
+                                                        <div class="col-sm-5">
+                                                            <label for="region">Region of location</label>
+                                                            <input type="text" name="region" id="region" placeholder="Region of location" class="form-control">
                                                         </div>
 
                                                     </div>
@@ -127,47 +147,25 @@ include  __DIR__.'/includes/register_group.inc.php';
                                                     <!-- Text input-->
                                                     <div class="form-group">
                                                         <div class="col-sm-5">
-                                                            <input type="text" name="ref_no" placeholder="Reference number" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Text input-->
-                                                    <div class="form-group">
-                                                        <div class="col-sm-5">
-                                                            <input type="text" name="number_of_members" placeholder="Number of members" class="form-control">
+                                                            <label for="official_contact">Group officials’ contact</label>
+                                                            <input type="text" name="official_contact" id="official_contact" placeholder="Group officials’ contact" class="form-control">
                                                         </div>
 
-                                                    </div>
-
-                                                    <!-- Text input-->
-                                                    <div class="form-group">
                                                         <div class="col-sm-5">
-                                                            <input type="text" name="region" placeholder="Region of location" class="form-control">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <!-- Text input-->
-                                                    <div class="form-group">
-                                                        <div class="col-sm-5">
-                                                            <input type="text" name="official_contact" placeholder="Group officials’ contact" class="form-control">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <!-- Text input-->
-                                                    <div class="form-group">
-                                                        <div class="col-sm-5">
-                                                            <input type="text" name="monthly_meeting_schedule" placeholder="Monthly meeting schedules" class="form-control">
+                                                            <label for="monthly_meeting_schedule">Monthly meeting schedules</label>
+                                                            <input type="text" name="monthly_meeting_schedule" id="monthly_meeting_schedule" placeholder="Monthly meeting schedules" class="form-control">
                                                         </div>
 
                                                     </div>
 
 
+
+
                                                     <div class="form-group">
                                                         <div class="col-sm-5">
+                                                            <label for="date_formed">Date of formation</label>
 
-                                                            <input placeholder="Date of formation" name="date_formed" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
+                                                            <input placeholder="Date of formation" name="date_formed" id="date_formed" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" >
                                                         </div>
                                                     </div>
 
