@@ -39,6 +39,8 @@ class EmployeeController implements EmployeeInterface
         $nokName = $employee->getNokName();
         $nokRelationship = $employee->getNokRelationship();
         $nokContact = $employee->getNokContact();
+        $dateOfHire = $employee->getDateOfHire();
+        $idAttachment = $employee->getIdAttachment();
 
         try {
 
@@ -61,7 +63,9 @@ class EmployeeController implements EmployeeInterface
                                             phoneNumber,
                                             nokName, 
                                             nokRelationship,
-                                            nokContact
+                                            nokContact,
+                                            dateOfHire,
+                                            idAttachment
                                             ) 
                                       VALUES(
                                             :pfNo,
@@ -82,7 +86,9 @@ class EmployeeController implements EmployeeInterface
                                             :phoneNumber,
                                             :nokName, 
                                             :nokRelationship,
-                                            :nokContact
+                                            :nokContact,
+                                            :dateOfHire,
+                                            :idAttachment
                                          )";
 
             $stmt = $conn->prepare($sql);
@@ -106,11 +112,23 @@ class EmployeeController implements EmployeeInterface
             $stmt->bindParam(":nokName", $nokName);
             $stmt->bindParam(":nokRelationship", $nokRelationship);
             $stmt->bindParam(":nokContact", $nokContact);
-            return $stmt->execute() ? true : false;
+            $stmt->bindParam(":dateOfHire", $dateOfHire);
+            $stmt->bindParam(":idAttachment", $idAttachment);
 
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
             print_r($exception->getMessage());
-            return false;
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
 
 
@@ -140,6 +158,8 @@ class EmployeeController implements EmployeeInterface
         $nokName = $employee->getNokName();
         $nokRelationship = $employee->getNokRelationship();
         $nokContact = $employee->getNokContact();
+        $dateOfHire = $employee->getDateOfHire();
+        $idAttachment = $employee->getIdAttachment();
 
         try {
 
@@ -162,7 +182,9 @@ class EmployeeController implements EmployeeInterface
                                         phoneNumber=:phoneNumber,
                                         nokName=:nokName, 
                                         nokRelationship=:nokRelationship,
-                                        nokContact=:nokContact
+                                        nokContact=:nokContact,
+                                        dateOfHire=:dateOfHire,
+                                        idAttachment=:idAttachment
                                     WHERE 
                                         id=:id
                                     ";
@@ -188,11 +210,23 @@ class EmployeeController implements EmployeeInterface
             $stmt->bindParam(":nokName", $nokName);
             $stmt->bindParam(":nokRelationship", $nokRelationship);
             $stmt->bindParam(":nokContact", $nokContact);
-            return $stmt->execute() ? true : false;
+            $stmt->bindParam(":dateOfHire", $dateOfHire);
+            $stmt->bindParam(":idAttachment", $idAttachment);
 
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 
@@ -204,11 +238,20 @@ class EmployeeController implements EmployeeInterface
         try {
             $stmt = $conn->prepare("DELETE FROM employees WHERE id=:id");
             $stmt->bindParam(":id", $id);
-            return $stmt->execute() ? true : false;
-
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
 
     }
@@ -220,11 +263,21 @@ class EmployeeController implements EmployeeInterface
 
         try {
             $stmt = $conn->prepare("DELETE FROM employees");
-            return $stmt->execute() ? true : false;
 
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 

@@ -5,7 +5,6 @@
  * Date: 4/25/17
  * Time: 11:58 AM
  */
-
 namespace Hudutech\Entity;
 
 
@@ -91,7 +90,14 @@ class Employee
      * @var string
      */
     private $nokContact;
-
+    /**
+     * @var string
+     */
+    private $dateOfHire;
+    /**
+     * @var string
+     */
+    private $idAttachment;
     /**
      * @return int
      */
@@ -410,6 +416,38 @@ class Employee
     public function setNokContact($nokContact)
     {
         $this->nokContact = $nokContact;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateOfHire()
+    {
+        return $this->dateOfHire;
+    }
+
+    /**
+     * @param string $dateOfHire
+     */
+    public function setDateOfHire($dateOfHire)
+    {
+        $this->dateOfHire = $dateOfHire;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdAttachment()
+    {
+        return $this->idAttachment;
+    }
+
+    /**
+     * @param string $idAttachment
+     */
+    public function setIdAttachment($idAttachment)
+    {
+        $this->idAttachment = $idAttachment;
     }
 
 }

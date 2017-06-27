@@ -191,7 +191,8 @@ class ClientController extends ComplexQuery implements ClientInterface
                                     nokName=:nokName,
                                     nokRelationship=:nokRelationship,
                                     dateEnrolled=:dateEnrolled,
-                                    nokContact=:nokContact
+                                    nokContact=:nokContact,
+                                    passport=:passport
                             WHERE
                                 id=:id
                             ";
@@ -221,10 +222,21 @@ class ClientController extends ComplexQuery implements ClientInterface
             $stmt->bindParam(":nokRelationship", $nokRelationship);
             $stmt->bindParam(":dateEnrolled", $dateEnrolled);
             $stmt->bindParam(":nokContact", $nokContact);
-            return $stmt->execute() ? true : false;
+            $stmt->bindParam(":passport", $passport);
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 
@@ -236,10 +248,20 @@ class ClientController extends ComplexQuery implements ClientInterface
         try {
             $stmt = $conn->prepare("DELETE FROM clients WHERE id=:id");
             $stmt->bindParam(":id", $id);
-            return $stmt->execute() ? true : false;
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 
@@ -250,10 +272,20 @@ class ClientController extends ComplexQuery implements ClientInterface
 
         try {
             $stmt = $conn->prepare("DELETE FROM clients");
-            return $stmt->execute() ? true : false;
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 
