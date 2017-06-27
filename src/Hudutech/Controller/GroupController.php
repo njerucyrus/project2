@@ -53,10 +53,20 @@ class GroupController extends ComplexQuery implements GroupInterface
             $stmt->bindParam(":dateFormed", $dateFormed);
             $stmt->bindParam(":monthlyMeetingSchedule", $monthlyMeetingSchedule);
 
-            return $stmt->execute() ? true : false;
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 
@@ -71,7 +81,8 @@ class GroupController extends ComplexQuery implements GroupInterface
         $officialContact = $group->getOfficialContact();
         $dateFormed = $group->getDateFormed();
         $monthlyMeetingSchedule = $group->getMonthlyMeetingSchedule();
-        $sql = " UPDATE  sacco_group SET
+        try {
+            $sql = " UPDATE  sacco_group SET
                                         groupName:=groupName,
                                         refNo:=refNo,
                                         region:=refNo,
@@ -80,15 +91,30 @@ class GroupController extends ComplexQuery implements GroupInterface
                                         monthlyMeetingSchedule:=monthlyMeetingSchedule
                                       WHERE id=:id
                                         ";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":groupName", $groupName);
-        $stmt->bindParam(":refNo", $refNo);
-        $stmt->bindParam(":region", $region);
-        $stmt->bindParam(":officialContact", $officialContact);
-        $stmt->bindParam(":dateFormed", $dateFormed);
-        $stmt->bindParam(":monthlyMeetingSchedule", $monthlyMeetingSchedule);
-        return $stmt->execute() ? true : false;
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":id", $id);
+            $stmt->bindParam(":groupName", $groupName);
+            $stmt->bindParam(":refNo", $refNo);
+            $stmt->bindParam(":region", $region);
+            $stmt->bindParam(":officialContact", $officialContact);
+            $stmt->bindParam(":dateFormed", $dateFormed);
+            $stmt->bindParam(":monthlyMeetingSchedule", $monthlyMeetingSchedule);
+
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
+        } catch (\PDOException $exception) {
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
+        }
     }
 
     public static function delete($id)
@@ -99,11 +125,20 @@ class GroupController extends ComplexQuery implements GroupInterface
         try{
             $stmt = $conn->prepare("DELETE FROM sacco_group WHERE id=:id");
             $stmt->bindParam(":id", $id);
-            return $stmt->execute() ? true : false;
-
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 
@@ -114,11 +149,20 @@ class GroupController extends ComplexQuery implements GroupInterface
 
         try{
             $stmt = $conn->prepare("DELETE FROM sacco_group");
-            return $stmt->execute() ? true : false;
-
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
+            }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return false;
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
     }
 
@@ -153,12 +197,20 @@ class GroupController extends ComplexQuery implements GroupInterface
                 $groups = $stmt->fetchAll(\PDO::FETCH_ASSOC);
                 return $groups;
             }
-            else {
-                return [];
+            if($stmt->execute()){
+                $db->closeConnection();
+                return true;
+            }else{
+                $db->closeConnection();
+                return [
+                    "error"=>"Error Occurred:=> [{$stmt->errorInfo()[0]} {$stmt->errorInfo()[1]}  {$stmt->errorInfo()[2]}]"
+                ];
             }
         } catch (\PDOException $exception) {
-            echo $exception->getMessage();
-            return [];
+            print_r($exception->getMessage());
+            return [
+                'error'=>$exception->getMessage()
+            ];
         }
 
     }
